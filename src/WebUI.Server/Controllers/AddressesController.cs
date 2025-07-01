@@ -1,7 +1,7 @@
 ﻿using Domain.Models;
-using WebUI.Server.Services.AddressService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using UseCases.Ports.Input;
 
 namespace WebUI.Server.Controllers;
 
@@ -9,13 +9,13 @@ namespace WebUI.Server.Controllers;
 public sealed class AddressesController(
     IAddressService addressService) : ControllerTemplate
 {
-    private readonly IAddressService _addressService = addressService;
+    private readonly IAddressService addressService = addressService;
 
     [HttpGet]
     public async Task<ActionResult<Address>> GetAddress() =>
-        HandleResult(await _addressService.GetAddress());
+        HandleGenericResult(await addressService.GetAddressAsync());
 
     [HttpPost]
     public async Task<ActionResult<Address>> AddOrUpdateAddress(Address request) =>
-        HandleResult(await _addressService.AddOrUpdateAddress(request)); 
+        HandleResult(await addressService.UpdateOrCreateAddressAsync(request));
 }

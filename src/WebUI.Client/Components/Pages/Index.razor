@@ -1,6 +1,7 @@
 ﻿@page "/"
 @page "/search/{SearchTerm}/{page:int}"
 @page "/{CategoryUrl}"
+@using WebUI.Client.Ports
 
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 

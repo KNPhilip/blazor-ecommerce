@@ -23,7 +23,7 @@ internal static class IdentityComponentsEndpointRouteBuilderExtensions
 
         accountGroup.MapPost("/performexternallogin", (
             HttpContext context,
-            [FromServices] SignInManager<ApplicationUser> signInManager,
+            [FromServices] SignInManager<DbUser> signInManager,
             [FromForm] string provider,
             [FromForm] string returnUrl) =>
         {
@@ -42,7 +42,7 @@ internal static class IdentityComponentsEndpointRouteBuilderExtensions
 
         accountGroup.MapPost("/logout", async (
             ClaimsPrincipal user,
-            SignInManager<ApplicationUser> signInManager,
+            SignInManager<DbUser> signInManager,
             [FromForm] string returnUrl) =>
         {
             await signInManager.SignOutAsync();
@@ -53,7 +53,7 @@ internal static class IdentityComponentsEndpointRouteBuilderExtensions
 
         manageGroup.MapPost("/linkexternallogin", async (
             HttpContext context,
-            [FromServices] SignInManager<ApplicationUser> signInManager,
+            [FromServices] SignInManager<DbUser> signInManager,
             [FromForm] string provider) =>
         {
             await context.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -73,10 +73,10 @@ internal static class IdentityComponentsEndpointRouteBuilderExtensions
 
         manageGroup.MapPost("/downloadpersonaldata", async (
             HttpContext context,
-            [FromServices] UserManager<ApplicationUser> userManager,
+            [FromServices] UserManager<DbUser> userManager,
             [FromServices] AuthenticationStateProvider authenticationStateProvider) =>
         {
-            ApplicationUser? user = await userManager.GetUserAsync(context.User);
+            DbUser? user = await userManager.GetUserAsync(context.User);
             if (user is null)
             {
                 return Results.NotFound($"Unable to load user with ID '{userManager.GetUserId(context.User)}'.");
@@ -86,7 +86,7 @@ internal static class IdentityComponentsEndpointRouteBuilderExtensions
             downloadLogger.LogInformation("User with ID '{UserId}' asked for their personal data.", userId);
 
             Dictionary<string, string> personalData = [];
-            IEnumerable<PropertyInfo> personalDataProps = typeof(ApplicationUser).GetProperties().Where(
+            IEnumerable<PropertyInfo> personalDataProps = typeof(DbUser).GetProperties().Where(
                 prop => Attribute.IsDefined(prop, typeof(PersonalDataAttribute)));
             foreach (PropertyInfo p in personalDataProps)
             {

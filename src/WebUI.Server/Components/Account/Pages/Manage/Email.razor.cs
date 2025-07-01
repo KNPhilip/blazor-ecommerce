@@ -10,7 +10,7 @@ namespace WebUI.Server.Components.Account.Pages.Manage;
 public sealed partial class Email
 {
     private string? message;
-    private ApplicationUser user = default!;
+    private DbUser user = default!;
     private string? email;
     private bool isEmailConfirmed;
 

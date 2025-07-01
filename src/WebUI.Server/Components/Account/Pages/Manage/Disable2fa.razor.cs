@@ -6,7 +6,7 @@ namespace WebUI.Server.Components.Account.Pages.Manage;
 
 public sealed partial class Disable2fa
 {
-    private ApplicationUser user = default!;
+    private DbUser user = default!;
 
     [CascadingParameter]
     private HttpContext HttpContext { get; set; } = default!;

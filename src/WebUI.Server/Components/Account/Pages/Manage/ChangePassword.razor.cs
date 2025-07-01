@@ -8,7 +8,7 @@ namespace WebUI.Server.Components.Account.Pages.Manage;
 public sealed partial class ChangePassword
 {
     private string? message;
-    private ApplicationUser user = default!;
+    private DbUser user = default!;
     private bool hasPassword;
 
     [CascadingParameter]

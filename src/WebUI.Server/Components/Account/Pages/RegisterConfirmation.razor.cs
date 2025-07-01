@@ -26,7 +26,7 @@ public sealed partial class RegisterConfirmation
             RedirectManager.RedirectTo("");
         }
 
-        ApplicationUser? user = await UserManager.FindByEmailAsync(Email);
+        DbUser? user = await UserManager.FindByEmailAsync(Email);
         if (user is null)
         {
             HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;

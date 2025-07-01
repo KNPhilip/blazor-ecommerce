@@ -6,7 +6,7 @@ namespace WebUI.Server.Components.Account.Pages.Manage;
 public sealed partial class GenerateRecoveryCodes
 {
     private string? message;
-    private ApplicationUser user = default!;
+    private DbUser user = default!;
     private IEnumerable<string>? recoveryCodes;
 
     [CascadingParameter]

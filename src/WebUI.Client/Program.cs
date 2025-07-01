@@ -1,5 +1,5 @@
-using WebUI.Client.Extensions;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using WebUI.Client;
 
 WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
 

@@ -8,7 +8,7 @@ namespace WebUI.Server.Components.Account.Pages;
 public sealed partial class LoginWith2fa
 {
     private string? message;
-    private ApplicationUser user = default!;
+    private DbUser user = default!;
 
     [SupplyParameterFromForm]
     private InputModel Input { get; set; } = new();

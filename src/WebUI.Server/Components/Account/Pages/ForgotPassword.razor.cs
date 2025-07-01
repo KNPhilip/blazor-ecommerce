@@ -16,7 +16,7 @@ public sealed partial class ForgotPassword
 
     private async Task OnValidSubmitAsync()
     {
-        ApplicationUser? user = await UserManager.FindByEmailAsync(Form.Email);
+        DbUser? user = await UserManager.FindByEmailAsync(Form.Email);
         if (user is null || !(await UserManager.IsEmailConfirmedAsync(user)))
         {
             statusMessage = "We've sent you instructions on resetting your password. Please check your email.";

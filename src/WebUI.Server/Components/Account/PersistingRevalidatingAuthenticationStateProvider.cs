@@ -42,13 +42,13 @@ internal sealed class PersistingRevalidatingAuthenticationStateProvider : Revali
         AuthenticationState authenticationState, CancellationToken cancellationToken)
     {
         await using AsyncServiceScope scope = scopeFactory.CreateAsyncScope();
-        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<DbUser>>();
         return await ValidateSecurityStampAsync(userManager, authenticationState.User);
     }
 
-    private async Task<bool> ValidateSecurityStampAsync(UserManager<ApplicationUser> userManager, ClaimsPrincipal principal)
+    private async Task<bool> ValidateSecurityStampAsync(UserManager<DbUser> userManager, ClaimsPrincipal principal)
     {
-        ApplicationUser? user = await userManager.GetUserAsync(principal);
+        DbUser? user = await userManager.GetUserAsync(principal);
         if (user is null)
         {
             return false;
