@@ -26,7 +26,7 @@ public sealed partial class ConfirmEmail
             RedirectManager.RedirectTo("");
         }
 
-        ApplicationUser? user = await UserManager.FindByIdAsync(UserId);
+        DbUser? user = await UserManager.FindByIdAsync(UserId);
         if (user is null)
         {
             HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;

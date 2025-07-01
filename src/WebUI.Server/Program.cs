@@ -1,139 +1,30 @@
-using WebUI.Server.Services.CartService;
-using WebUI.Server.Services.CategoryService;
 using WebUI.Server.Components;
-using WebUI.Server.Services.AuthService;
-using Microsoft.EntityFrameworkCore;
-using WebUI.Server.Data;
-using Blazored.LocalStorage;
-using WebUI.Server.Services.AddressService;
-using WebUI.Server.Services.MailService;
-using WebUI.Server.Services.OrderService;
-using WebUI.Server.Services.PaymentService;
-using WebUI.Server.Services.ProductService;
-using WebUI.Server.Services.ProductTypeService;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
-using Domain.Dtos;
-using MudBlazor.Services;
-using Domain.Interfaces;
-using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Domain.Models;
 using WebUI.Server.Components.Account;
-using System.Reflection;
-
-Assembly assembly = typeof(Program).Assembly;
-__packageId = assembly.GetCustomAttribute<AssemblyPackageIdAttribute>()?.PackageId ?? "WebUI.Server";
+using WebUI.Server.Extensions;
+using Domain.Options;
+using UseCases;
+using DataAccess;
+using WebUI.Server.Adapters;
+using UseCases.Ports.Output;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// ASP.NET Configuration
-builder.Services.AddCascadingAuthenticationState();
+SetEnvironmentVariablesFrom(builder.Configuration);
 
-builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents()
-    .AddInteractiveWebAssemblyComponents();
+builder.Services.AddAspNetCore(builder.Configuration);
+builder.Services.AddBlazor();
+builder.Services.AddSecurity();
 
-builder.Services.AddScoped<IdentityUserAccessor>();
-builder.Services.AddScoped<IdentityRedirectManager>();
-builder.Services.AddScoped<AuthenticationStateProvider, PersistingRevalidatingAuthenticationStateProvider>();
-
-builder.Services.AddControllers();
-
-builder.Services.AddRazorPages();
-
-builder.Services.AddEndpointsApiExplorer();
-
-builder.Services.AddSwaggerGen(options =>
-{
-    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-    {
-        Type = SecuritySchemeType.ApiKey,
-        In = ParameterLocation.Header,
-        Name = "Authorization"
-    });
-
-    options.OperationFilter<SecurityRequirementsOperationFilter>();
-});
-
-builder.Services.AddMudServices();
-
-builder.Services.AddBlazoredLocalStorage();
-
-builder.Services.AddHttpContextAccessor();
-
-builder.Services.AddIdentityCore<ApplicationUser>(options =>
-{
-    options.Password.RequireNonAlphanumeric = false;
-    options.Password.RequireDigit = false;
-    options.Password.RequireUppercase = false;
-
-    options.User.RequireUniqueEmail = true;
-    options.SignIn.RequireConfirmedEmail = true;
-    options.SignIn.RequireConfirmedAccount = true;
-})
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<EcommerceContext>()
-    .AddSignInManager()
-    .AddDefaultTokenProviders();
-
-builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
-
-builder.Services.AddAuthorization();
-
-builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultScheme = IdentityConstants.ApplicationScheme;
-        options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-    })
-    .AddIdentityCookies();
-
-string connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
-    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-
-builder.Services.AddDbContextFactory<EcommerceContext>(options =>
-    options.UseSqlServer(connectionString));
-
-builder.Services.AddScoped(sp => new HttpClient 
-{
-    BaseAddress = new Uri(builder.Configuration["BaseUri"]!) 
-});
-
-builder.Services.AddScoped<IAddressUIService, AddressUIService>();
-builder.Services.AddScoped<IAuthUIService, AuthUIService>();
-builder.Services.AddScoped<ICartUIService, CartUIService>();
-builder.Services.AddScoped<ICategoryUIService, CategoryUIService>();
-builder.Services.AddScoped<IOrderUIService, OrderUIService>();
-builder.Services.AddScoped<IProductUIService, ProductUIService>();
-builder.Services.AddScoped<IProductTypeUIService, ProductTypeUIService>();
-
-builder.Services.AddScoped<IAddressService, AddressService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<ICartService, CartService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IMailService, MailService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IPaymentService, PaymentService>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IProductTypeService, ProductTypeService>();
 
 builder.Services.AddOptions<MailSettingsDto>().Bind(builder.Configuration
     .GetSection(MailSettingsDto.SectionName));
 
-WebApplication app = builder.Build();
+builder.Services.AddDataAccess();
+builder.Services.AddUseCases();
+builder.Services.AddUIServices();
 
-app.UseReferrerPolicy(options => options.SameOrigin());
-app.UseXfo(options => options.Deny());
-app.UseXXssProtection(options => options.EnabledWithBlockMode());
-app.UseCspReportOnly(options => options
-    .BlockAllMixedContent()
-    .StyleSources(s => s.Self().UnsafeInline().CustomSources("https://fonts.googleapis.com"))
-    .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com"))
-    .FormActions(s => s.Self())
-    .FrameAncestors(s => s.Self())
-    .ImageSources(s => s.Self().CustomSources("blob:", "https://upload.wikimedia.org", "https://en.wikipedia.org", "data:"))
-    .ScriptSources(s => s.Self().CustomSources("https://localhost:55150").UnsafeEval())
-);
+WebApplication app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
@@ -142,32 +33,21 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    app.Use(async (context, next) =>
-    {
-        #pragma warning disable ASP0019 // Suggest using IHeaderDictionary.Append or the indexer
-        context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
-        #pragma warning restore ASP0019 // Suggest using IHeaderDictionary.Append or the indexer
-        await next.Invoke();
-    });
 }
 
 app.UseSwagger();
 
 app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
-
 app.MapControllers();
 
 app.UseRouting();
 
+app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
-app.UseAuthentication();
-
-app.UseAuthorization();
-
-app.UseAntiforgery();
+app.UseSecurity();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
@@ -178,18 +58,13 @@ app.MapAdditionalIdentityEndpoints();
 
 app.Run();
 
-public sealed partial class Program
+static void SetEnvironmentVariablesFrom(IConfiguration configuration)
 {
-    private static string? __packageId;
-
-    public static string PackageId
+    foreach (var section in configuration.AsEnumerable())
     {
-        get
+        if (!string.IsNullOrEmpty(section.Key) && !string.IsNullOrEmpty(section.Value))
         {
-            lock (__packageId!)
-            {
-                return __packageId;
-            }
+            Environment.SetEnvironmentVariable(section.Key.Replace(":", "__"), section.Value);
         }
     }
 }

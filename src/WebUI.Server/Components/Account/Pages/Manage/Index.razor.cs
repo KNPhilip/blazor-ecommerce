@@ -7,7 +7,7 @@ namespace WebUI.Server.Components.Account.Pages.Manage;
 
 public sealed partial class Index
 {
-    private ApplicationUser user = default!;
+    private DbUser user = default!;
     private string? username;
     private string? phoneNumber;
 

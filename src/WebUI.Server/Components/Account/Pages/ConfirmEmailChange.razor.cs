@@ -30,7 +30,7 @@ public sealed partial class ConfirmEmailChange
                 "account/login", "Error: Invalid email change confirmation link.", HttpContext);
         }
 
-        ApplicationUser? user = await UserManager.FindByIdAsync(UserId);
+        DbUser? user = await UserManager.FindByIdAsync(UserId);
         if (user is null)
         {
             message = "Unable to find user with Id '{userId}'";

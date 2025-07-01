@@ -1,4 +1,5 @@
 ﻿@page "/product/{id:int}"
+@using WebUI.Client.Ports
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 @inject IProductUIService ProductUIService

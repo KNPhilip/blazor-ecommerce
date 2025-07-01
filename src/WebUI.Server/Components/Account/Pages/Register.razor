@@ -1,10 +1,10 @@
 ﻿@page "/account/register"
 @layout ShopLayout
 
-@inject UserManager<ApplicationUser> UserManager
-@inject IUserStore<ApplicationUser> UserStore
-@inject SignInManager<ApplicationUser> SignInManager
-@inject IEmailSender<ApplicationUser> EmailSender
+@inject UserManager<DbUser> UserManager
+@inject IUserStore<DbUser> UserStore
+@inject SignInManager<DbUser> SignInManager
+@inject IEmailSender<DbUser> EmailSender
 @inject ILogger<Register> Logger
 @inject NavigationManager NavigationManager
 @inject IdentityRedirectManager RedirectManager

@@ -1,7 +1,7 @@
 ﻿@page "/account/manage/email"
 
-@inject UserManager<ApplicationUser> UserManager
-@inject IEmailSender<ApplicationUser> EmailSender
+@inject UserManager<DbUser> UserManager
+@inject IEmailSender<DbUser> EmailSender
 @inject IdentityUserAccessor UserAccessor
 @inject NavigationManager NavigationManager
 

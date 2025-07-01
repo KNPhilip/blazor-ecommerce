@@ -1,10 +1,10 @@
 ﻿@page "/account/manage/externallogins"
 @using Microsoft.AspNetCore.Authentication
 
-@inject UserManager<ApplicationUser> UserManager
-@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<DbUser> UserManager
+@inject SignInManager<DbUser> SignInManager
 @inject IdentityUserAccessor UserAccessor
-@inject IUserStore<ApplicationUser> UserStore
+@inject IUserStore<DbUser> UserStore
 @inject IdentityRedirectManager RedirectManager
 
 <PageTitle>Manage your external logins</PageTitle>

@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace WebUI.Server.Components.Account;
 
-internal sealed class IdentityUserAccessor(UserManager<ApplicationUser> userManager, IdentityRedirectManager redirectManager)
+internal sealed class IdentityUserAccessor(UserManager<DbUser> userManager, IdentityRedirectManager redirectManager)
 {
-    public async Task<ApplicationUser> GetRequiredUserAsync(HttpContext context)
+    public async Task<DbUser> GetRequiredUserAsync(HttpContext context)
     {
-        ApplicationUser? user = await userManager.GetUserAsync(context.User);
+        DbUser? user = await userManager.GetUserAsync(context.User);
 
         if (user is null)
         {

@@ -10,7 +10,7 @@ public sealed partial class ResetAuthenticator
 
     private async Task OnSubmitAsync()
     {
-        ApplicationUser user = await UserAccessor.GetRequiredUserAsync(HttpContext);
+        DbUser user = await UserAccessor.GetRequiredUserAsync(HttpContext);
         await UserManager.SetTwoFactorEnabledAsync(user, false);
         await UserManager.ResetAuthenticatorKeyAsync(user);
         string userId = await UserManager.GetUserIdAsync(user);

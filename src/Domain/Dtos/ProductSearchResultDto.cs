@@ -1,11 +1,10 @@
-﻿namespace Domain.Dtos;
+﻿using Domain.Models;
 
-/// <summary>
-/// DTO for paginated search results for products.
-/// </summary>
+namespace Domain.Dtos;
+
 public sealed class ProductSearchResultDto
 {
     public List<Product> Products { get; set; } = [];
     public int Pages { get; set; }
-    public int CurrentPage { get; set; } 
+    public int CurrentPage { get; set; }
 }

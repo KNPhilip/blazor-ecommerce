@@ -17,7 +17,7 @@ public sealed partial class TwoFactorAuthentication
 
     protected override async Task OnInitializedAsync()
     {
-        ApplicationUser user = await UserAccessor.GetRequiredUserAsync(HttpContext);
+        DbUser user = await UserAccessor.GetRequiredUserAsync(HttpContext);
         canTrack = HttpContext.Features.Get<ITrackingConsentFeature>()?.CanTrack ?? true;
         hasAuthenticator = await UserManager.GetAuthenticatorKeyAsync(user) is not null;
         is2faEnabled = await UserManager.GetTwoFactorEnabledAsync(user);

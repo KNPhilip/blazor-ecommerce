@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Domain.Models;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using System.ComponentModel.DataAnnotations;
@@ -32,7 +33,7 @@ public sealed partial class ResetPassword
     {
         try
         {
-            Domain.Models.ApplicationUser user = await UserManager
+            DbUser user = await UserManager
                 .FindByEmailAsync(Form.Email) ?? throw new Exception();
             IdentityResult resetResult = await UserManager.ResetPasswordAsync(user, Form.Code, Form.Password);
 

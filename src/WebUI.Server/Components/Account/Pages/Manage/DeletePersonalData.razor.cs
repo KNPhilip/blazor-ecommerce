@@ -8,7 +8,7 @@ namespace WebUI.Server.Components.Account.Pages.Manage;
 public sealed partial class DeletePersonalData
 {
     private string? message;
-    private ApplicationUser user = default!;
+    private DbUser user = default!;
     private bool requirePassword;
 
     [CascadingParameter]

@@ -24,10 +24,10 @@ public sealed partial class Register
 
     public async Task RegisterUser(EditContext editContext)
     {
-        ApplicationUser user = CreateUser();
+        DbUser user = CreateUser();
 
         await UserStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-        IUserEmailStore<ApplicationUser> emailStore = GetEmailStore();
+        IUserEmailStore<DbUser> emailStore = GetEmailStore();
         await emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
         IdentityResult result = await UserManager.CreateAsync(user, Input.Password);
 
@@ -60,26 +60,26 @@ public sealed partial class Register
         RedirectManager.RedirectTo(ReturnUrl);
     }
 
-    private ApplicationUser CreateUser()
+    private static DbUser CreateUser()
     {
         try
         {
-            return Activator.CreateInstance<ApplicationUser>();
+            return Activator.CreateInstance<DbUser>();
         }
         catch
         {
-            throw new InvalidOperationException($"Can't create an instance of '{nameof(ApplicationUser)}'. " +
-                $"Ensure that '{nameof(ApplicationUser)}' is not an abstract class and has a parameterless constructor.");
+            throw new InvalidOperationException($"Can't create an instance of '{nameof(DbUser)}'. " +
+                $"Ensure that '{nameof(DbUser)}' is not an abstract class and has a parameterless constructor.");
         }
     }
 
-    private IUserEmailStore<ApplicationUser> GetEmailStore()
+    private IUserEmailStore<DbUser> GetEmailStore()
     {
         if (!UserManager.SupportsUserEmail)
         {
             throw new NotSupportedException("The default UI requires a user store with email support.");
         }
-        return (IUserEmailStore<ApplicationUser>)UserStore;
+        return (IUserEmailStore<DbUser>)UserStore;
     }
 
     private static IEnumerable<IdentityError> TransformErrorMessaging(IEnumerable<IdentityError> errors)

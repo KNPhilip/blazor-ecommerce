@@ -1,22 +1,12 @@
-﻿namespace Domain.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Models;
 
 public sealed class ProductType : DbEntity
 {
-    private string name = string.Empty;
-
-    public string Name 
-    {
-        get => name;
-        set
-        {
-            Encapsulation.ThrowIfNullOrWhiteSpace(value);
-            name = value;
-        }
-    }
-
-    [NotMapped]
-    public bool Editing { get; set; }
-
+    public string? Name { get; set; }
     [NotMapped]
     public bool IsNew { get; set; }
+    [NotMapped]
+    public bool Editing { get; set; }
 }

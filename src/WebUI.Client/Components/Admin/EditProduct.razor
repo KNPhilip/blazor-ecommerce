@@ -1,5 +1,6 @@
 ﻿@page "/admin/product"
 @page "/admin/product/{id:int}"
+@using WebUI.Client.Ports
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 @attribute [Authorize(Roles = "Admin")]
 
