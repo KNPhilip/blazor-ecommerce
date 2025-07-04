@@ -14,7 +14,7 @@ public sealed partial class Categories
 
     public void Dispose()
     {
-        CategoryUIService.OnChange += StateHasChanged;
+        CategoryUIService.OnChange -= StateHasChanged;
     }
 
     private void CreateNewCategory()

@@ -32,6 +32,11 @@
         {
             <a href="@category.Url" class="nav-text">@category.Name</a>
         }
+        <AuthorizeView Roles="Admin">
+            <Authorized>
+                <a href="/admin" class="nav-text">Administration</a>
+            </Authorized>
+        </AuthorizeView>
     </div>
     <div class="d-flex flex-row">
         <AuthorizeView>
@@ -54,10 +59,4 @@
             </NotAuthorized>
         </AuthorizeView>
     </div>
-
-    <AuthorizeView Roles="Admin">
-        <Authorized>
-            <AdminMenu />
-        </Authorized>
-    </AuthorizeView>
 </div>

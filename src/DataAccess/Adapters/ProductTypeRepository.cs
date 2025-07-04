@@ -53,12 +53,9 @@ public sealed class ProductTypeRepository(EcommerceContext dbContext) : IProduct
 
     public async Task DeleteProductTypeByIdAsync(int id)
     {
-        ProductType productType = await dbContext.ProductTypes
-            .Where(x => x.Id == id)
-            .AsNoTracking()
-            .FirstOrDefaultAsync()
-                ?? throw new NotFoundException("The product type with the id"
-                + $" \"{id}\" could not be found in the database.");
+        ProductType productType = await dbContext.ProductTypes.FindAsync(id)
+            ?? throw new NotFoundException("The product type with the id"
+            + $" \"{id}\" could not be found in the database.");
 
         productType.IsSoftDeleted = true;
         await dbContext.SaveChangesAsync();

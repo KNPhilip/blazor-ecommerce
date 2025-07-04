@@ -38,11 +38,9 @@ public sealed class CategoryRepository(EcommerceContext dbContext) : ICategoryRe
 
     public async Task UpdateCategoryAsync(Category category)
     {
-        Category? dbCategory = await dbContext.Categories
-            .Where(c => c.Name == category.Name)
-            .FirstOrDefaultAsync()
-                ?? throw new NotFoundException("The category with the name " +
-                $"\"{category.Name}\" does not have a registered address.");
+        Category? dbCategory = await dbContext.Categories.FindAsync(category.Id)
+            ?? throw new NotFoundException("The category with the name " +
+            $"\"{category.Name}\" was not found in the database.");
 
         dbCategory.Name = category.Name;
         dbCategory.Url = category.Url;

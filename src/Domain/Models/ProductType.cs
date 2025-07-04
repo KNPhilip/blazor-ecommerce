@@ -4,7 +4,7 @@ namespace Domain.Models;
 
 public sealed class ProductType : DbEntity
 {
-    public string? Name { get; set; }
+    public string Name { get; set; } = string.Empty;
     [NotMapped]
     public bool IsNew { get; set; }
     [NotMapped]
