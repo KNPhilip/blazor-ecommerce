@@ -31,7 +31,7 @@ public sealed class AddressService(IAuthService authService,
             await repository.UpdateAddressAsync(address);
             return Result.Ok("The address was updated.");
         }
-        catch (DataAccessException)
+        catch (ArgumentException)
         {
             return await CreateAddressAsync(address);
         }

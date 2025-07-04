@@ -24,7 +24,10 @@ public sealed class AddressRepository(EcommerceContext dbContext) : IAddressRepo
 
     public async Task UpdateAddressAsync(Address address)
     {
-        ArgumentNullException.ThrowIfNull(address.UserId);
+        if (address.UserId is null)
+        {
+            throw new ArgumentException("User Id of the address was null.");
+        }
         Address dbAddress = await GetDbAddressByUserIdAsync(address.UserId);
 
         dbAddress.FirstName = address.FirstName;

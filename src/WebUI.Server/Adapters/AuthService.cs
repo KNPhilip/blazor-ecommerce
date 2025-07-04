@@ -8,12 +8,12 @@ namespace WebUI.Server.Adapters;
 public sealed class AuthService(IHttpContextAccessor httpContextAccessor, 
     UserManager<DbUser> userManager) : IAuthService
 {
-    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+    private readonly IHttpContextAccessor httpContextAccessor = httpContextAccessor;
     private readonly UserManager<DbUser> userManager = userManager;
 
     public async Task<string> GetUserIdAsync()
     {
-        DbUser user = await userManager.GetUserAsync(_httpContextAccessor.HttpContext!.User)
+        DbUser user = await userManager.GetUserAsync(httpContextAccessor.HttpContext!.User)
             ?? throw new Exception("User not found.");
 
         return user.Id;
@@ -21,7 +21,7 @@ public sealed class AuthService(IHttpContextAccessor httpContextAccessor,
 
     public string GetUserEmail()
     {
-        return _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name)
+        return httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Name)
             ?? throw new ArgumentNullException("Couldn't get the users email..");
     }
 
