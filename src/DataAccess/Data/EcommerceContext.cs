@@ -22,16 +22,16 @@ public sealed class EcommerceContext : IdentityDbContext<DbUser>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Product>()
-            .HasData(SeedData.SeedProducts());
+            .HasData(DataSeeder.SeedProducts());
 
         modelBuilder.Entity<Category>()
-            .HasData(SeedData.SeedCategories());
+            .HasData(DataSeeder.SeedCategories());
 
         modelBuilder.Entity<ProductVariant>()
-            .HasData(SeedData.SeedProductVariants());
+            .HasData(DataSeeder.SeedProductVariants());
 
         modelBuilder.Entity<ProductType>()
-            .HasData(SeedData.SeedProductTypes());
+            .HasData(DataSeeder.SeedProductTypes());
 
         modelBuilder.Entity<ProductVariant>()
             .HasKey(p => new { p.ProductId, p.ProductTypeId });

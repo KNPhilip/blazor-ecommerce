@@ -17,13 +17,15 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.1" />
+	<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+	<PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
+	<PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.2" />
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\UseCases\UseCases.csproj" />
-    <ProjectReference Include="..\WebApi\WebApi.csproj" />
     <ProjectReference Include="..\WebUI.Client\WebUI.Client.csproj" />
   </ItemGroup>
 
