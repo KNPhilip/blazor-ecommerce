@@ -4,6 +4,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(EcommerceContext))]
-    partial class EcommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20250704104511_DbEntityDateTime")]
+    partial class DbEntityDateTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -332,7 +335,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Martian is a science fiction novel by Andy Weir, published in 2011. The story follows astronaut Mark Watney, who is stranded on Mars and must use his ingenuity and spirit to survive.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/7/71/The_Martian_%28Weir_novel%29.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "The Martian",
                             Visible = true
@@ -344,7 +347,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Silent Patient is a psychological thriller novel by Alex Michaelides, published in 2019. It tells the story of a woman who shoots her husband and then stops speaking, and the psychotherapist determined to uncover her motivations.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/d/df/The_Silent_Patient_early_2019_UK_edition.png",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "The Silent Patient",
                             Visible = true
@@ -356,7 +359,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Where the Crawdads Sing is a novel by Delia Owens, published in 2018. It is a coming-of-age story that intertwines a murder mystery with the life of a young girl growing up in the marshes of North Carolina.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/1/1f/Where_The_Crawdads_Sing_Book_Cover.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Where the Crawdads Sing",
                             Visible = true
@@ -368,7 +371,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Educated is a memoir by Tara Westover, published in 2018. It recounts her experiences growing up in a strict and abusive household in rural Idaho, and her quest for knowledge that ultimately leads her to earn a PhD.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/1/1f/Educated_%28Tara_Westover%29.png",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Educated",
                             Visible = true
@@ -380,7 +383,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Night Circus is a fantasy novel by Erin Morgenstern, published in 2011. It follows a magical competition between two young illusionists, set against the backdrop of a mysterious circus that appears only at night.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/c/c5/TheNightCircus.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "The Night Circus",
                             Visible = true
@@ -392,7 +395,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Vanishing Half is a novel by Brit Bennett, published in 2020. It tells the story of twin sisters whose lives diverge when one decides to pass as white, exploring themes of race, identity, and family.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/e/ed/The_Vanishing_Half_%28Brit_Bennett%29.png",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "The Vanishing Half",
                             Visible = true
@@ -404,7 +407,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Dune is a science fiction novel by Frank Herbert, published in 1965. It is set in a distant future amidst a huge interstellar empire, focusing on the conflict over the desert planet Arrakis and its valuable resource, spice.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/d/de/Dune-Frank_Herbert_%281965%29_First_edition.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Dune",
                             Visible = true
@@ -416,7 +419,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Book Thief is a historical novel by Markus Zusak, published in 2005. It follows a young girl in Nazi Germany who finds solace by stealing books and sharing them with others, narrated by Death.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/8/8f/The_Book_Thief_by_Markus_Zusak_book_cover.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "The Book Thief",
                             Visible = true
@@ -428,7 +431,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Circe is a fantasy novel by Madeline Miller, published in 2018. It is a retelling of the life of Circe, the daughter of Helios, exploring her journey of self-discovery and empowerment.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/9/9b/Circe_%28novel%29_Madeline_Milller.jpeg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Circe",
                             Visible = true
@@ -440,7 +443,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Giver of Stars is a historical novel by Jojo Moyes, published in 2019. It tells the story of a group of women who become traveling librarians in 1930s Kentucky, fighting for their right to work and make a difference.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/7/7c/The_Giver_of_Stars.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "The Giver of Stars",
                             Visible = true
@@ -452,7 +455,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Inception is a 2010 science fiction film directed by Christopher Nolan. The story follows a skilled thief who steals secrets from within the subconscious during the dream state.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Inception",
                             Visible = true
@@ -464,7 +467,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Parasite is a 2019 South Korean black comedy thriller film directed by Bong Joon-ho. It tells the story of a poor family who schemes to become employed by a wealthy family.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/5/53/Parasite_%282019_film%29.png",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Parasite",
                             Visible = true
@@ -476,7 +479,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Shawshank Redemption is a 1994 drama film based on a Stephen King novella. It follows the story of a banker sentenced to life in Shawshank State Penitentiary for the murder of his wife.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "The Shawshank Redemption",
                             Visible = true
@@ -488,7 +491,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Godfather is a 1972 crime film directed by Francis Ford Coppola. It chronicles the powerful Italian-American crime family of Don Vito Corleone.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/1/1c/Godfather_ver1.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "The Godfather",
                             Visible = true
@@ -500,7 +503,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Dark Knight is a 2008 superhero film directed by Christopher Nolan. It features Batman as he faces off against the Joker, who seeks to create chaos in Gotham City.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "The Dark Knight",
                             Visible = true
@@ -512,7 +515,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Forrest Gump is a 1994 drama film directed by Robert Zemeckis. The story follows a slow-witted but kind-hearted man as he witnesses and unwittingly influences several historical events.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/6/67/Forrest_Gump_poster.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Forrest Gump",
                             Visible = true
@@ -524,7 +527,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Pulp Fiction is a 1994 crime film directed by Quentin Tarantino. The film intertwines multiple narratives of crime in Los Angeles, featuring an ensemble cast.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_%281994%29_poster.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Pulp Fiction",
                             Visible = true
@@ -536,7 +539,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Matrix Resurrections is a 2021 science fiction film and the fourth installment in The Matrix franchise. It revisits the world of the Matrix with returning characters and new challenges.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/5/50/The_Matrix_Resurrections.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "The Matrix Resurrections",
                             Visible = true
@@ -548,7 +551,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Spider-Man: No Way Home is a 2021 superhero film directed by Jon Watts. It follows Peter Parker as he seeks help from Doctor Strange to manage the fallout from revealing his identity.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/0/00/Spider-Man_No_Way_Home_poster.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Spider-Man: No Way Home",
                             Visible = true
@@ -560,7 +563,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Get Out is a 2017 horror film written and directed by Jordan Peele. It follows a young African-American man who uncovers disturbing secrets when he meets his white girlfriend's family.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/a/a3/Get_Out_poster.png",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Get Out",
                             Visible = true
@@ -572,7 +575,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Legend of Zelda: Breath of the Wild is an action-adventure game developed by Nintendo. Set in a vast open world, players control Link as he awakens from a long slumber to defeat Calamity Ganon.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/c/c6/The_Legend_of_Zelda_Breath_of_the_Wild.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "The Legend of Zelda: Breath of the Wild",
                             Visible = true
@@ -584,7 +587,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Ghost of Tsushima is an action-adventure game developed by Sucker Punch Productions. Set in feudal Japan, players control samurai Jin Sakai as he battles against the Mongol invasion.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/b/b6/Ghost_of_Tsushima.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Ghost of Tsushima",
                             Visible = true
@@ -596,7 +599,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Cyberpunk 2077 is an open-world role-playing game developed by CD Projekt. Set in a dystopian future, players assume the role of V, a customizable mercenary navigating the streets of Night City.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Cyberpunk 2077",
                             Visible = true
@@ -608,7 +611,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Last of Us Part II is an action-adventure game developed by Naughty Dog. It follows Ellie on her quest for revenge in a post-apocalyptic world filled with danger and moral dilemmas.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/4/4f/TLOU_P2_Box_Art_2.png",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "The Last of Us Part II",
                             Visible = true
@@ -620,7 +623,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Among Us is a multiplayer social deduction game developed by InnerSloth. Players work together on a spaceship, but some are impostors trying to sabotage the crew.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/9/9a/Among_Us_cover_art.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Among Us",
                             Visible = true
@@ -632,7 +635,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Hades is a roguelike dungeon crawler developed by Supergiant Games. Players control Zagreus, the son of Hades, as he attempts to escape the Underworld.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/c/cc/Hades_cover_art.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Hades",
                             Visible = true
@@ -644,7 +647,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Final Fantasy VII Remake is an action role-playing game developed by Square Enix. It is a reimagining of the classic 1997 game, focusing on the early chapters of Cloud Strife's journey.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/c/ce/FFVIIRemake.png",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Final Fantasy VII Remake",
                             Visible = true
@@ -656,7 +659,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Resident Evil Village is a survival horror game developed by Capcom. It follows Ethan Winters as he searches for his kidnapped daughter in a mysterious village filled with horrors.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/2/2c/Resident_Evil_Village.png",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Resident Evil Village",
                             Visible = true
@@ -668,7 +671,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Apex Legends is a free-to-play battle royale game developed by Respawn Entertainment. Players choose from a roster of characters, each with unique abilities, and compete to be the last squad standing.",
                             Featured = true,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/d/db/Apex_legends_cover.jpg",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Apex Legends",
                             Visible = true
@@ -680,7 +683,7 @@ namespace DataAccess.Migrations
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Minecraft is a sandbox game developed by Mojang Studios. Players can build and explore their own worlds, crafting items and surviving against monsters.",
                             Featured = false,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/en/b/b6/Minecraft_2024_cover_art.png",
+                            ImageUrl = "",
                             IsSoftDeleted = false,
                             Title = "Minecraft",
                             Visible = true
