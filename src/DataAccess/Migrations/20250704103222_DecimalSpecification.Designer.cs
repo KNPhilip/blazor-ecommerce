@@ -4,6 +4,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(EcommerceContext))]
-    partial class EcommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20250704103222_DecimalSpecification")]
+    partial class DecimalSpecification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +39,7 @@ namespace DataAccess.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
@@ -92,7 +95,7 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsSoftDeleted")
@@ -115,7 +118,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 653, DateTimeKind.Utc).AddTicks(2632),
                             IsSoftDeleted = false,
                             Name = "Books",
                             Url = "books",
@@ -124,7 +127,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 653, DateTimeKind.Utc).AddTicks(3048),
                             IsSoftDeleted = false,
                             Name = "Movies",
                             Url = "movies",
@@ -133,7 +136,7 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 653, DateTimeKind.Utc).AddTicks(3050),
                             IsSoftDeleted = false,
                             Name = "Video Games",
                             Url = "video-games",
@@ -297,7 +300,7 @@ namespace DataAccess.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -329,7 +332,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 651, DateTimeKind.Utc).AddTicks(8165),
                             Description = "The Martian is a science fiction novel by Andy Weir, published in 2011. The story follows astronaut Mark Watney, who is stranded on Mars and must use his ingenuity and spirit to survive.",
                             Featured = true,
                             ImageUrl = "",
@@ -341,7 +344,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 651, DateTimeKind.Utc).AddTicks(9049),
                             Description = "The Silent Patient is a psychological thriller novel by Alex Michaelides, published in 2019. It tells the story of a woman who shoots her husband and then stops speaking, and the psychotherapist determined to uncover her motivations.",
                             Featured = false,
                             ImageUrl = "",
@@ -353,7 +356,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 3,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 651, DateTimeKind.Utc).AddTicks(9052),
                             Description = "Where the Crawdads Sing is a novel by Delia Owens, published in 2018. It is a coming-of-age story that intertwines a murder mystery with the life of a young girl growing up in the marshes of North Carolina.",
                             Featured = true,
                             ImageUrl = "",
@@ -365,7 +368,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 4,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 651, DateTimeKind.Utc).AddTicks(9054),
                             Description = "Educated is a memoir by Tara Westover, published in 2018. It recounts her experiences growing up in a strict and abusive household in rural Idaho, and her quest for knowledge that ultimately leads her to earn a PhD.",
                             Featured = false,
                             ImageUrl = "",
@@ -377,7 +380,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 5,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 651, DateTimeKind.Utc).AddTicks(9056),
                             Description = "The Night Circus is a fantasy novel by Erin Morgenstern, published in 2011. It follows a magical competition between two young illusionists, set against the backdrop of a mysterious circus that appears only at night.",
                             Featured = true,
                             ImageUrl = "",
@@ -389,7 +392,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 6,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 651, DateTimeKind.Utc).AddTicks(9057),
                             Description = "The Vanishing Half is a novel by Brit Bennett, published in 2020. It tells the story of twin sisters whose lives diverge when one decides to pass as white, exploring themes of race, identity, and family.",
                             Featured = false,
                             ImageUrl = "",
@@ -401,7 +404,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 7,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 651, DateTimeKind.Utc).AddTicks(9059),
                             Description = "Dune is a science fiction novel by Frank Herbert, published in 1965. It is set in a distant future amidst a huge interstellar empire, focusing on the conflict over the desert planet Arrakis and its valuable resource, spice.",
                             Featured = true,
                             ImageUrl = "",
@@ -413,7 +416,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 8,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 651, DateTimeKind.Utc).AddTicks(9061),
                             Description = "The Book Thief is a historical novel by Markus Zusak, published in 2005. It follows a young girl in Nazi Germany who finds solace by stealing books and sharing them with others, narrated by Death.",
                             Featured = false,
                             ImageUrl = "",
@@ -425,7 +428,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 9,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 651, DateTimeKind.Utc).AddTicks(9062),
                             Description = "Circe is a fantasy novel by Madeline Miller, published in 2018. It is a retelling of the life of Circe, the daughter of Helios, exploring her journey of self-discovery and empowerment.",
                             Featured = true,
                             ImageUrl = "",
@@ -437,7 +440,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 10,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 651, DateTimeKind.Utc).AddTicks(9064),
                             Description = "The Giver of Stars is a historical novel by Jojo Moyes, published in 2019. It tells the story of a group of women who become traveling librarians in 1930s Kentucky, fighting for their right to work and make a difference.",
                             Featured = false,
                             ImageUrl = "",
@@ -449,7 +452,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 11,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(2115),
                             Description = "Inception is a 2010 science fiction film directed by Christopher Nolan. The story follows a skilled thief who steals secrets from within the subconscious during the dream state.",
                             Featured = true,
                             ImageUrl = "",
@@ -461,7 +464,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 12,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(2119),
                             Description = "Parasite is a 2019 South Korean black comedy thriller film directed by Bong Joon-ho. It tells the story of a poor family who schemes to become employed by a wealthy family.",
                             Featured = false,
                             ImageUrl = "",
@@ -473,7 +476,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 13,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(2121),
                             Description = "The Shawshank Redemption is a 1994 drama film based on a Stephen King novella. It follows the story of a banker sentenced to life in Shawshank State Penitentiary for the murder of his wife.",
                             Featured = true,
                             ImageUrl = "",
@@ -485,7 +488,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 14,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(2123),
                             Description = "The Godfather is a 1972 crime film directed by Francis Ford Coppola. It chronicles the powerful Italian-American crime family of Don Vito Corleone.",
                             Featured = false,
                             ImageUrl = "",
@@ -497,7 +500,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 15,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(2125),
                             Description = "The Dark Knight is a 2008 superhero film directed by Christopher Nolan. It features Batman as he faces off against the Joker, who seeks to create chaos in Gotham City.",
                             Featured = true,
                             ImageUrl = "",
@@ -509,7 +512,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 16,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(2128),
                             Description = "Forrest Gump is a 1994 drama film directed by Robert Zemeckis. The story follows a slow-witted but kind-hearted man as he witnesses and unwittingly influences several historical events.",
                             Featured = false,
                             ImageUrl = "",
@@ -521,7 +524,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 17,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(2129),
                             Description = "Pulp Fiction is a 1994 crime film directed by Quentin Tarantino. The film intertwines multiple narratives of crime in Los Angeles, featuring an ensemble cast.",
                             Featured = true,
                             ImageUrl = "",
@@ -533,7 +536,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 18,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(2131),
                             Description = "The Matrix Resurrections is a 2021 science fiction film and the fourth installment in The Matrix franchise. It revisits the world of the Matrix with returning characters and new challenges.",
                             Featured = false,
                             ImageUrl = "",
@@ -545,7 +548,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 19,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(2133),
                             Description = "Spider-Man: No Way Home is a 2021 superhero film directed by Jon Watts. It follows Peter Parker as he seeks help from Doctor Strange to manage the fallout from revealing his identity.",
                             Featured = true,
                             ImageUrl = "",
@@ -557,7 +560,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 20,
                             CategoryId = 2,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(2134),
                             Description = "Get Out is a 2017 horror film written and directed by Jordan Peele. It follows a young African-American man who uncovers disturbing secrets when he meets his white girlfriend's family.",
                             Featured = false,
                             ImageUrl = "",
@@ -569,7 +572,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 21,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(4967),
                             Description = "The Legend of Zelda: Breath of the Wild is an action-adventure game developed by Nintendo. Set in a vast open world, players control Link as he awakens from a long slumber to defeat Calamity Ganon.",
                             Featured = true,
                             ImageUrl = "",
@@ -581,7 +584,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 22,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(4971),
                             Description = "Ghost of Tsushima is an action-adventure game developed by Sucker Punch Productions. Set in feudal Japan, players control samurai Jin Sakai as he battles against the Mongol invasion.",
                             Featured = false,
                             ImageUrl = "",
@@ -593,7 +596,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 23,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(4973),
                             Description = "Cyberpunk 2077 is an open-world role-playing game developed by CD Projekt. Set in a dystopian future, players assume the role of V, a customizable mercenary navigating the streets of Night City.",
                             Featured = true,
                             ImageUrl = "",
@@ -605,7 +608,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 24,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(4975),
                             Description = "The Last of Us Part II is an action-adventure game developed by Naughty Dog. It follows Ellie on her quest for revenge in a post-apocalyptic world filled with danger and moral dilemmas.",
                             Featured = false,
                             ImageUrl = "",
@@ -617,7 +620,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 25,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(4977),
                             Description = "Among Us is a multiplayer social deduction game developed by InnerSloth. Players work together on a spaceship, but some are impostors trying to sabotage the crew.",
                             Featured = true,
                             ImageUrl = "",
@@ -629,7 +632,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 26,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(4980),
                             Description = "Hades is a roguelike dungeon crawler developed by Supergiant Games. Players control Zagreus, the son of Hades, as he attempts to escape the Underworld.",
                             Featured = false,
                             ImageUrl = "",
@@ -641,7 +644,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 27,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(4981),
                             Description = "Final Fantasy VII Remake is an action role-playing game developed by Square Enix. It is a reimagining of the classic 1997 game, focusing on the early chapters of Cloud Strife's journey.",
                             Featured = true,
                             ImageUrl = "",
@@ -653,7 +656,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 28,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(4983),
                             Description = "Resident Evil Village is a survival horror game developed by Capcom. It follows Ethan Winters as he searches for his kidnapped daughter in a mysterious village filled with horrors.",
                             Featured = false,
                             ImageUrl = "",
@@ -665,7 +668,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 29,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(4984),
                             Description = "Apex Legends is a free-to-play battle royale game developed by Respawn Entertainment. Players choose from a roster of characters, each with unique abilities, and compete to be the last squad standing.",
                             Featured = true,
                             ImageUrl = "",
@@ -677,7 +680,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 30,
                             CategoryId = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 652, DateTimeKind.Utc).AddTicks(4986),
                             Description = "Minecraft is a sandbox game developed by Mojang Studios. Players can build and explore their own worlds, crafting items and surviving against monsters.",
                             Featured = false,
                             ImageUrl = "",
@@ -695,7 +698,7 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsSoftDeleted")
@@ -712,70 +715,70 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 654, DateTimeKind.Utc).AddTicks(9568),
                             IsSoftDeleted = false,
                             Name = "Default"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 654, DateTimeKind.Utc).AddTicks(9756),
                             IsSoftDeleted = false,
                             Name = "Paperback"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 654, DateTimeKind.Utc).AddTicks(9757),
                             IsSoftDeleted = false,
                             Name = "E-Book"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 654, DateTimeKind.Utc).AddTicks(9759),
                             IsSoftDeleted = false,
                             Name = "Audiobook"
                         },
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 654, DateTimeKind.Utc).AddTicks(9760),
                             IsSoftDeleted = false,
                             Name = "Stream"
                         },
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 654, DateTimeKind.Utc).AddTicks(9761),
                             IsSoftDeleted = false,
                             Name = "Blu-ray"
                         },
                         new
                         {
                             Id = 7,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 654, DateTimeKind.Utc).AddTicks(9762),
                             IsSoftDeleted = false,
                             Name = "VHS"
                         },
                         new
                         {
                             Id = 8,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 654, DateTimeKind.Utc).AddTicks(9763),
                             IsSoftDeleted = false,
                             Name = "PC"
                         },
                         new
                         {
                             Id = 9,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 654, DateTimeKind.Utc).AddTicks(9764),
                             IsSoftDeleted = false,
                             Name = "PlayStation"
                         },
                         new
                         {
                             Id = 10,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateCreated = new DateTime(2025, 7, 4, 10, 32, 21, 654, DateTimeKind.Utc).AddTicks(9765),
                             IsSoftDeleted = false,
                             Name = "Xbox"
                         });

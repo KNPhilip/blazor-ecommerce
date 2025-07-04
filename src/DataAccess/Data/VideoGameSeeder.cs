@@ -17,7 +17,7 @@ internal static class VideoGameSeeder
                 CategoryId = 3,
                 Featured = true,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -26,9 +26,8 @@ internal static class VideoGameSeeder
                 Description = "Ghost of Tsushima is an action-adventure game developed by Sucker Punch Productions. Set in feudal Japan, players control samurai Jin Sakai as he battles against the Mongol invasion.",
                 ImageUrl = string.Empty,
                 CategoryId = 3,
-                Featured = false,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -39,7 +38,7 @@ internal static class VideoGameSeeder
                 CategoryId = 3,
                 Featured = true,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -48,9 +47,8 @@ internal static class VideoGameSeeder
                 Description = "The Last of Us Part II is an action-adventure game developed by Naughty Dog. It follows Ellie on her quest for revenge in a post-apocalyptic world filled with danger and moral dilemmas.",
                 ImageUrl = string.Empty,
                 CategoryId = 3,
-                Featured = false,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -61,7 +59,7 @@ internal static class VideoGameSeeder
                 CategoryId = 3,
                 Featured = true,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -70,9 +68,8 @@ internal static class VideoGameSeeder
                 Description = "Hades is a roguelike dungeon crawler developed by Supergiant Games. Players control Zagreus, the son of Hades, as he attempts to escape the Underworld.",
                 ImageUrl = string.Empty,
                 CategoryId = 3,
-                Featured = false,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -83,7 +80,7 @@ internal static class VideoGameSeeder
                 CategoryId = 3,
                 Featured = true,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -92,9 +89,8 @@ internal static class VideoGameSeeder
                 Description = "Resident Evil Village is a survival horror game developed by Capcom. It follows Ethan Winters as he searches for his kidnapped daughter in a mysterious village filled with horrors.",
                 ImageUrl = string.Empty,
                 CategoryId = 3,
-                Featured = false,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -105,7 +101,7 @@ internal static class VideoGameSeeder
                 CategoryId = 3,
                 Featured = true,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -114,9 +110,8 @@ internal static class VideoGameSeeder
                 Description = "Minecraft is a sandbox game developed by Mojang Studios. Players can build and explore their own worlds, crafting items and surviving against monsters.",
                 ImageUrl = string.Empty,
                 CategoryId = 3,
-                Featured = false,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             }
         ];
     }
@@ -131,8 +126,7 @@ internal static class VideoGameSeeder
                 ProductTypeId = 9,
                 Price = 59.99m,
                 OriginalPrice = 69.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -140,8 +134,7 @@ internal static class VideoGameSeeder
                 ProductTypeId = 8,
                 Price = 49.99m,
                 OriginalPrice = 59.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -149,8 +142,7 @@ internal static class VideoGameSeeder
                 ProductTypeId = 9,
                 Price = 59.99m,
                 OriginalPrice = 69.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -158,8 +150,7 @@ internal static class VideoGameSeeder
                 ProductTypeId = 9,
                 Price = 59.99m,
                 OriginalPrice = 79.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -167,8 +158,7 @@ internal static class VideoGameSeeder
                 ProductTypeId = 9,
                 Price = 49.99m,
                 OriginalPrice = 59.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -176,8 +166,7 @@ internal static class VideoGameSeeder
                 ProductTypeId = 8,
                 Price = 4.99m,
                 OriginalPrice = 9.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -185,8 +174,7 @@ internal static class VideoGameSeeder
                 ProductTypeId = 9,
                 Price = 24.99m,
                 OriginalPrice = 34.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -194,8 +182,7 @@ internal static class VideoGameSeeder
                 ProductTypeId = 9,
                 Price = 59.99m,
                 OriginalPrice = 69.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -203,8 +190,7 @@ internal static class VideoGameSeeder
                 ProductTypeId = 9,
                 Price = 49.99m,
                 OriginalPrice = 59.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -212,8 +198,7 @@ internal static class VideoGameSeeder
                 ProductTypeId = 8,
                 Price = 0m,
                 OriginalPrice = 0m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -221,8 +206,7 @@ internal static class VideoGameSeeder
                 ProductTypeId = 8,
                 Price = 26.99m,
                 OriginalPrice = 29.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             }
         ];
     }

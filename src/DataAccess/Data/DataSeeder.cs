@@ -24,7 +24,8 @@ internal static class DataSeeder
                 Name = "Books",
                 Url = "books",
                 Visible = true,
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -32,7 +33,8 @@ internal static class DataSeeder
                 Name = "Movies",
                 Url = "movies",
                 Visible = true,
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -40,7 +42,8 @@ internal static class DataSeeder
                 Name = "Video Games",
                 Url = "video-games",
                 Visible = true,
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             }
         ];
     }
@@ -63,61 +66,71 @@ internal static class DataSeeder
             {
                 Id = 1,
                 Name = "Default",
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
                 Id = 2,
                 Name = "Paperback",
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
                 Id = 3,
                 Name = "E-Book",
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
                 Id = 4,
                 Name = "Audiobook",
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
                 Id = 5,
                 Name = "Stream",
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
                 Id = 6,
                 Name = "Blu-ray",
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
                 Id = 7,
                 Name = "VHS",
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
                 Id = 8,
                 Name = "PC",
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
                 Id = 9,
                 Name = "PlayStation",
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
                 Id = 10,
                 Name = "Xbox",
-                IsSoftDeleted = false
+                IsSoftDeleted = false,
+                CreatedDate = new DateTime(2025, 1, 1)
             }
         ];
     }

@@ -1,4 +1,6 @@
-﻿namespace Domain.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Domain.Models;
 
 public sealed class OrderItem
 {
@@ -9,5 +11,6 @@ public sealed class OrderItem
     public ProductType? ProductType { get; set; }
     public int ProductTypeId { get; set; }
     public int Quantity { get; set; }
+    [Column(TypeName = "decimal(18,2)")]
     public decimal TotalPrice { get; set; }
 }

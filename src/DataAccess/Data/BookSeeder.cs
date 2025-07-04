@@ -17,7 +17,7 @@ internal static class BookSeeder
                 CategoryId = 1,
                 Featured = true,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -26,9 +26,8 @@ internal static class BookSeeder
                 Description = "The Silent Patient is a psychological thriller novel by Alex Michaelides, published in 2019. It tells the story of a woman who shoots her husband and then stops speaking, and the psychotherapist determined to uncover her motivations.",
                 ImageUrl = string.Empty,
                 CategoryId = 1,
-                Featured = false,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -39,7 +38,7 @@ internal static class BookSeeder
                 CategoryId = 1,
                 Featured = true,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -48,9 +47,8 @@ internal static class BookSeeder
                 Description = "Educated is a memoir by Tara Westover, published in 2018. It recounts her experiences growing up in a strict and abusive household in rural Idaho, and her quest for knowledge that ultimately leads her to earn a PhD.",
                 ImageUrl = string.Empty,
                 CategoryId = 1,
-                Featured = false,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -61,7 +59,7 @@ internal static class BookSeeder
                 CategoryId = 1,
                 Featured = true,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -70,9 +68,8 @@ internal static class BookSeeder
                 Description = "The Vanishing Half is a novel by Brit Bennett, published in 2020. It tells the story of twin sisters whose lives diverge when one decides to pass as white, exploring themes of race, identity, and family.",
                 ImageUrl = string.Empty,
                 CategoryId = 1,
-                Featured = false,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -83,7 +80,7 @@ internal static class BookSeeder
                 CategoryId = 1,
                 Featured = true,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -92,9 +89,8 @@ internal static class BookSeeder
                 Description = "The Book Thief is a historical novel by Markus Zusak, published in 2005. It follows a young girl in Nazi Germany who finds solace by stealing books and sharing them with others, narrated by Death.",
                 ImageUrl = string.Empty,
                 CategoryId = 1,
-                Featured = false,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -105,7 +101,7 @@ internal static class BookSeeder
                 CategoryId = 1,
                 Featured = true,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             },
             new()
             {
@@ -114,9 +110,8 @@ internal static class BookSeeder
                 Description = "The Giver of Stars is a historical novel by Jojo Moyes, published in 2019. It tells the story of a group of women who become traveling librarians in 1930s Kentucky, fighting for their right to work and make a difference.",
                 ImageUrl = string.Empty,
                 CategoryId = 1,
-                Featured = false,
                 Visible = true,
-                IsSoftDeleted = false
+                CreatedDate = new DateTime(2025, 1, 1)
             }
         ];
     }
@@ -131,8 +126,7 @@ internal static class BookSeeder
                 ProductTypeId = 2,
                 Price = 14.99m,
                 OriginalPrice = 19.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -140,8 +134,7 @@ internal static class BookSeeder
                 ProductTypeId = 3,
                 Price = 9.99m,
                 OriginalPrice = 14.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -149,8 +142,7 @@ internal static class BookSeeder
                 ProductTypeId = 2,
                 Price = 12.99m,
                 OriginalPrice = 16.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -158,8 +150,7 @@ internal static class BookSeeder
                 ProductTypeId = 2,
                 Price = 15.99m,
                 OriginalPrice = 20.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -167,8 +158,7 @@ internal static class BookSeeder
                 ProductTypeId = 2,
                 Price = 13.99m,
                 OriginalPrice = 18.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -176,8 +166,7 @@ internal static class BookSeeder
                 ProductTypeId = 2,
                 Price = 16.99m,
                 OriginalPrice = 21.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -185,8 +174,7 @@ internal static class BookSeeder
                 ProductTypeId = 2,
                 Price = 14.99m,
                 OriginalPrice = 19.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -194,8 +182,7 @@ internal static class BookSeeder
                 ProductTypeId = 2,
                 Price = 17.99m,
                 OriginalPrice = 22.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -203,8 +190,7 @@ internal static class BookSeeder
                 ProductTypeId = 2,
                 Price = 10.99m,
                 OriginalPrice = 15.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -212,8 +198,7 @@ internal static class BookSeeder
                 ProductTypeId = 2,
                 Price = 18.99m,
                 OriginalPrice = 24.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             },
             new()
             {
@@ -221,8 +206,7 @@ internal static class BookSeeder
                 ProductTypeId = 2,
                 Price = 12.99m,
                 OriginalPrice = 17.99m,
-                Visible = true,
-                IsSoftDeleted = false
+                Visible = true
             }
         ];
     }
