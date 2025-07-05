@@ -43,5 +43,6 @@ public sealed class ProductVariantRepository(EcommerceContext dbContext) : IProd
             dbProductVariant.Visible = productVariant.Visible;
             dbProductVariant.IsSoftDeleted = productVariant.IsSoftDeleted;
         }
+        await dbContext.SaveChangesAsync();
     }
 }

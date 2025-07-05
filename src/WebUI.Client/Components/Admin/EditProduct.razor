@@ -86,9 +86,8 @@
                     @bind-Value="product.Description" 
                 />
             </div>
-            @* TODO: Fix MudSwitch 
-            <MudSwitch Class="mt-3" @bind-Checked="product.Featured" Label="Featured" Color="Color.Info" />
-            <MudSwitch Class="mb-3" @bind-Checked="product.Visible" Label="Visible" Color="Color.Info" /> *@
+            <MudSwitch Class="mt-3" @bind-Value="product.Featured" Label="Featured" Color="Color.Info" />
+            <MudSwitch Class="mb-3" @bind-Value="product.Visible" Label="Visible" Color="Color.Info" />
             <MudText Class="mb-2 mt-4" Typo="Typo.h5">Images (at least one)</MudText>
             <div class="mb-3">
                 <MudTextField 
@@ -221,7 +220,7 @@
 
     protected sealed override async Task OnParametersSetAsync()
     {
-        if(Id == 0)
+        if (Id == 0)
         {
             product = new()
             {
