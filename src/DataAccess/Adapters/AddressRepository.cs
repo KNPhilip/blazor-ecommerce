@@ -3,27 +3,37 @@ using DataAccess.Data;
 using DataAccess.Exceptions;
 using UseCases.Ports.Output;
 using Domain.Models;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DataAccess.Adapters;
 
-public sealed class AddressRepository(EcommerceContext dbContext) : IAddressRepository
+public sealed class AddressRepository(IServiceProvider serviceProvider) : IAddressRepository
 {
-    private readonly EcommerceContext dbContext = dbContext;
+    private readonly IServiceProvider serviceProvider = serviceProvider;
 
     public async Task<Address> GetAddressByUserIdAsync(string userId)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         Address address = await GetDbAddressByUserIdAsync(userId);
         return address;
     }
 
     public async Task CreateAddressAsync(Address address)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         dbContext.Addresses.Add(address);
         await dbContext.SaveChangesAsync();
     }
 
     public async Task UpdateAddressAsync(Address address)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         if (address.UserId is null)
         {
             throw new ArgumentException("User Id of the address was null.");
@@ -43,6 +53,9 @@ public sealed class AddressRepository(EcommerceContext dbContext) : IAddressRepo
 
     private async Task<Address> GetDbAddressByUserIdAsync(string userId)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         Address dbAddress = await dbContext.Addresses
             .Where(x => x.UserId == userId).FirstOrDefaultAsync()
                 ?? throw new NotFoundException("The user with the id " +

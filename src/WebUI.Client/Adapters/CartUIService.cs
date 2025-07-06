@@ -38,7 +38,7 @@ public sealed class CartUIService(
             await SetCartItemsCountAsync(cart is null ? 0 : cart.Count);
         }
 
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 
     public async Task AddToCart(CartItem cartItem)

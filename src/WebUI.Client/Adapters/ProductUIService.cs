@@ -73,7 +73,7 @@ public sealed class ProductUIService(HttpClient http) : IProductUIService
             Message = "No products found.";
         }
 
-        OnProductsChanged!.Invoke();
+        OnProductsChanged?.Invoke();
     }
 
     public async Task<List<string>> GetProductSearchSuggestions(string searchTerm)

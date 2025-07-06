@@ -1,17 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DataAccess.Data;
+﻿using DataAccess.Data;
 using DataAccess.Exceptions;
-using UseCases.Ports.Output;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using UseCases.Ports.Output;
 
 namespace DataAccess.Adapters;
 
-public sealed class ProductRepository(EcommerceContext dbContext) : IProductRepository
+public sealed class ProductRepository(IServiceProvider serviceProvider) : IProductRepository
 {
-    private readonly EcommerceContext dbContext = dbContext;
+    private readonly IServiceProvider serviceProvider = serviceProvider;
 
     public async Task<List<Product>> GetAllProductsAsync()
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         List<Product> products = await dbContext.Products
             .Where(x => x.Visible && !x.IsSoftDeleted)
             .Include(x => x.Images)
@@ -25,6 +29,9 @@ public sealed class ProductRepository(EcommerceContext dbContext) : IProductRepo
 
     public async Task<List<Product>> GetAllAdminProductsAsync()
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         List<Product> products = await dbContext.Products
             .Where(x => !x.IsSoftDeleted)
             .Include(x => x.Variants.Where(x => !x.IsSoftDeleted))
@@ -39,6 +46,9 @@ public sealed class ProductRepository(EcommerceContext dbContext) : IProductRepo
 
     public async Task<List<Product>> GetAllFeaturedProductsAsync()
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         List<Product> products = await dbContext.Products
             .Where(x => x.Featured && x.Visible && !x.IsSoftDeleted)
             .Include(x => x.Variants.Where(x => x.Visible && !x.IsSoftDeleted))
@@ -51,6 +61,9 @@ public sealed class ProductRepository(EcommerceContext dbContext) : IProductRepo
 
     public async Task<List<Product>> GetProductsByCategoryAsync(string categoryUrl)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         List<Product> products = await dbContext.Products
             .Where(x => x.Visible && !x.IsSoftDeleted && x.Category!.Url!
                 .ToLower().Equals(categoryUrl.ToLower()))
@@ -65,6 +78,9 @@ public sealed class ProductRepository(EcommerceContext dbContext) : IProductRepo
 
     public async Task<List<Product>> GetProductsBySearchTermAsync(string searchTerm)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         List<Product> products = await dbContext.Products
             .Where(p => p.Title.ToLower().Contains(searchTerm.ToLower()) ||
                                     p.Description.ToLower().Contains(searchTerm.ToLower()) &&
@@ -78,6 +94,9 @@ public sealed class ProductRepository(EcommerceContext dbContext) : IProductRepo
 
     public async Task<Product> GetProductByIdAsync(int id)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         Product? product = await dbContext.Products
             .Include(x => x.Variants.Where(x => x.Visible && !x.IsSoftDeleted))
                 .ThenInclude(x => x.ProductType)
@@ -93,6 +112,9 @@ public sealed class ProductRepository(EcommerceContext dbContext) : IProductRepo
 
     public async Task<Product> GetAdminProductByIdAsync(int id)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         Product? product = await dbContext.Products
             .Include(x => x.Variants.Where(x => !x.IsSoftDeleted))
                 .ThenInclude(x => x.ProductType)
@@ -107,6 +129,9 @@ public sealed class ProductRepository(EcommerceContext dbContext) : IProductRepo
 
     public async Task CreateProductAsync(Product product)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         foreach (ProductVariant variant in product.Variants)
         {
             variant.ProductType = null;
@@ -117,9 +142,14 @@ public sealed class ProductRepository(EcommerceContext dbContext) : IProductRepo
 
     public async Task UpdateProductAsync(Product product)
     {
-        Product dbProduct = await dbContext.Products.FindAsync(product.Id)
-            ?? throw new NotFoundException("The product with the id"
-                + $" \"{product.Id}\" could not be found in the database.");
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
+        Product dbProduct = await dbContext.Products
+            .Include(x => x.Images)
+            .FirstOrDefaultAsync(x => x.Id == product.Id)
+                ?? throw new NotFoundException("The product with the id"
+                    + $" \"{product.Id}\" could not be found in the database.");
 
         dbContext.Images.RemoveRange(dbProduct.Images);
 
@@ -136,6 +166,9 @@ public sealed class ProductRepository(EcommerceContext dbContext) : IProductRepo
 
     public async Task DeleteProductByIdAsync(int id)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         Product dbProduct = await dbContext.Products.FindAsync(id)
             ?? throw new NotFoundException("The product with the id"
                 + $" \"{id}\" could not be found in the database.");

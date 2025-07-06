@@ -46,7 +46,9 @@
     {
         if(string.IsNullOrEmpty(message))
         {
-            <MudProgressLinear Color="Color.Info" Indeterminate="true" Class="my-7" />
+            <MudProgressLinear Color="Color.Info" 
+                               Indeterminate="true" 
+                               Class="my-7" />
         }
         else
         {
@@ -64,38 +66,38 @@
             <MudText Typo="Typo.h3">Create a new product</MudText>
         }
 
-        <EditForm Model="product" OnValidSubmit="AddOrUpdateProduct">
+        <EditForm Model="product" OnValidSubmit="CreateOrUpdateProductAsync">
             <MudText Class="mb-2 mt-4" Typo="Typo.h5">Essentials</MudText>
             <DataAnnotationsValidator />
             <div class="mb-3 mt-3">
-                <MudTextField 
-                    T="string" 
-                    Label="Title" 
-                    Variant="Variant.Outlined" 
-                    Required="true" 
-                    RequiredError="Title is required!" 
-                    @bind-Value="product.Title" 
-                />
+                <MudTextField T="string" 
+                              Label="Title" 
+                              Variant="Variant.Outlined" 
+                              Required="true" 
+                              RequiredError="Title is required!" 
+                              @bind-Value="product.Title" />
             </div>
             <div class="mb-3">
-                <MudTextField 
-                    T="string"
-                    Lines="3"
-                    Label="Description" 
-                    Variant="Variant.Outlined"
-                    @bind-Value="product.Description" 
-                />
+                <MudTextField T="string"
+                              Lines="3"
+                              Label="Description" 
+                              Variant="Variant.Outlined"
+                              @bind-Value="product.Description" />
             </div>
-            <MudSwitch Class="mt-3" @bind-Value="product.Featured" Label="Featured" Color="Color.Info" />
-            <MudSwitch Class="mb-3" @bind-Value="product.Visible" Label="Visible" Color="Color.Info" />
+            <MudSwitch Class="mt-3" 
+                       Label="Featured" 
+                       Color="Color.Info" 
+                       @bind-Value="product.Featured" />
+            <MudSwitch Class="mb-3" 
+                       Label="Visible" 
+                       Color="Color.Info" 
+                       @bind-Value="product.Visible" />
             <MudText Class="mb-2 mt-4" Typo="Typo.h5">Images (at least one)</MudText>
             <div class="mb-3">
-                <MudTextField 
-                    T="string" 
-                    Label="Image Url" 
-                    Variant="Variant.Outlined" 
-                    @bind-Value="product.ImageUrl" 
-                />
+                <MudTextField T="string" 
+                              Label="Image Url" 
+                              Variant="Variant.Outlined" 
+                              @bind-Value="product.ImageUrl" />
             </div>
             <div class="d-flex flex-column">
                 @if (!string.IsNullOrEmpty(product.ImageUrl))
@@ -125,24 +127,47 @@
                 }
             </div>
             <div class="mb-3">
-@* TODO: Fix this code                
-    <MudFileUpload T="IReadOnlyList<IBrowserFile>" OnFilesChanged="OnFileChange" Hidden="false" Class="flex-1" InputClass="absolute mud-width-full mud-height-full overflow-hidden z-20" InputStyle="opacity:0"
-                   @ondragenter="@SetDragClass" @ondragleave="@ClearDragClass" @ondragend="@ClearDragClass">
-                    <ButtonTemplate Context="wut">
-                        <MudPaper Height="200px" Outlined="true" Class="@DragClass">
-                            <MudText Typo="Typo.h6">Drag and drop files here or click</MudText>
-                            @foreach (string file in fileNames)
+
+                <MudFileUpload T="IReadOnlyList<IBrowserFile>" 
+                               OnFilesChanged="OnFileChangeAsync" 
+                               Hidden="false" 
+                               Class="flex-1" 
+                               InputClass="absolute mud-width-full mud-height-full overflow-hidden z-20" 
+                               InputStyle="opacity:0"
+                               @ondragenter="@SetDragClass" 
+                               @ondragleave="@ClearDragClass" 
+                               @ondragend="@ClearDragClass">
+                    <ActivatorContent>
+                        <MudPaper Height="300px"
+                                  Outlined="true"
+                                  Class="@DragClass">
+                            <MudText Typo="Typo.h6">
+                                Drag and drop files here or click
+                            </MudText>
+                            @foreach (var file in fileNames)
                             {
-                                <MudChip Color="Color.Dark" Text="@file" />
+                                <MudChip T="string"
+                                         Color="Color.Dark"
+                                         Text="@file"
+                                         tabindex="-1" />
                             }
                         </MudPaper>
-                    </ButtonTemplate>
-                </MudFileUpload> *@
+                    </ActivatorContent>
+                </MudFileUpload>
+
                 <MudToolBar DisableGutters="true" Class="gap-4 mt-3">
-                    <MudButton OnClick="ClearImages" Disabled="@(product.Images.Count == 0 && string.IsNullOrEmpty(product.ImageUrl))" Color="Color.Error" Variant="Variant.Filled">Clear Images</MudButton>
+                    <MudButton OnClick="ClearImagesAsync" 
+                               Disabled="@(product.Images.Count == 0 && string.IsNullOrEmpty(product.ImageUrl))" 
+                               Color="Color.Error" 
+                               Variant="Variant.Filled">
+                        Clear Images
+                    </MudButton>
                 </MudToolBar>
             </div>
-            <MudText Class="mb-2 mt-4" Typo="Typo.h5">@(product.Variants.Count > 1 ? "Variants" : "Variant")</MudText>
+            <MudText Class="mb-2 mt-4" 
+                     Typo="Typo.h5">
+                @(product.Variants.Count > 1 ? "Variants" : "Variant")
+            </MudText>
 
             <div class="header">
                 <div class="col">Product Type</div>
@@ -172,14 +197,26 @@
                         <InputCheckbox @bind-Value="variant.Visible" style="transform:scale(1.5,1.5);" disabled="@variant.IsSoftDeleted"></InputCheckbox>
                     </div>
                     <div class="col">
-                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" aria-label="delete" Disabled="variant.IsSoftDeleted" Class="float-end" OnClick="(() => RemoveVariant(variant.ProductTypeId))" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" 
+                                       Color="Color.Error" aria-label="delete" 
+                                       Disabled="variant.IsSoftDeleted" 
+                                       Class="float-end" 
+                                       OnClick="(() => RemoveVariant(variant.ProductTypeId))" />
                     </div>
                 </div>
             }
-            <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Info" @onclick="AddVariant">Add Variant</MudButton>
+            <MudButton Variant="Variant.Filled" 
+                       StartIcon="@Icons.Material.Filled.Add" 
+                       Color="Color.Info" @onclick="AddVariant">
+                Add Variant
+            </MudButton>
+
             <hr />
             <div class="mb-3">
-                <MudText Class="mb-2 mt-4" Typo="Typo.h5">Category</MudText>
+                <MudText Class="mb-2 mt-4" 
+                         Typo="Typo.h5">
+                    Category
+                </MudText>
                 <InputSelect id="category" @bind-Value="product.CategoryId" class="form-control">
                     @foreach(Category category in CategoryUIService.AdminCategories)
                     {
@@ -188,14 +225,32 @@
                 </InputSelect>
             </div>
             <hr />
-            <MudButton ButtonType="ButtonType.Submit" Class="float-end mb-3 ml-2" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Save" Color="Color.Info">@btnText</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" 
+                       Class="float-end mb-3 ml-2" 
+                       Variant="Variant.Filled" 
+                       StartIcon="@Icons.Material.Filled.Save" 
+                       Color="Color.Info">
+                @btnText
+            </MudButton>
             <ValidationSummary class="mb-3"></ValidationSummary>
         </EditForm>
         @if (!product.IsNew)
         {
-            <MudButton Class="float-end" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error" @onclick="DeleteProduct">Delete Product</MudButton>
+            <MudButton Class="float-end" 
+                       Variant="Variant.Filled" 
+                       StartIcon="@Icons.Material.Filled.Delete" 
+                       Color="Color.Error" 
+                       @onclick="DeleteProductAsync">
+                Delete Product
+            </MudButton>
         }
-        <MudButton Href="admin/products" Class="float-start mb-3" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.ArrowBack" Color="Color.Info">Go back</MudButton>
+        <MudButton Href="admin/products" 
+                   Class="float-start mb-3" 
+                   Variant="Variant.Filled" 
+                   StartIcon="@Icons.Material.Filled.ArrowBack" 
+                   Color="Color.Info">
+            Go back
+        </MudButton>
     }
 </div>
 
@@ -203,10 +258,10 @@
     [Parameter]
     public int Id { get; set; }
 
-    Product product = new();
-    string btnText = "";
-    bool isLoaded = false;
-    string message = string.Empty;
+    private Product product = new();
+    private string btnText = "";
+    private bool isLoaded = false;
+    private string message = string.Empty;
 
     private static string DefaultDragClass = "relative rounded-lg border-2 border-dashed pa-4 mt-4 mud-width-full mud-height-full z-10";
     private string DragClass = DefaultDragClass;
@@ -271,7 +326,7 @@
         });
     }
 
-    private async void AddOrUpdateProduct()
+    private async Task CreateOrUpdateProductAsync()
     {
         if (product.IsNew)
         {
@@ -286,7 +341,7 @@
         }
     }
 
-    private async void DeleteProduct()
+    private async Task DeleteProductAsync()
     {
         bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm",
             $"Are you sure you want to delete '{product.Title}'?");
@@ -298,12 +353,14 @@
         }
     }
 
-    private async Task OnFileChange(InputFileChangeEventArgs e)
+    private async Task OnFileChangeAsync(InputFileChangeEventArgs e)
     {
         ClearDragClass();
         IReadOnlyList<IBrowserFile> files = e.GetMultipleFiles();
         foreach (IBrowserFile file in files)
+        {
             fileNames.Add(file.Name);
+        }
 
         string format = "image/png";
         foreach (IBrowserFile image in e.GetMultipleFiles(int.MaxValue))
@@ -322,7 +379,7 @@
         }
     }
 
-    private async Task ClearImages()
+    private async Task ClearImagesAsync()
     {
         fileNames.Clear();
         ClearDragClass();

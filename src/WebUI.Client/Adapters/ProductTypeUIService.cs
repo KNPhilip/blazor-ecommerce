@@ -16,7 +16,7 @@ public sealed class ProductTypeUIService(HttpClient http) : IProductTypeUIServic
         HttpResponseMessage response = await http.PostAsJsonAsync("api/v1/producttypes", productType);
         ProductTypes = (await response.Content
             .ReadFromJsonAsync<List<ProductType>>())!;
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 
     public ProductType CreateNewProductType()
@@ -28,7 +28,7 @@ public sealed class ProductTypeUIService(HttpClient http) : IProductTypeUIServic
         };
 
         ProductTypes.Add(newProductType);
-        OnChange!.Invoke();
+        OnChange?.Invoke();
         return newProductType;
     }
 
@@ -45,7 +45,7 @@ public sealed class ProductTypeUIService(HttpClient http) : IProductTypeUIServic
             .PutAsJsonAsync("api/v1/producttypes", productType);
         ProductTypes = await response.Content
             .ReadFromJsonAsync<List<ProductType>>() ?? [];
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 
     public async Task DeleteProductType(int productTypeId)
@@ -54,6 +54,6 @@ public sealed class ProductTypeUIService(HttpClient http) : IProductTypeUIServic
             .DeleteAsync($"api/v1/producttypes/{productTypeId}");
         ProductTypes = await response.Content
             .ReadFromJsonAsync<List<ProductType>>() ?? [];
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 }

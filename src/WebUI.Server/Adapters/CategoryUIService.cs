@@ -22,7 +22,7 @@ public sealed class CategoryUIService(
     {
         AdminCategories = await categoryService.CreateCategoryAsync(category);
         await GetCategories();
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 
     public Category CreateNewCategory()
@@ -33,7 +33,7 @@ public sealed class CategoryUIService(
             Editing = true
         };
         AdminCategories.Add(newCategory);
-        OnChange!.Invoke();
+        OnChange?.Invoke();
         return newCategory;
     }
 
@@ -41,7 +41,7 @@ public sealed class CategoryUIService(
     {
         AdminCategories = await categoryService.DeleteCategoryAsync(categoryId);
         await GetCategories();
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 
     public async Task GetAdminCategories()
@@ -59,6 +59,6 @@ public sealed class CategoryUIService(
     {
         AdminCategories = await categoryService.UpdateCategoryAsync(category);
         await GetCategories();
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 }

@@ -1,17 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DataAccess.Data;
+﻿using DataAccess.Data;
 using DataAccess.Exceptions;
-using UseCases.Ports.Output;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using UseCases.Ports.Output;
 
 namespace DataAccess.Adapters;
 
-public sealed class ProductTypeRepository(EcommerceContext dbContext) : IProductTypeRepository
+public sealed class ProductTypeRepository(IServiceProvider serviceProvider) : IProductTypeRepository
 {
-    private readonly EcommerceContext dbContext = dbContext;
+    private readonly IServiceProvider serviceProvider = serviceProvider;
 
     public async Task<List<ProductType>> GetAllProductTypesAsync()
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         List<ProductType> productTypes = await dbContext.ProductTypes
             .Where(x => !x.IsSoftDeleted)
             .AsNoTracking()
@@ -22,6 +26,9 @@ public sealed class ProductTypeRepository(EcommerceContext dbContext) : IProduct
 
     public async Task CreateProductTypeAsync(ProductType productType)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         ProductType? dbProductType = await dbContext.ProductTypes
             .Where(x => x.Name == productType.Name)
             .AsNoTracking()
@@ -40,6 +47,9 @@ public sealed class ProductTypeRepository(EcommerceContext dbContext) : IProduct
 
     public async Task UpdateProductTypeAsync(ProductType productType)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         ProductType dbProductType = await dbContext.ProductTypes
             .Where(x => x.Id == productType.Id)
             .FirstOrDefaultAsync()
@@ -53,6 +63,9 @@ public sealed class ProductTypeRepository(EcommerceContext dbContext) : IProduct
 
     public async Task DeleteProductTypeByIdAsync(int id)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         ProductType productType = await dbContext.ProductTypes.FindAsync(id)
             ?? throw new NotFoundException("The product type with the id"
             + $" \"{id}\" could not be found in the database.");

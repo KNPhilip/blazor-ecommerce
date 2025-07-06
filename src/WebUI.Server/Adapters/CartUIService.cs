@@ -1,7 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using Domain.Dtos;
 using Domain.Models;
-using UseCases;
 using UseCases.Ports.Input;
 using WebUI.Client.Ports;
 
@@ -65,7 +64,7 @@ public sealed class CartUIService(
             await localStorage.SetItemAsync("cart", cart);
         }
         await SetCartItemsCountAsync();
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 
     public async Task<List<CartProductResponseDto>> GetCartProducts()
@@ -111,7 +110,7 @@ public sealed class CartUIService(
             }
         }
         await SetCartItemsCountAsync();
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 
     public async Task StoreCartItems(bool emptyLocalCart)

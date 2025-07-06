@@ -1,17 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.Data;
 using DataAccess.Exceptions;
-using DataAccess.Data;
-using UseCases.Ports.Output;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using UseCases.Ports.Output;
 
 namespace DataAccess.Adapters;
 
-public sealed class ProductVariantRepository(EcommerceContext dbContext) : IProductVariantRepository
+public sealed class ProductVariantRepository(IServiceProvider serviceProvider) : IProductVariantRepository
 {
-    private readonly EcommerceContext dbContext = dbContext;
+    private readonly IServiceProvider serviceProvider = serviceProvider;
 
     public async Task<ProductVariant> GetProductVariantAsync(int productId, int productTypeId)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         ProductVariant productVariant = await dbContext.ProductVariants
             .Where(v => v.ProductId == productId && v.ProductTypeId == productTypeId)
             .Include(v => v.ProductType)
@@ -26,6 +30,9 @@ public sealed class ProductVariantRepository(EcommerceContext dbContext) : IProd
 
     public async Task UpdateProductVariantAsync(ProductVariant productVariant)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         ProductVariant? dbProductVariant = await dbContext.ProductVariants
             .SingleOrDefaultAsync(x => x.ProductId == productVariant.ProductId
             && x.ProductTypeId == productVariant.ProductTypeId);

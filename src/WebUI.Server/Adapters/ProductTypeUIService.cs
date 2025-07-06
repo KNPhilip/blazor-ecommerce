@@ -16,7 +16,7 @@ public sealed class ProductTypeUIService(
     {
         productType.Editing = productType.IsNew = false;
         ProductTypes = await productTypeService.CreateProductTypeAsync(productType);
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 
     public ProductType CreateNewProductType()
@@ -28,14 +28,14 @@ public sealed class ProductTypeUIService(
         };
 
         ProductTypes.Add(newProductType);
-        OnChange!.Invoke();
+        OnChange?.Invoke();
         return newProductType;
     }
 
     public async Task DeleteProductType(int productTypeId)
     {
         ProductTypes = await productTypeService.DeleteProductTypeByIdAsync(productTypeId);
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 
     public async Task GetProductTypes()
@@ -46,6 +46,6 @@ public sealed class ProductTypeUIService(
     public async Task UpdateProductType(ProductType productType)
     {
         ProductTypes = await productTypeService.UpdateProductTypeAsync(productType);
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 }

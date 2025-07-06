@@ -60,7 +60,7 @@ public sealed class ProductUIService(
         if (Products.Count == 0)
             Message = "No products found.";
 
-        OnProductsChanged!.Invoke();
+        OnProductsChanged?.Invoke();
     }
 
     public async Task<List<string>> GetProductSearchSuggestions(string searchTerm)

@@ -19,7 +19,7 @@ public sealed class CategoryUIService(HttpClient http)
         AdminCategories = (await response.Content
             .ReadFromJsonAsync<List<Category>>())!;
         await GetCategories();
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 
     public async Task UpdateCategory(Category category)
@@ -29,7 +29,7 @@ public sealed class CategoryUIService(HttpClient http)
         AdminCategories = (await response.Content
             .ReadFromJsonAsync<List<Category>>())!;
         await GetCategories();
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 
     public async Task AddCategory(Category category)
@@ -39,7 +39,7 @@ public sealed class CategoryUIService(HttpClient http)
         AdminCategories = (await response.Content
             .ReadFromJsonAsync<List<Category>>())!;
         await GetCategories();
-        OnChange!.Invoke();
+        OnChange?.Invoke();
     }
 
     public Category CreateNewCategory()
@@ -50,7 +50,7 @@ public sealed class CategoryUIService(HttpClient http)
             Editing = true
         };
         AdminCategories.Add(newCategory);
-        OnChange!.Invoke();
+        OnChange?.Invoke();
         return newCategory;
     }
 

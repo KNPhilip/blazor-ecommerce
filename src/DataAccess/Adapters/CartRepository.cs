@@ -1,17 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using DataAccess.Data;
+﻿using DataAccess.Data;
 using DataAccess.Exceptions;
-using UseCases.Ports.Output;
 using Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using UseCases.Ports.Output;
 
 namespace DataAccess.Adapters;
 
-public sealed class CartRepository(EcommerceContext dbContext) : ICartRepository
+public sealed class CartRepository(IServiceProvider serviceProvider) : ICartRepository
 {
-    private readonly EcommerceContext dbContext = dbContext;
+    private readonly IServiceProvider serviceProvider = serviceProvider;
 
     public async Task<List<CartItem>> GetCartItemsForUserAsync(string userId)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         List<CartItem> cartItems = await dbContext.CartItems
             .Where(ci => ci.UserId == userId)
             .AsNoTracking()
@@ -22,6 +26,9 @@ public sealed class CartRepository(EcommerceContext dbContext) : ICartRepository
 
     public async Task<bool> CartItemExistAsync(CartItem cartItem)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         CartItem? dbCartItem = await dbContext.CartItems
             .FirstOrDefaultAsync(ci => ci.ProductId == cartItem.ProductId &&
             ci.ProductTypeId == cartItem.ProductTypeId &&
@@ -32,18 +39,27 @@ public sealed class CartRepository(EcommerceContext dbContext) : ICartRepository
 
     public async Task CreateCartItemAsync(CartItem cartItem)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         dbContext.CartItems.Add(cartItem);
         await dbContext.SaveChangesAsync();
     }
 
     public async Task CreateCartItemsAsync(List<CartItem> cartItems)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         dbContext.CartItems.AddRange(cartItems);
         await dbContext.SaveChangesAsync();
     }
 
     public async Task UpdateQuantityAsync(CartItem cartItem)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         CartItem dbCartItem = await dbContext.CartItems
             .FirstOrDefaultAsync(ci => ci.ProductId == cartItem.ProductId &&
             ci.ProductTypeId == cartItem.ProductTypeId &&
@@ -56,6 +72,9 @@ public sealed class CartRepository(EcommerceContext dbContext) : ICartRepository
 
     public async Task DeleteCartItemAsync(string userId, int productId, int productTypeId)
     {
+        using IServiceScope scope = serviceProvider.CreateScope();
+        var dbContext = scope.ServiceProvider.GetRequiredService<EcommerceContext>();
+
         CartItem cartItem = await dbContext.CartItems
             .FirstOrDefaultAsync(ci => ci.ProductId == productId &&
             ci.ProductTypeId == productTypeId &&
