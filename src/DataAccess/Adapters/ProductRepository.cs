@@ -54,7 +54,7 @@ public sealed class ProductRepository(EcommerceContext dbContext) : IProductRepo
         List<Product> products = await dbContext.Products
             .Where(x => x.Visible && !x.IsSoftDeleted && x.Category!.Url!
                 .ToLower().Equals(categoryUrl.ToLower()))
-            .Include(x => x.Variants.Where(x => x.Visible && !x.IsSoftDeleted))
+            .Include(x => x.Variants)
             .Include(x => x.Images)
             .Include(x => x.Category)
             .AsNoTracking()
@@ -66,12 +66,10 @@ public sealed class ProductRepository(EcommerceContext dbContext) : IProductRepo
     public async Task<List<Product>> GetProductsBySearchTermAsync(string searchTerm)
     {
         List<Product> products = await dbContext.Products
-            .Where(x => x.Visible && !x.IsSoftDeleted
-                && (x.Title.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase)
-                || x.Description.Contains(searchTerm, StringComparison.CurrentCultureIgnoreCase)))
-            .Include(x => x.Variants.Where(x => x.Visible && !x.IsSoftDeleted))
-            .Include(x => x.Images)
-            .Include(x => x.Category)
+            .Where(p => p.Title.ToLower().Contains(searchTerm.ToLower()) ||
+                                    p.Description.ToLower().Contains(searchTerm.ToLower()) &&
+                                    p.Visible && !p.IsSoftDeleted)
+            .Include(x => x.Variants)
             .AsNoTracking()
             .ToListAsync();
 

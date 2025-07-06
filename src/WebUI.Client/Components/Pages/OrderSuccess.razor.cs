@@ -9,6 +9,6 @@ public sealed partial class OrderSuccess
 
     protected sealed override async Task OnInitializedAsync()
     {
-        await CartUIService.GetCartItemsCount();
+        await CartUIService.SetCartItemsCountAsync();
     }
 }

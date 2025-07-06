@@ -6,13 +6,16 @@ using Domain.Models;
 namespace WebUI.Server.Adapters;
 
 public sealed class AuthService(IHttpContextAccessor httpContextAccessor, 
-    UserManager<DbUser> userManager) : IAuthService
+    IServiceProvider serviceProvider) : IAuthService
 {
     private readonly IHttpContextAccessor httpContextAccessor = httpContextAccessor;
-    private readonly UserManager<DbUser> userManager = userManager;
+    private readonly IServiceProvider serviceProvider = serviceProvider;
 
     public async Task<string> GetUserIdAsync()
     {
+        IServiceScope scope = serviceProvider.CreateScope();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<DbUser>>();
+
         DbUser user = await userManager.GetUserAsync(httpContextAccessor.HttpContext!.User)
             ?? throw new Exception("User not found.");
 
@@ -27,9 +30,11 @@ public sealed class AuthService(IHttpContextAccessor httpContextAccessor,
 
     public async Task<DbUser> GetUserByEmailAsync(string email)
     {
-        DbUser? user = await userManager.FindByEmailAsync(email);
+        IServiceScope scope = serviceProvider.CreateScope();
+        var userManager = scope.ServiceProvider.GetRequiredService<UserManager<DbUser>>();
 
-        ArgumentNullException.ThrowIfNull(user, nameof(user));
+        DbUser user = await userManager.FindByEmailAsync(email)
+            ?? throw new Exception($"User with email \"{email}\" not found.");
 
         return user;
     }

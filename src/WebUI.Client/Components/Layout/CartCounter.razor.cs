@@ -6,17 +6,29 @@ public sealed partial class CartCounter
 
     protected override void OnInitialized()
     {
-        CartUIService.OnChange += StateHasChanged;
+        CartUIService.OnChange += HandleCartChanged;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        cartItemsCount = await CartUIService.GetCartItemsCountAsync();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        await CartUIService.SetCartItemsCountAsync(cartItemsCount);
         cartItemsCount = await GetCartItemsCountAsync();
     }
 
     public void Dispose()
     {
-        CartUIService.OnChange -= StateHasChanged;
+        CartUIService.OnChange -= HandleCartChanged;
+    }
+
+    private async void HandleCartChanged()
+    {
+        cartItemsCount = await GetCartItemsCountAsync();
+        StateHasChanged();
     }
 
     private async Task<int> GetCartItemsCountAsync()

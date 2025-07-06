@@ -29,6 +29,8 @@ public static class SecurityExtensions
             .AddSignInManager()
             .AddDefaultTokenProviders();
 
+        services.AddTransient<UserManager<DbUser>>();
+        services.AddTransient<SignInManager<DbUser>>();
         services.AddSingleton<IEmailSender<DbUser>, IdentityNoOpEmailSender>();
         services.AddAuthorization();
         services.AddAuthentication(options =>

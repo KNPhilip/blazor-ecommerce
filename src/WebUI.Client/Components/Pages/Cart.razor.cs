@@ -23,7 +23,7 @@ public sealed partial class Cart
 
     private async Task LoadCart()
     {
-        await CartUIService.GetCartItemsCount();
+        await CartUIService.SetCartItemsCountAsync();
         cartProducts = await CartUIService.GetCartProducts();
         if (cartProducts is null || cartProducts.Count == 0)
         {

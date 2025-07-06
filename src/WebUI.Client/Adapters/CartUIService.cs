@@ -13,6 +13,34 @@ public sealed class CartUIService(
 {
     public event Action? OnChange;
 
+    public async Task<int> GetCartItemsCountAsync()
+    {
+        return await http.GetFromJsonAsync<int>("api/v1/carts/count");
+    }
+
+    public async Task SetCartItemsCountAsync(int count)
+    {
+        await localStorage.SetItemAsync("cartItemsCount", count);
+    }
+
+    public async Task SetCartItemsCountAsync()
+    {
+        if (await authService.IsUserAuthenticated())
+        {
+            int count = await GetCartItemsCountAsync();
+            await SetCartItemsCountAsync(count);
+        }
+        else
+        {
+            List<CartItem>? cart = await localStorage
+                .GetItemAsync<List<CartItem>>("cart");
+
+            await SetCartItemsCountAsync(cart is null ? 0 : cart.Count);
+        }
+
+        OnChange!.Invoke();
+    }
+
     public async Task AddToCart(CartItem cartItem)
     {
         if (await authService.IsUserAuthenticated())
@@ -38,28 +66,7 @@ public sealed class CartUIService(
 
             await localStorage.SetItemAsync("cart", cart);
         }
-        await GetCartItemsCount();
-    }
-
-    public async Task GetCartItemsCount()
-    {
-        if (await authService.IsUserAuthenticated())
-        {
-            int count = await http
-                .GetFromJsonAsync<int>("api/v1/carts/count");
-
-            await localStorage.SetItemAsync
-                ("cartItemsCount", count);
-        }
-        else
-        {
-            List<CartItem>? cart = await localStorage
-                .GetItemAsync<List<CartItem>>("cart");
-            await localStorage.SetItemAsync
-                ("cartItemsCount", cart is not null ? cart.Count : 0);
-        }
-
-        OnChange!.Invoke();
+        await SetCartItemsCountAsync();
     }
 
     public async Task<List<CartProductResponseDto>> GetCartProducts()
@@ -114,7 +121,7 @@ public sealed class CartUIService(
                 await localStorage.SetItemAsync("cart", cart);
             }
         }
-        await GetCartItemsCount();
+        await SetCartItemsCountAsync();
     }
 
     public async Task StoreCartItems(bool emptyLocalCart)

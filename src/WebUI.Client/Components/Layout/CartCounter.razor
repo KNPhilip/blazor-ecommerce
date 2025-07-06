@@ -1,4 +1,5 @@
 ﻿@using WebUI.Client.Ports
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
 @inject ICartUIService CartUIService
 @inject ILocalStorageService LocalStorage
 @implements IDisposable
