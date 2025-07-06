@@ -11,39 +11,39 @@ public sealed partial class Cart
 
     protected override async Task OnInitializedAsync()
     {
-        isAuthenticated = await AuthUIService.IsUserAuthenticated();
-        await LoadCart();
+        isAuthenticated = await AuthUIService.IsUserAuthenticatedAsync();
+        await LoadCartAsync();
     }
 
-    private async Task RemoveProductFromCart(int productId, int productTypeId)
+    private async Task RemoveProductFromCartAsync(int productId, int productTypeId)
     {
-        await CartUIService.RemoveProductFromCart(productId, productTypeId);
-        await LoadCart();
+        await CartUIService.RemoveProductFromCartAsync(productId, productTypeId);
+        await LoadCartAsync();
     }
 
-    private async Task LoadCart()
+    private async Task LoadCartAsync()
     {
         await CartUIService.SetCartItemsCountAsync();
-        cartProducts = await CartUIService.GetCartProducts();
+        cartProducts = await CartUIService.GetCartProductsAsync();
         if (cartProducts is null || cartProducts.Count == 0)
         {
             message = "Your cart is empty.";
         }
     }
 
-    private async Task UpdateQuantity(ChangeEventArgs e, CartProductResponseDto product)
+    private async Task UpdateQuantityAsync(ChangeEventArgs e, CartProductResponseDto product)
     {
         product.Quantity = int.Parse(e.Value!.ToString()!);
         if (product.Quantity < 1)
         {
             product.Quantity = 1;
         }
-        await CartUIService.UpdateQuantity(product);
+        await CartUIService.UpdateQuantityAsync(product);
     }
 
-    private async Task PlaceOrder()
+    private async Task PlaceOrderAsync()
     {
-        string url = await OrderUIService.PlaceOrder();
+        string url = await OrderUIService.PlaceOrderAsync();
         NavigationManager.NavigateTo(url);
     }
 }

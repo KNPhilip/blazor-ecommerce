@@ -2,5 +2,5 @@
 
 public interface IAuthUIService
 {
-    Task<bool> IsUserAuthenticated();
+    Task<bool> IsUserAuthenticatedAsync();
 }

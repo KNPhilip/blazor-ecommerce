@@ -17,11 +17,11 @@ public sealed partial class Index
     {
         if (SearchTerm is not null)
         {
-            await ProductUIService.SearchProducts(SearchTerm, Page);
+            await ProductUIService.SearchProductsAsync(SearchTerm, Page);
         }
         else
         {
-            await ProductUIService.GetProducts(CategoryUrl);
+            await ProductUIService.GetProductsAsync(CategoryUrl);
         }
     }
 }

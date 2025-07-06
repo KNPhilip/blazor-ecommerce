@@ -22,7 +22,7 @@ public partial class Search
         NavigationManager.NavigateTo($"search/{searchTerm}/1");
     }
 
-    private async Task HandleSearch(KeyboardEventArgs args)
+    private async Task HandleSearchAsync(KeyboardEventArgs args)
     {
         if (args.Key is null || args.Key.Equals("Enter"))
         {
@@ -30,7 +30,7 @@ public partial class Search
         }
         else if (searchTerm.Length > 1)
         {
-            suggestions = await ProductUIService.GetProductSearchSuggestions(searchTerm);
+            suggestions = await ProductUIService.GetProductSearchSuggestionsAsync(searchTerm);
         }
     }
 }

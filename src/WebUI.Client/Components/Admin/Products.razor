@@ -19,11 +19,17 @@
 
     @if(ProductUIService.AdminProducts is null)
     {
-        <MudProgressLinear Color="Color.Info" Indeterminate="true" Class="my-7" />
+        <MudProgressLinear Color="Color.Info" 
+                           Indeterminate="true" 
+                           Class="my-7" />
     }
     else
     {
-        <MudButton Variant="Variant.Filled" Class="float-end mb-3" StartIcon="@Icons.Material.Filled.Add" Color="Color.Info" @onclick="CreateProduct">Create new Product</MudButton>
+        <MudButton Variant="Variant.Filled" 
+                   Class="float-end mb-3" 
+                   StartIcon="@Icons.Material.Filled.Add" 
+                   Color="Color.Info" 
+                   @onclick="CreateProduct">Create new Product</MudButton>
         <table class="table">
             <thead>
                 <tr>
@@ -67,7 +73,10 @@
                             <MudIcon Icon="@(product.Visible ? Icons.Material.Filled.Check : Icons.Material.Filled.Close)" Color="Color.Info"></MudIcon>
                         </td>
                         <td>
-                            <MudIconButton Variant="Variant.Filled" Icon="@Icons.Material.Filled.Edit" Color="Color.Info" aria-label="edit" OnClick="(() => EditProduct(product.Id))"></MudIconButton>
+                            <MudIconButton Variant="Variant.Filled" 
+                                           Icon="@Icons.Material.Filled.Edit" 
+                                           Color="Color.Info" aria-label="edit" 
+                                           OnClick="(() => EditProduct(product.Id))"></MudIconButton>
                         </td>
                     </tr>
                 </Virtualize>

@@ -5,24 +5,29 @@ using Domain.Models;
 namespace WebUI.Server.Adapters;
 
 public sealed class CategoryUIService(
-    ICategoryService categoryService)
-    : ICategoryUIService
+    ICategoryService categoryService) : ICategoryUIService
 {
+    private readonly ICategoryService categoryService = categoryService;
+
     public List<Category> Categories { get; set; } = [];
     public List<Category> AdminCategories { get; set; } = [];
 
     public event Action? OnChange;
 
-    public async Task GetCategories()
+    public async Task GetCategoriesAsync()
     {
         Categories = await categoryService.GetCategoriesAsync();
     }
 
-    public async Task AddCategory(Category category)
+    public async Task GetAdminCategoriesAsync()
     {
-        AdminCategories = await categoryService.CreateCategoryAsync(category);
-        await GetCategories();
-        OnChange?.Invoke();
+        List<Category>? result =
+            await categoryService.GetAdminCategoriesAsync();
+
+        if (result is not null)
+        {
+            AdminCategories = result ?? [];
+        }
     }
 
     public Category CreateNewCategory()
@@ -37,28 +42,24 @@ public sealed class CategoryUIService(
         return newCategory;
     }
 
-    public async Task DeleteCategory(int categoryId)
+    public async Task CreateCategoryAsync(Category category)
     {
-        AdminCategories = await categoryService.DeleteCategoryAsync(categoryId);
-        await GetCategories();
+        AdminCategories = await categoryService.CreateCategoryAsync(category);
+        await GetCategoriesAsync();
         OnChange?.Invoke();
     }
 
-    public async Task GetAdminCategories()
-    {
-        List<Category>? result =
-            await categoryService.GetAdminCategoriesAsync();
-
-        if (result is not null)
-        {
-            AdminCategories = result ?? [];
-        }
-    }
-
-    public async Task UpdateCategory(Category category)
+    public async Task UpdateCategoryAsync(Category category)
     {
         AdminCategories = await categoryService.UpdateCategoryAsync(category);
-        await GetCategories();
+        await GetCategoriesAsync();
+        OnChange?.Invoke();
+    }
+
+    public async Task DeleteCategoryByIdAsync(int categoryId)
+    {
+        AdminCategories = await categoryService.DeleteCategoryAsync(categoryId);
+        await GetCategoriesAsync();
         OnChange?.Invoke();
     }
 }

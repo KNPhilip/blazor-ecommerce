@@ -269,8 +269,8 @@
 
     protected sealed override async Task OnInitializedAsync()
     {
-        await ProductTypeUIService.GetProductTypes();
-        await CategoryUIService.GetAdminCategories();
+        await ProductTypeUIService.GetProductTypesAsync();
+        await CategoryUIService.GetAdminCategoriesAsync();
     }
 
     protected sealed override async Task OnParametersSetAsync()
@@ -285,7 +285,7 @@
         }
         else
         {
-            Product? dbProduct = await ProductUIService.GetProduct(Id);
+            Product? dbProduct = await ProductUIService.GetProductByIdAsync(Id);
             if (dbProduct is null)
             {
                 message = $"Product with Id '{Id}' does not exist.";
@@ -330,13 +330,13 @@
     {
         if (product.IsNew)
         {
-            Product result = await ProductUIService.CreateProduct(product);
+            Product result = await ProductUIService.CreateProductAsync(product);
             NavigationManager.NavigateTo($"admin/product/{result.Id}");
         }
         else
         {
             product.IsNew = false;
-            product = await ProductUIService.UpdateProduct(product) ?? new();
+            product = await ProductUIService.UpdateProductAsync(product) ?? new();
             NavigationManager.NavigateTo($"admin/product/{product!.Id}", true);
         }
     }
@@ -348,7 +348,7 @@
 
         if (confirmed)
         {
-            await ProductUIService.DeleteProduct(product);
+            await ProductUIService.DeleteProductAsync(product);
             NavigationManager.NavigateTo("admin/products");
         }
     }

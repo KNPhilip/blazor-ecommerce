@@ -4,7 +4,7 @@ namespace WebUI.Client.Ports;
 
 public interface IOrderUIService
 {
-    Task<string> PlaceOrder();
-    Task<List<OrderOverviewDto>> GetOrders();
-    Task<OrderDetailsDto> GetOrderDetails(int orderId);
+    Task<List<OrderOverviewDto>> GetOrdersAsync();
+    Task<OrderDetailsDto> GetOrderDetailsByIdAsync(int orderId);
+    Task<string> PlaceOrderAsync();
 }

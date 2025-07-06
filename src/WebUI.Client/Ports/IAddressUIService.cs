@@ -4,6 +4,6 @@ namespace WebUI.Client.Ports;
 
 public interface IAddressUIService
 {
-    Task<Address> GetAddress();
-    Task<Address> AddOrUpdateAddress(Address address);
+    Task<Address> GetAddressAsync();
+    Task<Address> CreateOrUpdateAddressAsync(Address address);
 }

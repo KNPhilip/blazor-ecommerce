@@ -9,21 +9,21 @@ public sealed class OrderUIService(
     AuthenticationStateProvider authStateProvider,
     HttpClient http) : IOrderUIService
 {
-    public async Task<OrderDetailsDto> GetOrderDetails(int orderId)
+    public async Task<OrderDetailsDto> GetOrderDetailsByIdAsync(int orderId)
     {
         OrderDetailsDto? result = await http
             .GetFromJsonAsync<OrderDetailsDto>($"api/v1/orders/{orderId}");
         return result!;
     }
 
-    public async Task<List<OrderOverviewDto>> GetOrders()
+    public async Task<List<OrderOverviewDto>> GetOrdersAsync()
     {
         List<OrderOverviewDto>? result = await http
             .GetFromJsonAsync<List<OrderOverviewDto>>("api/v1/orders");
         return result!;
     }
 
-    public async Task<string> PlaceOrder()
+    public async Task<string> PlaceOrderAsync()
     {
         if (await IsUserAuthenticated())
         {

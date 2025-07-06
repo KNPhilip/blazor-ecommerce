@@ -8,7 +8,7 @@ public sealed partial class ProductTypes
 
     protected override async Task OnInitializedAsync()
     {
-        await ProductTypeUIService.GetProductTypes();
+        await ProductTypeUIService.GetProductTypesAsync();
         ProductTypeUIService.OnChange += StateHasChanged;
     }
 
@@ -28,27 +28,27 @@ public sealed partial class ProductTypes
         editingProductType = ProductTypeUIService.CreateNewProductType();
     }
 
-    private async Task CancelEditing()
+    private async Task CancelEditingAsync()
     {
-        await ProductTypeUIService.GetProductTypes();
+        await ProductTypeUIService.GetProductTypesAsync();
         editingProductType = null;
     }
 
-    private async Task UpdateProductType()
+    private async Task CreateOrUpdateProductTypeAsync()
     {
         if (editingProductType!.IsNew)
         {
-            await ProductTypeUIService.AddProductType(editingProductType);
+            await ProductTypeUIService.CreateProductTypeAsync(editingProductType);
         }
         else
         {
-            await ProductTypeUIService.UpdateProductType(editingProductType);
+            await ProductTypeUIService.UpdateProductTypeAsync(editingProductType);
         }
         editingProductType = null;
     }
 
-    private async Task DeleteProductType(int productTypeId)
+    private async Task DeleteProductTypeByIdAsync(int productTypeId)
     {
-        await ProductTypeUIService.DeleteProductType(productTypeId);
+        await ProductTypeUIService.DeleteProductTypeByIdAsync(productTypeId);
     }
 }

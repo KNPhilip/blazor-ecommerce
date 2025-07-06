@@ -14,7 +14,7 @@ public sealed partial class ProductDetails
 
     protected override async Task OnParametersSetAsync()
     {
-        Product? result = await ProductUIService.GetProduct(Id);
+        Product? result = await ProductUIService.GetProductByIdAsync(Id);
         product = result;
         if (product!.Variants.Count > 0)
         {
@@ -27,7 +27,7 @@ public sealed partial class ProductDetails
         return product!.Variants.FirstOrDefault(v => v.ProductTypeId == currentTypeId);
     }
 
-    private async Task AddToCart()
+    private async Task AddToCartAsync()
     {
         ProductVariant? productVariant = GetSelectedVariant();
         CartItem cartItem = new()
@@ -37,6 +37,6 @@ public sealed partial class ProductDetails
             Quantity = 1
         };
 
-        await CartUIService.AddToCart(cartItem);
+        await CartUIService.AddToCartAsync(cartItem);
     }
 }

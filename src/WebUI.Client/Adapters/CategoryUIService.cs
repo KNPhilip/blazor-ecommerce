@@ -7,39 +7,30 @@ namespace WebUI.Client.Adapters;
 public sealed class CategoryUIService(HttpClient http)
     : ICategoryUIService
 {
+    private readonly HttpClient http = http;
+
     public List<Category> Categories { get; set; } = [];
     public List<Category> AdminCategories { get; set; } = [];
 
     public event Action? OnChange;
 
-    public async Task DeleteCategory(int categoryId)
+    public async Task GetCategoriesAsync()
     {
-        HttpResponseMessage response = await http
-            .DeleteAsync($"api/v1/categories/{categoryId}");
-        AdminCategories = (await response.Content
-            .ReadFromJsonAsync<List<Category>>())!;
-        await GetCategories();
-        OnChange?.Invoke();
+        Categories = await http
+            .GetFromJsonAsync<List<Category>>
+                ("api/v1/categories") ?? [];
     }
 
-    public async Task UpdateCategory(Category category)
+    public async Task GetAdminCategoriesAsync()
     {
-        HttpResponseMessage response = await http
-            .PutAsJsonAsync("api/v1/categories", category);
-        AdminCategories = (await response.Content
-            .ReadFromJsonAsync<List<Category>>())!;
-        await GetCategories();
-        OnChange?.Invoke();
-    }
+        List<Category>? response = await http
+            .GetFromJsonAsync<List<Category>>
+                ("api/v1/categories/admin");
 
-    public async Task AddCategory(Category category)
-    {
-        HttpResponseMessage response = await http
-            .PostAsJsonAsync("api/v1/categories", category);
-        AdminCategories = (await response.Content
-            .ReadFromJsonAsync<List<Category>>())!;
-        await GetCategories();
-        OnChange?.Invoke();
+        if (response is not null)
+        {
+            AdminCategories = response;
+        }
     }
 
     public Category CreateNewCategory()
@@ -54,22 +45,33 @@ public sealed class CategoryUIService(HttpClient http)
         return newCategory;
     }
 
-    public async Task GetAdminCategories()
+    public async Task CreateCategoryAsync(Category category)
     {
-        List<Category>? response = await http
-            .GetFromJsonAsync<List<Category>>
-                ("api/v1/categories/admin");
-
-        if (response is not null)
-        {
-            AdminCategories = response;
-        }
+        HttpResponseMessage response = await http
+            .PostAsJsonAsync("api/v1/categories", category);
+        AdminCategories = (await response.Content
+            .ReadFromJsonAsync<List<Category>>())!;
+        await GetCategoriesAsync();
+        OnChange?.Invoke();
     }
 
-    public async Task GetCategories()
+    public async Task UpdateCategoryAsync(Category category)
     {
-        Categories = await http
-            .GetFromJsonAsync<List<Category>>
-                ("api/v1/categories") ?? [];
+        HttpResponseMessage response = await http
+            .PutAsJsonAsync("api/v1/categories", category);
+        AdminCategories = (await response.Content
+            .ReadFromJsonAsync<List<Category>>())!;
+        await GetCategoriesAsync();
+        OnChange?.Invoke();
+    }
+
+    public async Task DeleteCategoryByIdAsync(int categoryId)
+    {
+        HttpResponseMessage response = await http
+            .DeleteAsync($"api/v1/categories/{categoryId}");
+        AdminCategories = (await response.Content
+            .ReadFromJsonAsync<List<Category>>())!;
+        await GetCategoriesAsync();
+        OnChange?.Invoke();
     }
 }

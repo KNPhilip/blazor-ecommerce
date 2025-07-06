@@ -8,7 +8,7 @@ public sealed partial class Categories
 
     protected override async Task OnInitializedAsync()
     {
-        await CategoryUIService.GetAdminCategories();
+        await CategoryUIService.GetAdminCategoriesAsync();
         CategoryUIService.OnChange += StateHasChanged;
     }
 
@@ -28,28 +28,28 @@ public sealed partial class Categories
         editingCategory = category;
     }
 
-    private async Task UpdateCategory()
+    private async Task CreateOrUpdateCategoryAsync()
     {
         if (editingCategory!.IsNew)
         {
-            await CategoryUIService.AddCategory(editingCategory);
+            await CategoryUIService.CreateCategoryAsync(editingCategory);
         }
         else
         {
-            await CategoryUIService.UpdateCategory(editingCategory);
+            await CategoryUIService.UpdateCategoryAsync(editingCategory);
         }
 
         editingCategory = null;
     }
 
-    private async Task CancelEditing()
+    private async Task CancelEditingAsync()
     {
-        await CategoryUIService.GetAdminCategories();
+        await CategoryUIService.GetAdminCategoriesAsync();
         editingCategory = null;
     }
 
-    private async Task DeleteCategory(int id)
+    private async Task DeleteCategoryByIdAsync(int id)
     {
-        await CategoryUIService.DeleteCategory(id);
+        await CategoryUIService.DeleteCategoryByIdAsync(id);
     }
 }

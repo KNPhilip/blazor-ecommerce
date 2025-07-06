@@ -9,13 +9,13 @@ public sealed partial class AddressForm
 
     protected override async Task OnInitializedAsync()
     {
-        address = await AddressUIService.GetAddress();
+        address = await AddressUIService.GetAddressAsync();
     }
 
-    private async Task SubmitAddresss()
+    private async Task SubmitAddresssAsync()
     {
         editAddress = false;
-        address = await AddressUIService.AddOrUpdateAddress(address!);
+        address = await AddressUIService.CreateOrUpdateAddressAsync(address!);
     }
 
     private void InitAddress()

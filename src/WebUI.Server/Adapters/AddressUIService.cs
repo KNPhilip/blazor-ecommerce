@@ -8,15 +8,17 @@ namespace WebUI.Server.Adapters;
 public sealed class AddressUIService(
     IAddressService addressService) : IAddressUIService
 {
-    public async Task<Address> AddOrUpdateAddress(Address address)
-    {
-        await addressService.UpdateOrCreateAddressAsync(address);
-        return await addressService.GetAddressAsync();
-    }
+    private readonly IAddressService addressService = addressService;
 
-    public async Task<Address> GetAddress()
+    public async Task<Address> GetAddressAsync()
     {
         Result<Address> result = await addressService.GetAddressAsync();
         return result;
+    }
+
+    public async Task<Address> CreateOrUpdateAddressAsync(Address address)
+    {
+        await addressService.UpdateOrCreateAddressAsync(address);
+        return await addressService.GetAddressAsync();
     }
 }

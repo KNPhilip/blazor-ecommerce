@@ -36,7 +36,7 @@
            placeholder="Search..."
            @bind="@searchTerm"
            @bind:event="oninput"
-           @onkeyup="HandleSearch"
+           @onkeyup="HandleSearchAsync"
            @ref="searchInput" />
     <datalist id="products">
         @foreach (string suggestion in suggestions)

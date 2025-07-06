@@ -5,24 +5,24 @@ using Domain.Dtos;
 
 namespace WebUI.Server.Adapters;
 
-public sealed class OrderUIService(IHttpContextAccessor httpContextAccessor, IOrderService orderService,
-    IAuthService authService) : IOrderUIService
+public sealed class OrderUIService(IHttpContextAccessor httpContextAccessor, 
+    IOrderService orderService, IAuthService authService) : IOrderUIService
 {
     private readonly IHttpContextAccessor httpContextAccessor = httpContextAccessor;
     private readonly IOrderService orderService = orderService;
     private readonly IAuthService authService = authService;
 
-    public async Task<OrderDetailsDto> GetOrderDetails(int orderId)
-    {
-        return await orderService.GetOrderDetailsAsync(orderId);
-    }
-
-    public async Task<List<OrderOverviewDto>> GetOrders()
+    public async Task<List<OrderOverviewDto>> GetOrdersAsync()
     {
         return await orderService.GetOrdersAsync();
     }
 
-    public async Task<string> PlaceOrder()
+    public async Task<OrderDetailsDto> GetOrderDetailsByIdAsync(int orderId)
+    {
+        return await orderService.GetOrderDetailsAsync(orderId);
+    }
+
+    public async Task<string> PlaceOrderAsync()
     {
         if (IsUserAuthenticated())
         {

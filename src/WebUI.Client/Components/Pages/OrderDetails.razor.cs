@@ -12,6 +12,6 @@ public sealed partial class OrderDetails
 
     protected override async Task OnInitializedAsync()
     {
-        order = await OrderUIService.GetOrderDetails(OrderId);
+        order = await OrderUIService.GetOrderDetailsByIdAsync(OrderId);
     }
 }

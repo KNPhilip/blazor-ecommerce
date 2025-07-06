@@ -4,7 +4,7 @@ public sealed partial class Products
 {
     protected override async Task OnInitializedAsync()
     {
-        await ProductUIService.GetAdminProducts();
+        await ProductUIService.GetAdminProductsAsync();
     }
 
     private void EditProduct(int productId)

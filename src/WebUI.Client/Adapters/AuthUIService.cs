@@ -6,7 +6,9 @@ namespace WebUI.Client.Adapters;
 public sealed class AuthUIService(
     AuthenticationStateProvider authStateProvider) : IAuthUIService
 {
-    public async Task<bool> IsUserAuthenticated()
+    private readonly AuthenticationStateProvider authStateProvider = authStateProvider;
+
+    public async Task<bool> IsUserAuthenticatedAsync()
     {
         return (await authStateProvider
             .GetAuthenticationStateAsync()).User.Identity!.IsAuthenticated;

@@ -5,18 +5,17 @@ using Domain.Models;
 namespace WebUI.Server.Adapters;
 
 public sealed class ProductTypeUIService(
-    IProductTypeService productTypeService)
-    : IProductTypeUIService
+    IProductTypeService productTypeService): IProductTypeUIService
 {
+    private readonly IProductTypeService productTypeService = productTypeService;
+
     public List<ProductType> ProductTypes { get; set; } = [];
 
     public event Action? OnChange;
 
-    public async Task AddProductType(ProductType productType)
+    public async Task GetProductTypesAsync()
     {
-        productType.Editing = productType.IsNew = false;
-        ProductTypes = await productTypeService.CreateProductTypeAsync(productType);
-        OnChange?.Invoke();
+        ProductTypes = await productTypeService.GetProductTypesAsync();
     }
 
     public ProductType CreateNewProductType()
@@ -32,20 +31,22 @@ public sealed class ProductTypeUIService(
         return newProductType;
     }
 
-    public async Task DeleteProductType(int productTypeId)
+    public async Task CreateProductTypeAsync(ProductType productType)
     {
-        ProductTypes = await productTypeService.DeleteProductTypeByIdAsync(productTypeId);
+        productType.Editing = productType.IsNew = false;
+        ProductTypes = await productTypeService.CreateProductTypeAsync(productType);
         OnChange?.Invoke();
     }
 
-    public async Task GetProductTypes()
-    {
-        ProductTypes = await productTypeService.GetProductTypesAsync();
-    }
-
-    public async Task UpdateProductType(ProductType productType)
+    public async Task UpdateProductTypeAsync(ProductType productType)
     {
         ProductTypes = await productTypeService.UpdateProductTypeAsync(productType);
+        OnChange?.Invoke();
+    }
+
+    public async Task DeleteProductTypeByIdAsync(int productTypeId)
+    {
+        ProductTypes = await productTypeService.DeleteProductTypeByIdAsync(productTypeId);
         OnChange?.Invoke();
     }
 }

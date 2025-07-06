@@ -30,7 +30,7 @@ public sealed partial class NavMenu
 
     protected sealed override async Task OnInitializedAsync()
     {
-        await CategoryUIService.GetCategories();
+        await CategoryUIService.GetCategoriesAsync();
         CategoryUIService.OnChange += StateHasChanged;
     }
 

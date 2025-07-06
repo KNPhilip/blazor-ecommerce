@@ -8,6 +8,6 @@ public sealed partial class Orders
 
     protected override async Task OnInitializedAsync()
     {
-        orders = await OrderUIService.GetOrders();
+        orders = await OrderUIService.GetOrdersAsync();
     }
 }
