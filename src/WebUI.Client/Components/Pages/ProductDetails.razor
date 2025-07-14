@@ -49,15 +49,15 @@
     {
         <div class="media">
             <div class="media-img-wrapper mr-4">
-                @if (!string.IsNullOrEmpty(product.ImageUrl))
+                @if (product.Images.Count == 1)
                 {
-                    <img class="media-img" src="@product.ImageUrl" alt="@product.Title" />
+                    <MudImage Src="@product.Images[0].Data"></MudImage>
                 }
                 else
                 {
                     <MudCarousel Class="mud-width-full"
-                                 ItemsSource="@product.Images"
-                                 Style="height: 200px;">
+                                    ItemsSource="@product.Images"
+                                    Style="height: 200px;">
                         <ItemTemplate>
                             <MudImage Src="@context.Data"></MudImage>
                         </ItemTemplate>

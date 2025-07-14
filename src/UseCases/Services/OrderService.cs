@@ -28,7 +28,6 @@ public sealed class OrderService(IAuthService authService,
                 $"{o.OrderItems.First().Product!.Title} and " +
                 $"{o.OrderItems.Count - 1} more..." :
                 o.OrderItems.First().Product!.Title,
-            ProductImageUrl = o.OrderItems.First().Product!.ImageUrl,
             Images = o.OrderItems.First().Product!.Images
         }));
         return orderResponse;
@@ -54,7 +53,6 @@ public sealed class OrderService(IAuthService authService,
         orderDetailsResponse.Products.Add(new OrderDetailsProductDto
         {
             ProductId = item.ProductId,
-            ImageUrl = item.Product!.ImageUrl,
             Images = item.Product.Images,
             ProductType = item.ProductType!.Name,
             Quantity = item.Quantity,

@@ -17,9 +17,16 @@ public sealed class CartService(IAuthService authService, ICartRepository cartRe
 
     public async Task<Result<int>> GetCartItemsCountAsync()
     {
-        string userId = await authService.GetUserIdAsync();
-        List<CartItem> cartItems = await cartRepository.GetCartItemsForUserAsync(userId);
-        return cartItems.Count;
+        try
+        {
+            string userId = await authService.GetUserIdAsync();
+            List<CartItem> cartItems = await cartRepository.GetCartItemsForUserAsync(userId);
+            return cartItems.Count;
+        }
+        catch (Exception)
+        {
+            return 0;
+        }
     }
 
     public async Task<Result<List<CartProductResponseDto>>> GetCartItemsAsync(string? userId = null)
@@ -45,7 +52,7 @@ public sealed class CartService(IAuthService authService, ICartRepository cartRe
                 {
                     ProductId = product.Id,
                     Title = product.Title,
-                    ImageUrl = product.ImageUrl,
+                    Images = product.Images,
                     Price = productVariant.Price,
                     ProductType = productVariant.ProductType.Name,
                     ProductTypeId = productVariant.ProductTypeId,
