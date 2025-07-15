@@ -63,14 +63,7 @@ else
                     <div class="flex flex-center">
                         <a href="product/@product.Id">
                             <div class="media-img-wrapper">
-                                @if(!string.IsNullOrEmpty(product.ImageUrl))
-                                {
-                                    <img src="@product.ImageUrl">
-                                }
-                                else if(product.Images.Count > 0)
-                                {
-                                    <img src="@product.Images[0].Data" />
-                                }
+                                <img src="@product.Images[0].Data" />
                             </div>
                         </a>
                     </div>

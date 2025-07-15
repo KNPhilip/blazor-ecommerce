@@ -6,6 +6,7 @@ using Domain.Models;
 using Domain.Dtos;
 using Stripe.Checkout;
 using Stripe;
+using Domain.Enums;
 
 namespace UseCases.Services;
 
@@ -30,10 +31,12 @@ public sealed class PaymentService(IConfiguration config, IAuthService authServi
                 ProductData = new()
                 {
                     Name = product.Title,
-                    Images =
-                    [
-                        product.ImageUrl
-                    ]
+                    Images = product.Images
+                        .Where(x => x.Type == ImageType.Url
+                            || x.Type == ImageType.Base64)
+                        .Select(x => x.Data)
+                        .Take(8)
+                        .ToList()
                 }
             },
             Quantity = product.Quantity

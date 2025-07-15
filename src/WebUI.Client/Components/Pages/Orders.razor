@@ -63,14 +63,7 @@
         {
             <div class="wrapper">
                 <div class="image-wrapper">
-                    @if (!string.IsNullOrEmpty(order.ProductImageUrl))
-                    {
-                        <img src="@order.ProductImageUrl" class="image" />
-                    }
-                    else if (order.Images.Count > 0)
-                    {
-                        <img src="@order.Images[0].Data" class="image" />
-                    }
+                    <img src="@order.Images[0].Data" class="image" />
                 </div>
                 <div class="details">
                     <h4>@order.Product</h4>

@@ -4,16 +4,6 @@ namespace DataAccess.Data;
 
 internal static class DataSeeder
 {
-    internal static List<Product> SeedProducts()
-    {
-        return new List<List<Product>>
-        {
-            BookSeeder.SeedBookProducts(),
-            MovieSeeder.SeedMovieProducts(),
-            VideoGameSeeder.SeedVideoGameProducts()
-        }.SelectMany(x => x).ToList();
-    }
-
     internal static List<Category> SeedCategories()
     {
         return 
@@ -46,16 +36,6 @@ internal static class DataSeeder
                 CreatedDate = new DateTime(2025, 1, 1)
             }
         ];
-    }
-
-    internal static List<ProductVariant> SeedProductVariants()
-    {
-        return new List<List<ProductVariant>>
-        {
-            BookSeeder.SeedBookVariants(),
-            MovieSeeder.SeedMovieVariants(),
-            VideoGameSeeder.SeedVideoGameVariants()
-        }.SelectMany(x => x).ToList();
     }
 
     internal static List<ProductType> SeedProductTypes()
@@ -133,5 +113,35 @@ internal static class DataSeeder
                 CreatedDate = new DateTime(2025, 1, 1)
             }
         ];
+    }
+
+    internal static List<Product> SeedProducts()
+    {
+        return new List<List<Product>>
+        {
+            BookSeeder.SeedBookProducts(),
+            MovieSeeder.SeedMovieProducts(),
+            VideoGameSeeder.SeedVideoGameProducts()
+        }.SelectMany(x => x).ToList();
+    }
+
+    internal static List<Image> SeedImages()
+    {
+        return new List<List<Image>>
+        {
+            BookSeeder.SeedBookImages(),
+            MovieSeeder.SeedMovieImages(),
+            VideoGameSeeder.SeedVideoGameImages()
+        }.SelectMany(x => x).ToList();
+    }
+
+    internal static List<ProductVariant> SeedProductVariants()
+    {
+        return new List<List<ProductVariant>>
+        {
+            BookSeeder.SeedBookVariants(),
+            MovieSeeder.SeedMovieVariants(),
+            VideoGameSeeder.SeedVideoGameVariants()
+        }.SelectMany(x => x).ToList();
     }
 }

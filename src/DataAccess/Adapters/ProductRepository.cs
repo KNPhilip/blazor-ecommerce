@@ -155,7 +155,6 @@ public sealed class ProductRepository(IServiceProvider serviceProvider) : IProdu
 
         dbProduct.Title = product.Title;
         dbProduct.Description = product.Description;
-        dbProduct.ImageUrl = product.ImageUrl;
         dbProduct.CategoryId = product.CategoryId;
         dbProduct.Visible = product.Visible;
         dbProduct.Featured = product.Featured;

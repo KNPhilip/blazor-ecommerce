@@ -8,6 +8,5 @@ public sealed class OrderOverviewDto
     public DateTime OrderDate { get; set; }
     public decimal TotalPrice { get; set; }
     public required string Product { get; set; }
-    public string? ProductImageUrl { get; set; }
     public List<Image> Images { get; set; } = [];
 }

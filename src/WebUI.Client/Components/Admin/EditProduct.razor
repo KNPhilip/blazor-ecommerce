@@ -1,5 +1,6 @@
 ﻿@page "/admin/product"
 @page "/admin/product/{id:int}"
+@using Domain.Enums
 @using WebUI.Client.Ports
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 @attribute [Authorize(Roles = "Admin")]
@@ -92,28 +93,11 @@
                        Label="Visible" 
                        Color="Color.Info" 
                        @bind-Value="product.Visible" />
+
             <MudText Class="mb-2 mt-4" Typo="Typo.h5">Images (at least one)</MudText>
-            <div class="mb-3">
-                <MudTextField T="string" 
-                              Label="Image Url" 
-                              Variant="Variant.Outlined" 
-                              @bind-Value="product.ImageUrl" />
-            </div>
             <div class="d-flex flex-column">
-                @if (!string.IsNullOrEmpty(product.ImageUrl))
-                {
-                    <MudText Typo="Typo.body1">From Url:</MudText>
-                    <div style="display: flex; flex-wrap: wrap; flex-direction: row;">
-                        <MudCard Class="ma-2">
-                            <MudCardContent>
-                                <MudImage Src="@product.ImageUrl" />
-                            </MudCardContent>
-                        </MudCard>
-                    </div>
-                }
                 @if (product.Images.Count > 0)
                 {
-                    <MudText Typo="Typo.body1">From Upload:</MudText>
                     <div style="display: flex; flex-wrap: wrap; flex-direction: row;">
                         @foreach (Image image in product.Images)
                         {
@@ -127,7 +111,6 @@
                 }
             </div>
             <div class="mb-3">
-
                 <MudFileUpload T="IReadOnlyList<IBrowserFile>" 
                                OnFilesChanged="OnFileChangeAsync" 
                                Hidden="false" 
@@ -154,16 +137,22 @@
                         </MudPaper>
                     </ActivatorContent>
                 </MudFileUpload>
-
-                <MudToolBar DisableGutters="true" Class="gap-4 mt-3">
+                <MudToolBar DisableGutters="true" Class="gap-4 mt-3 justify-content-between">
+                    <MudTextField @bind-Value="imageUrl"
+                                    Label="Add image by Url"
+                                    Adornment="Adornment.Start"
+                                    AdornmentIcon="@Icons.Material.Filled.Add"
+                                    OnAdornmentClick="AddImageByUrl" />
                     <MudButton OnClick="ClearImagesAsync" 
-                               Disabled="@(product.Images.Count == 0 && string.IsNullOrEmpty(product.ImageUrl))" 
+                               Disabled="@(product.Images.Count == 0)"
+                               StartIcon="@Icons.Material.Filled.Delete"
                                Color="Color.Error" 
                                Variant="Variant.Filled">
                         Clear Images
                     </MudButton>
                 </MudToolBar>
             </div>
+
             <MudText Class="mb-2 mt-4" 
                      Typo="Typo.h5">
                 @(product.Variants.Count > 1 ? "Variants" : "Variant")
@@ -207,7 +196,8 @@
             }
             <MudButton Variant="Variant.Filled" 
                        StartIcon="@Icons.Material.Filled.Add" 
-                       Color="Color.Info" @onclick="AddVariant">
+                       Color="Color.Info" 
+                       @onclick="AddVariant">
                 Add Variant
             </MudButton>
 
@@ -266,6 +256,7 @@
     private static string DefaultDragClass = "relative rounded-lg border-2 border-dashed pa-4 mt-4 mud-width-full mud-height-full z-10";
     private string DragClass = DefaultDragClass;
     private List<string> fileNames = new();
+    private string imageUrl = string.Empty;
 
     protected sealed override async Task OnInitializedAsync()
     {
@@ -353,6 +344,19 @@
         }
     }
 
+    private void AddImageByUrl()
+    {
+        product.Images.Add(
+            new Image
+            {
+                Type = ImageType.Url,
+                Data = imageUrl
+            }
+        );
+
+        imageUrl = string.Empty;
+    }
+
     private async Task OnFileChangeAsync(InputFileChangeEventArgs e)
     {
         ClearDragClass();
@@ -373,6 +377,7 @@
             product.Images.Add(
                 new Image
                 {
+                    Type = ImageType.Base64,
                     Data = imageData
                 }
             );
@@ -385,7 +390,6 @@
         ClearDragClass();
         await Task.Delay(100);
         product.Images.Clear();
-        product.ImageUrl = "";
     }
 
     private void SetDragClass() 

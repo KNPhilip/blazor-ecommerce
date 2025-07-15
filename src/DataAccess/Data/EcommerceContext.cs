@@ -21,17 +21,20 @@ public sealed class EcommerceContext : IdentityDbContext<DbUser>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Product>()
-            .HasData(DataSeeder.SeedProducts());
-
         modelBuilder.Entity<Category>()
             .HasData(DataSeeder.SeedCategories());
 
-        modelBuilder.Entity<ProductVariant>()
-            .HasData(DataSeeder.SeedProductVariants());
-
         modelBuilder.Entity<ProductType>()
             .HasData(DataSeeder.SeedProductTypes());
+
+        modelBuilder.Entity<Product>()
+            .HasData(DataSeeder.SeedProducts());
+
+        modelBuilder.Entity<Image>()
+            .HasData(DataSeeder.SeedImages());
+
+        modelBuilder.Entity<ProductVariant>()
+            .HasData(DataSeeder.SeedProductVariants());
 
         modelBuilder.Entity<ProductVariant>()
             .HasKey(p => new { p.ProductId, p.ProductTypeId });
