@@ -8,7 +8,8 @@ public static class BuilderExtensions
 {
     public static void AddGateways(this IServiceCollection services)
     {
-        services.AddScoped<IMailGateway, MailGateway>();
-        services.AddScoped<IPaymentGateway, PaymentGateway>();
+        services.AddScoped<IPhotoGateway, CloudinaryGateway>();
+        services.AddScoped<IMailGateway, SmtpGateway>();
+        services.AddScoped<IPaymentGateway, StripeGateway>();
     }
 }

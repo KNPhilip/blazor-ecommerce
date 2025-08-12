@@ -1,17 +1,22 @@
-﻿using UseCases.Ports.Input;
-using UseCases.Ports.Output;
+﻿using Domain.Dtos;
+using Domain.Enums;
 using Domain.Models;
-using Domain.Dtos;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using UseCases.Ports;
+using UseCases.Ports.Input;
+using UseCases.Ports.Output;
 
 namespace UseCases.Services;
 
 public sealed class ProductService(IProductVariantRepository productVariantRepository,
-    IProductRepository productRepository, IAuthService authService) : IProductService
+    IProductRepository productRepository, IAuthService authService,
+    IPhotoGateway fileGateway) : IProductService
 {
     private readonly IProductVariantRepository productVariantRepository = productVariantRepository;
     private readonly IProductRepository productRepository = productRepository;
     private readonly IAuthService authService = authService;
+    private readonly IPhotoGateway fileGateway = fileGateway;
 
     public async Task<Result<Product>> GetProductByIdAsync(int productId)
     {
@@ -124,6 +129,7 @@ public sealed class ProductService(IProductVariantRepository productVariantRepos
 
     public async Task<Result<Product>> CreateProductAsync(Product product)
     {
+        await PrepareProductImagesAsync(product);
         await productRepository.CreateProductAsync(product);
         return product;
     }
@@ -132,6 +138,7 @@ public sealed class ProductService(IProductVariantRepository productVariantRepos
     {
         try
         {
+            await PrepareProductImagesAsync(product);
             await productRepository.UpdateProductAsync(product);
 
             foreach (ProductVariant variant in product.Variants)
@@ -157,5 +164,40 @@ public sealed class ProductService(IProductVariantRepository productVariantRepos
         {
             return Result.Fail<bool>("Product not found");
         }
+    }
+
+    private async Task PrepareProductImagesAsync(Product product)
+    {
+        foreach (Image image in product.Images)
+        {
+            if (image.Data is null)
+            {
+                product.Images.Remove(image);
+                continue;
+            }
+            if (image.Type == ImageType.Cloudinary)
+            {
+                IFormFile img = ConvertBase64ToFormFile(image.Data);
+                PhotoUploadDto result = await fileGateway.AddPhotoAsync(img);
+                image.Data = result.PublicId;
+            }
+        }
+    }
+
+    private static FormFile ConvertBase64ToFormFile(string base64String)
+    {
+        if (base64String.Contains(","))
+        {
+            base64String = base64String.Split(',')[1];
+        }
+
+        byte[] fileBytes = Convert.FromBase64String(base64String);
+        MemoryStream stream = new(fileBytes);
+
+        return new FormFile(stream, 0, fileBytes.Length, "file", "upload.bin")
+        {
+            Headers = new HeaderDictionary(),
+            ContentType = "application/octet-stream"
+        };
     }
 }

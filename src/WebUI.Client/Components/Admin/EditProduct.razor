@@ -137,6 +137,10 @@
                         </MudPaper>
                     </ActivatorContent>
                 </MudFileUpload>
+                <MudSwitch Class="mb-3"
+                           Label="Send Drag and Drop files to Cloudinary"
+                           Color="Color.Info"
+                           @bind-Value="cloudinaryUpload" />
                 <MudToolBar DisableGutters="true" Class="gap-4 mt-3 justify-content-between">
                     <MudTextField @bind-Value="imageUrl"
                                     Label="Add image by Url"
@@ -251,6 +255,7 @@
     private Product product = new();
     private string btnText = "";
     private bool isLoaded = false;
+    private bool cloudinaryUpload = false;
     private string message = string.Empty;
 
     private static string DefaultDragClass = "relative rounded-lg border-2 border-dashed pa-4 mt-4 mud-width-full mud-height-full z-10";
@@ -377,7 +382,7 @@
             product.Images.Add(
                 new Image
                 {
-                    Type = ImageType.Base64,
+                    Type = cloudinaryUpload ? ImageType.Cloudinary : ImageType.Base64,
                     Data = imageData
                 }
             );

@@ -3,5 +3,6 @@
 public enum ImageType
 {
     Url,
-    Base64
+    Base64,
+    Cloudinary
 }

@@ -18,6 +18,9 @@ builder.Services.AddSecurity();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+builder.Services.AddOptions<CloudinaryOptions>().Bind(builder.Configuration
+    .GetSection(CloudinaryOptions.SectionName));
+
 builder.Services.AddOptions<MailSettingsOptions>().Bind(builder.Configuration
     .GetSection(MailSettingsOptions.SectionName));
 
