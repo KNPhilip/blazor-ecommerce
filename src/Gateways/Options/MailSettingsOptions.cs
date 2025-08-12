@@ -1,4 +1,4 @@
-﻿namespace Domain.Options;
+﻿namespace Gateways.Options;
 
 public sealed class MailSettingsOptions
 {

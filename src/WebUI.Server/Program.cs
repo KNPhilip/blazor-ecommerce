@@ -1,10 +1,10 @@
 using WebUI.Server.Components;
 using WebUI.Server.Components.Account;
 using WebUI.Server.Extensions;
-using Domain.Options;
 using UseCases;
 using DataAccess;
 using Gateways;
+using Gateways.Options;
 using WebUI.Server.Adapters;
 using UseCases.Ports.Output;
 

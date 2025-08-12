@@ -1,4 +1,4 @@
-﻿using Domain.Options;
+﻿using Gateways.Options;
 using Microsoft.Extensions.Options;
 using System.Net;
 using System.Net.Mail;
