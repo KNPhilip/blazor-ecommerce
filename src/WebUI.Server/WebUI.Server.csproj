@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\Gateways\Gateways.csproj" />
     <ProjectReference Include="..\UseCases\UseCases.csproj" />
     <ProjectReference Include="..\WebUI.Client\WebUI.Client.csproj" />
   </ItemGroup>

@@ -1,14 +1,15 @@
-﻿using Microsoft.Extensions.Options;
-using System.Net.Mail;
+﻿using Gateways.Options;
+using Microsoft.Extensions.Options;
 using System.Net;
-using UseCases.Ports.Input;
-using Domain.Options;
+using System.Net.Mail;
+using UseCases;
+using UseCases.Ports.Output;
 
-namespace UseCases.Services;
+namespace Gateways.Adapters;
 
-public sealed class MailService(IOptions<MailSettingsDto> mailOptions) : IMailService
+public sealed class MailGateway(IOptions<MailSettingsOptions> mailOptions) : IMailGateway
 {
-    private readonly MailSettingsDto _mailOptions = mailOptions.Value;
+    private readonly MailSettingsOptions _mailOptions = mailOptions.Value;
 
     public async Task<Result<bool>> SendEmailAsync(string toEmail, string subject, string htmlBody)
     {
@@ -30,6 +31,7 @@ public sealed class MailService(IOptions<MailSettingsDto> mailOptions) : IMailSe
             Credentials = new NetworkCredential(_mailOptions.Username, _mailOptions.Password),
             DeliveryMethod = SmtpDeliveryMethod.Network
         };
+
         try
         {
             await smtp.SendMailAsync(message);
