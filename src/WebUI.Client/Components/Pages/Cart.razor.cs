@@ -44,6 +44,10 @@ public sealed partial class Cart
     private async Task PlaceOrderAsync()
     {
         string url = await OrderUIService.PlaceOrderAsync();
-        NavigationManager.NavigateTo(url);
+        if (url is not null)
+        {
+            
+            NavigationManager.NavigateTo(url);
+        }
     }
 }

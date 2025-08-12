@@ -1,26 +1,27 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain.Dtos;
+using Domain.Enums;
+using Domain.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Stripe;
+using Stripe.Checkout;
+using UseCases;
 using UseCases.Ports.Input;
 using UseCases.Ports.Output;
-using Domain.Models;
-using Domain.Dtos;
-using Stripe.Checkout;
-using Stripe;
-using Domain.Enums;
 
-namespace UseCases.Services;
+namespace Gateways.Adapters;
 
-public sealed class PaymentService(IConfiguration config, IAuthService authService,
-    ICartService cartService, IOrderService orderService) : IPaymentService
+public sealed class PaymentGateway(IConfiguration config, IAuthService authService,
+    ICartService cartService, IOrderService orderService) : IPaymentGateway
 {
     private readonly IConfiguration config = config;
     private readonly IAuthService authService = authService;
     private readonly ICartService cartService = cartService;
     private readonly IOrderService orderService = orderService;
 
-    public async Task<Session> CreateCheckoutSessionAsync()
+    public async Task<string> CreateCheckoutSessionAsync()
     {
-        List<CartProductResponseDto> products = await cartService.GetCartItemsAsync();
+        List<CartProductResponseDto>? products = await cartService.GetCartItemsAsync();
         List<SessionLineItemOptions> lineItems = [];
         products?.ForEach(product => lineItems.Add(new()
         {
@@ -60,7 +61,8 @@ public sealed class PaymentService(IConfiguration config, IAuthService authServi
         };
 
         SessionService service = new();
-        return service.Create(options);
+        Session session = service.Create(options);
+        return session.Url;
     }
 
     public async Task<Result<bool>> FulfillOrderAsync(HttpRequest request)
@@ -79,6 +81,11 @@ public sealed class PaymentService(IConfiguration config, IAuthService authServi
                 Session session = stripeEvent.Data.Object as Session
                     ?? throw new StripeException("The data object for the Stripe event was null.");
                 DbUser user = await authService.GetUserByEmailAsync(session.CustomerEmail);
+
+                if (user.Email is null)
+                {
+                    return false;
+                }
                 await orderService.PlaceOrderForEmailAsync(user.Email);
             }
             return true;

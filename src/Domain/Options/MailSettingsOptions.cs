@@ -1,6 +1,6 @@
 ﻿namespace Domain.Options;
 
-public sealed class MailSettingsDto
+public sealed class MailSettingsOptions
 {
     public static string SectionName => "MailSettings";
     public required string Username { get; init; }

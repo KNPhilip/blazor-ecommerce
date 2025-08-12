@@ -1,31 +1,30 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Stripe.Checkout;
-using UseCases.Ports.Input;
+using UseCases.Ports.Output;
 
 namespace WebUI.Server.Controllers;
 
 public sealed class PaymentsController(
-    IPaymentService paymentService) : ControllerTemplate
+    IPaymentGateway paymentGateway) : ControllerTemplate
 {
-    private readonly IPaymentService paymentService = paymentService;
+    private readonly IPaymentGateway paymentGateway = paymentGateway;
 
     [HttpPost("checkout"), Authorize]
     public async Task<ActionResult<string>> CreateCheckoutSession()
     {
         try
         {
-            Session session = await paymentService.CreateCheckoutSessionAsync();
-            return Ok(session.Url);
+            string url = await paymentGateway.CreateCheckoutSessionAsync();
+            return Ok(url);
         }
         catch
         {
-            string url = await paymentService.FakeOrderCompletionAsync();
+            string url = await paymentGateway.FakeOrderCompletionAsync();
             return Ok(url);
         }
     }
 
     [HttpPost]
     public async Task<ActionResult<bool>> FulfillOrder() =>
-        HandleResult(await paymentService.FulfillOrderAsync(Request));
+        HandleResult(await paymentGateway.FulfillOrderAsync(Request));
 }

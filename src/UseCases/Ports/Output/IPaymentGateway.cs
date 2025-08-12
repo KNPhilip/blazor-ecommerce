@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Stripe.Checkout;
 
-namespace UseCases.Ports.Input;
+namespace UseCases.Ports.Output;
 
-public interface IPaymentService
+public interface IPaymentGateway
 {
-    Task<Session> CreateCheckoutSessionAsync();
+    Task<string> CreateCheckoutSessionAsync();
     Task<Result<bool>> FulfillOrderAsync(HttpRequest request);
     Task<string> FakeOrderCompletionAsync();
 }

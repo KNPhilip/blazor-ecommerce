@@ -4,6 +4,7 @@ using WebUI.Server.Extensions;
 using Domain.Options;
 using UseCases;
 using DataAccess;
+using Gateways;
 using WebUI.Server.Adapters;
 using UseCases.Ports.Output;
 
@@ -17,10 +18,11 @@ builder.Services.AddSecurity();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-builder.Services.AddOptions<MailSettingsDto>().Bind(builder.Configuration
-    .GetSection(MailSettingsDto.SectionName));
+builder.Services.AddOptions<MailSettingsOptions>().Bind(builder.Configuration
+    .GetSection(MailSettingsOptions.SectionName));
 
 builder.Services.AddDataAccess();
+builder.Services.AddGateways();
 builder.Services.AddUseCases();
 builder.Services.AddUIServices();
 
