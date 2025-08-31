@@ -46,7 +46,6 @@ public sealed partial class Cart
         string url = await OrderUIService.PlaceOrderAsync();
         if (url is not null)
         {
-            
             NavigationManager.NavigateTo(url);
         }
     }

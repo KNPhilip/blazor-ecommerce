@@ -63,7 +63,7 @@ public sealed class CartUIService(ILocalStorageService localStorage,
             await localStorage.SetItemAsync("cart", cart);
         }
         await SetCartItemsCountAsync();
-        OnChange?.Invoke();
+        InvokeOnChange();
     }
 
     public async Task StoreCartItemsAsync(bool emptyLocalCart)
@@ -163,6 +163,11 @@ public sealed class CartUIService(ILocalStorageService localStorage,
             }
         }
         await SetCartItemsCountAsync();
+        InvokeOnChange();
+    }
+
+    public void InvokeOnChange()
+    {
         OnChange?.Invoke();
     }
 }

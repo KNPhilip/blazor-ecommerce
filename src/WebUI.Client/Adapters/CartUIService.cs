@@ -111,7 +111,7 @@ public sealed class CartUIService(ILocalStorageService localStorage,
             await SetCartItemsCountAsync(cart is null ? 0 : cart.Count);
         }
 
-        OnChange?.Invoke();
+        InvokeOnChange();
     }
 
     public async Task UpdateQuantityAsync(CartProductResponseDto product)
@@ -176,5 +176,10 @@ public sealed class CartUIService(ILocalStorageService localStorage,
             }
         }
         await SetCartItemsCountAsync();
+    }
+
+    public void InvokeOnChange()
+    {
+        OnChange?.Invoke();
     }
 }
