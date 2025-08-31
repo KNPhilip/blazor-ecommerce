@@ -7,7 +7,7 @@ using UseCases.Ports.Output;
 
 namespace Gateways.Adapters;
 
-public sealed class MailGateway(IOptions<MailSettingsOptions> mailOptions) : IMailGateway
+public sealed class SmtpGateway(IOptions<MailSettingsOptions> mailOptions) : IMailGateway
 {
     private readonly MailSettingsOptions _mailOptions = mailOptions.Value;
 

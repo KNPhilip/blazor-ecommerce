@@ -1,17 +1,20 @@
-﻿using UseCases.Ports.Input;
-using UseCases.Ports.Output;
+﻿using Domain.Dtos;
+using Domain.Enums;
 using Domain.Models;
-using Domain.Dtos;
 using UseCases.Ports;
+using UseCases.Ports.Input;
+using UseCases.Ports.Output;
 
 namespace UseCases.Services;
 
 public sealed class ProductService(IProductVariantRepository productVariantRepository,
-    IProductRepository productRepository, IAuthService authService) : IProductService
+    IProductRepository productRepository, IAuthService authService,
+    IPhotoGateway fileGateway) : IProductService
 {
     private readonly IProductVariantRepository productVariantRepository = productVariantRepository;
     private readonly IProductRepository productRepository = productRepository;
     private readonly IAuthService authService = authService;
+    private readonly IPhotoGateway fileGateway = fileGateway;
 
     public async Task<Result<Product>> GetProductByIdAsync(int productId)
     {
@@ -124,6 +127,7 @@ public sealed class ProductService(IProductVariantRepository productVariantRepos
 
     public async Task<Result<Product>> CreateProductAsync(Product product)
     {
+        await PrepareProductImagesAsync(product);
         await productRepository.CreateProductAsync(product);
         return product;
     }
@@ -132,6 +136,7 @@ public sealed class ProductService(IProductVariantRepository productVariantRepos
     {
         try
         {
+            await PrepareProductImagesAsync(product);
             await productRepository.UpdateProductAsync(product);
 
             foreach (ProductVariant variant in product.Variants)
@@ -156,6 +161,23 @@ public sealed class ProductService(IProductVariantRepository productVariantRepos
         catch (DataAccessException)
         {
             return Result.Fail<bool>("Product not found");
+        }
+    }
+
+    private async Task PrepareProductImagesAsync(Product product)
+    {
+        foreach (Image image in product.Images)
+        {
+            if (image.Data is null)
+            {
+                product.Images.Remove(image);
+                continue;
+            }
+            if (image.Type == ImageType.Cloudinary && image.IsNew)
+            {
+                PhotoUploadDto result = await fileGateway.AddPhotoAsync(image.Data);
+                image.Data = result.Url;
+            }
         }
     }
 }

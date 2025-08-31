@@ -11,7 +11,7 @@ using UseCases.Ports.Output;
 
 namespace Gateways.Adapters;
 
-public sealed class PaymentGateway(IConfiguration config, IAuthService authService,
+public sealed class StripeGateway(IConfiguration config, IAuthService authService,
     ICartService cartService, IOrderService orderService) : IPaymentGateway
 {
     private readonly IConfiguration config = config;

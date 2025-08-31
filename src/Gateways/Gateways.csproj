@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.27.6" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.1" />
 	<PackageReference Include="Microsoft.Extensions.Options" Version="9.0.1" />
 	<PackageReference Include="Stripe.net" Version="45.6.0" />

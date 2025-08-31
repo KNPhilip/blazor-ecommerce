@@ -52,7 +52,9 @@ public static class SecurityExtensions
             .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com"))
             .FormActions(s => s.Self())
             .FrameAncestors(s => s.Self())
-            .ImageSources(s => s.Self().CustomSources("blob:", "https://upload.wikimedia.org", "https://en.wikipedia.org", "data:"))
+            .ImageSources(s => s.Self()
+                .CustomSources("blob:", "https://upload.wikimedia.org", "https://en.wikipedia.org", "data:")
+                .CustomSources("blob:", "data:", "https://res.cloudinary.com", "https://platform-lookaside.fbsbx.com"))
             .ScriptSources(s => s.Self().CustomSources("https://localhost:55150").UnsafeEval())
         );
 
