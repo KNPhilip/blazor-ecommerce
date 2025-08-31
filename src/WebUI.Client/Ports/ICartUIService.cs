@@ -14,4 +14,5 @@ public interface ICartUIService
     Task SetCartItemsCountAsync();
     Task UpdateQuantityAsync(CartProductResponseDto product);
     Task RemoveProductFromCartAsync(int productId, int productTypeId);
+    void InvokeOnChange();
 }
