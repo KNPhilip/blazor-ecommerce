@@ -1,8 +1,6 @@
 ﻿using Domain.Dtos;
 using Domain.Enums;
 using Domain.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 using UseCases.Ports;
 using UseCases.Ports.Input;
 using UseCases.Ports.Output;
@@ -175,29 +173,11 @@ public sealed class ProductService(IProductVariantRepository productVariantRepos
                 product.Images.Remove(image);
                 continue;
             }
-            if (image.Type == ImageType.Cloudinary)
+            if (image.Type == ImageType.Cloudinary && image.IsNew)
             {
-                IFormFile img = ConvertBase64ToFormFile(image.Data);
-                PhotoUploadDto result = await fileGateway.AddPhotoAsync(img);
-                image.Data = result.PublicId;
+                PhotoUploadDto result = await fileGateway.AddPhotoAsync(image.Data);
+                image.Data = result.Url;
             }
         }
-    }
-
-    private static FormFile ConvertBase64ToFormFile(string base64String)
-    {
-        if (base64String.Contains(","))
-        {
-            base64String = base64String.Split(',')[1];
-        }
-
-        byte[] fileBytes = Convert.FromBase64String(base64String);
-        MemoryStream stream = new(fileBytes);
-
-        return new FormFile(stream, 0, fileBytes.Length, "file", "upload.bin")
-        {
-            Headers = new HeaderDictionary(),
-            ContentType = "application/octet-stream"
-        };
     }
 }

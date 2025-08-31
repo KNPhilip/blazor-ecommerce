@@ -355,7 +355,8 @@
             new Image
             {
                 Type = ImageType.Url,
-                Data = imageUrl
+                Data = imageUrl,
+                IsNew = true
             }
         );
 
@@ -383,7 +384,8 @@
                 new Image
                 {
                     Type = cloudinaryUpload ? ImageType.Cloudinary : ImageType.Base64,
-                    Data = imageData
+                    Data = imageData,
+                    IsNew = true
                 }
             );
         }
