@@ -4,6 +4,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(EcommerceContext))]
-    partial class EcommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20250907192727_AddPublishers")]
+    partial class AddPublishers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,21 @@ namespace DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("DbUserProduct", b =>
+                {
+                    b.Property<int>("PublishedProductsId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PublishersId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("PublishedProductsId", "PublishersId");
+
+                    b.HasIndex("PublishersId");
+
+                    b.ToTable("DbUserProduct");
+                });
 
             modelBuilder.Entity("Domain.Models.Address", b =>
                 {
@@ -166,9 +184,6 @@ namespace DataAccess.Migrations
                     b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("BirthDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -183,23 +198,14 @@ namespace DataAccess.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsSoftDeleted")
                         .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("NickName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -241,498 +247,6 @@ namespace DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "47fac782-04bb-45f0-8700-2b9a3b855984",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1972, 6, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "47fac782-04bb-45f0-8700-2b9a3b855984",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "andy@weir.fake",
-                            EmailConfirmed = true,
-                            FirstName = "Andy",
-                            IsSoftDeleted = false,
-                            LastName = "Weir",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ANDY@WEIR.FAKE",
-                            NormalizedUserName = "ANDY@WEIR.FAKE",
-                            PasswordHash = "$3y$20$bDDaBlqNVSIfhAL7UBFjA2sDVVQABeMd",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "47fac782-04bb-45f0-8700-2b9a3b855984",
-                            TwoFactorEnabled = false,
-                            UserName = "andy@weir.fake"
-                        },
-                        new
-                        {
-                            Id = "9904a3cc-92aa-43e4-a743-5bdc46374c6c",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1977, 9, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "9904a3cc-92aa-43e4-a743-5bdc46374c6c",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "alex@michaelides.fake",
-                            EmailConfirmed = true,
-                            FirstName = "Alex",
-                            IsSoftDeleted = false,
-                            LastName = "Michaelides",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ALEX@MICHAELIDES.FAKE",
-                            NormalizedUserName = "ALEX@MICHAELIDES.FAKE",
-                            PasswordHash = "$3y$20$e0NRG7mXG1fXo8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "9904a3cc-92aa-43e4-a743-5bdc46374c6c",
-                            TwoFactorEnabled = false,
-                            UserName = "alex@michaelides.fake"
-                        },
-                        new
-                        {
-                            Id = "d02c893b-5ed4-4e37-bac0-0b62bb50fcdb",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1949, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "d02c893b-5ed4-4e37-bac0-0b62bb50fcdb",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "delia@owens.fake",
-                            EmailConfirmed = true,
-                            FirstName = "Delia",
-                            IsSoftDeleted = false,
-                            LastName = "Owens",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "DELIA@OWENS.FAKE",
-                            NormalizedUserName = "DELIA@OWENS.FAKE",
-                            PasswordHash = "$3y$20$gk1F8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "d02c893b-5ed4-4e37-bac0-0b62bb50fcdb",
-                            TwoFactorEnabled = false,
-                            UserName = "delia@owens.fake"
-                        },
-                        new
-                        {
-                            Id = "dc7b8125-6391-4774-b1f2-ad92281ed289",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1986, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "dc7b8125-6391-4774-b1f2-ad92281ed289",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "tara@westover.fake",
-                            EmailConfirmed = true,
-                            FirstName = "Tara",
-                            IsSoftDeleted = false,
-                            LastName = "Westover",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "TARA@WESTOVER.FAKE",
-                            NormalizedUserName = "TARA@WESTOVER.FAKE",
-                            PasswordHash = "$3y$20$hL2G9JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "dc7b8125-6391-4774-b1f2-ad92281ed289",
-                            TwoFactorEnabled = false,
-                            UserName = "tara@westover.fake"
-                        },
-                        new
-                        {
-                            Id = "27045ac4-b1d1-4dbb-a13b-529456b1dad2",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1978, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "27045ac4-b1d1-4dbb-a13b-529456b1dad2",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "erin@morgenstern.fake",
-                            EmailConfirmed = true,
-                            FirstName = "Erin",
-                            IsSoftDeleted = false,
-                            LastName = "Morgenstern",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "ERIN@MORGENSTERN.FAKE",
-                            NormalizedUserName = "ERIN@MORGENSTERN.FAKE",
-                            PasswordHash = "$3y$20$kM3H9JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "27045ac4-b1d1-4dbb-a13b-529456b1dad2",
-                            TwoFactorEnabled = false,
-                            UserName = "erin@morgenstern.fake"
-                        },
-                        new
-                        {
-                            Id = "bafc87aa-2221-4543-ac96-9f1e4aac691d",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "bafc87aa-2221-4543-ac96-9f1e4aac691d",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "brit@bennett.fake",
-                            EmailConfirmed = true,
-                            FirstName = "Brit",
-                            IsSoftDeleted = false,
-                            LastName = "Bennett",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "BRIT@BENNETT.FAKE",
-                            NormalizedUserName = "BRIT@BENNETT.FAKE",
-                            PasswordHash = "$3y$20$uN4J8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "bafc87aa-2221-4543-ac96-9f1e4aac691d",
-                            TwoFactorEnabled = false,
-                            UserName = "brit@bennett.fake"
-                        },
-                        new
-                        {
-                            Id = "35be5291-5ce0-4483-9e7d-9d60dc912f98",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1920, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "35be5291-5ce0-4483-9e7d-9d60dc912f98",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "frank@herbert.fake",
-                            EmailConfirmed = true,
-                            FirstName = "Frank",
-                            IsSoftDeleted = false,
-                            LastName = "Herbert",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "FRANK@HERBERT.FAKE",
-                            NormalizedUserName = "FRANK@HERBERT.FAKE",
-                            PasswordHash = "$3y$20$vP5K8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "35be5291-5ce0-4483-9e7d-9d60dc912f98",
-                            TwoFactorEnabled = false,
-                            UserName = "frank@herbert.fake"
-                        },
-                        new
-                        {
-                            Id = "a989fbed-3273-4342-bf5b-7724721e1504",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1975, 6, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "a989fbed-3273-4342-bf5b-7724721e1504",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "markus@zusak.fake",
-                            EmailConfirmed = true,
-                            FirstName = "Markus",
-                            IsSoftDeleted = false,
-                            LastName = "Zusak",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MARKUS@ZUSAK.FAKE",
-                            NormalizedUserName = "MARKUS@ZUSAK.FAKE",
-                            PasswordHash = "$3y$20$zQ6L8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "a989fbed-3273-4342-bf5b-7724721e1504",
-                            TwoFactorEnabled = false,
-                            UserName = "markus@zusak.fake"
-                        },
-                        new
-                        {
-                            Id = "8567a393-058f-4ecb-a209-307dc6c8c8fa",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1978, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "8567a393-058f-4ecb-a209-307dc6c8c8fa",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "madeline@miller.fake",
-                            EmailConfirmed = true,
-                            FirstName = "Madeline",
-                            IsSoftDeleted = false,
-                            LastName = "Miller",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "MADELINE@MILLER.FAKE",
-                            NormalizedUserName = "MADELINE@MILLER.FAKE",
-                            PasswordHash = "$3y$20$eR7M8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "8567a393-058f-4ecb-a209-307dc6c8c8fa",
-                            TwoFactorEnabled = false,
-                            UserName = "madeline@miller.fake"
-                        },
-                        new
-                        {
-                            Id = "87ef6fb3-1a20-472e-b6d3-7599afb506e6",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1969, 8, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "87ef6fb3-1a20-472e-b6d3-7599afb506e6",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "jojo@moyes.fake",
-                            EmailConfirmed = true,
-                            FirstName = "Jojo",
-                            IsSoftDeleted = false,
-                            LastName = "Moyes",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "JOJO@MOYES.FAKE",
-                            NormalizedUserName = "JOJO@MOYES.FAKE",
-                            PasswordHash = "$3y$20$hT8N8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "87ef6fb3-1a20-472e-b6d3-7599afb506e6",
-                            TwoFactorEnabled = false,
-                            UserName = "jojo@moyes.fake"
-                        },
-                        new
-                        {
-                            Id = "3711943c-2d78-4a3f-b007-a6ee15ba0e7b",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1996, 12, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "3711943c-2d78-4a3f-b007-a6ee15ba0e7b",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "contact@barunsonena.com",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "Barunson E&A and CJ Entertainment",
-                            NormalizedEmail = "CONTACT@BARUNSONENA.COM",
-                            NormalizedUserName = "CONTACT@BARUNSONENA.COM",
-                            PasswordHash = "$3y$20$mQ0P8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "3711943c-2d78-4a3f-b007-a6ee15ba0e7b",
-                            TwoFactorEnabled = false,
-                            UserName = "contact@barunsonena.com"
-                        },
-                        new
-                        {
-                            Id = "0f39bc69-752a-495f-9e13-07b8d447e98f",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1987, 6, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "0f39bc69-752a-495f-9e13-07b8d447e98f",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "info@castle-rock.com",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "Castle Rock Entertainment",
-                            NormalizedEmail = "INFO@CASTLE-ROCK.COM",
-                            NormalizedUserName = "INFO@CASTLE-ROCK.COM",
-                            PasswordHash = "$3y$20$nR1Q8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "0f39bc69-752a-495f-9e13-07b8d447e98f",
-                            TwoFactorEnabled = false,
-                            UserName = "info@castle-rock.com"
-                        },
-                        new
-                        {
-                            Id = "2bc82d0e-8b77-4a6a-84da-e79b618acbcf",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1912, 5, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "2bc82d0e-8b77-4a6a-84da-e79b618acbcf",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "studio_operations@paramount.com",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "Paramount Pictures",
-                            NormalizedEmail = "STUDIO_OPERATIONS@PARAMOUNT.COM",
-                            NormalizedUserName = "STUDIO_OPERATIONS@PARAMOUNT.COM",
-                            PasswordHash = "$3y$20$oS2R8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "2bc82d0e-8b77-4a6a-84da-e79b618acbcf",
-                            TwoFactorEnabled = false,
-                            UserName = "studio_operations@paramount.com"
-                        },
-                        new
-                        {
-                            Id = "c5534807-f265-41c6-afa8-fcbefabb164b",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1923, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "c5534807-f265-41c6-afa8-fcbefabb164b",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "support@wbd.com",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "Warner Bros. Pictures",
-                            NormalizedEmail = "SUPPORT@WBD.COM",
-                            NormalizedUserName = "SUPPORT@WBD.COM",
-                            PasswordHash = "$3y$20$pT3S8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "c5534807-f265-41c6-afa8-fcbefabb164b",
-                            TwoFactorEnabled = false,
-                            UserName = "support@wbd.com"
-                        },
-                        new
-                        {
-                            Id = "8a57c8e1-08f3-42b5-9671-cbc84976fb01",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1993, 12, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "8a57c8e1-08f3-42b5-9671-cbc84976fb01",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "ms-comms@marvelstudios.com",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "Marvel Studios",
-                            NormalizedEmail = "MS-COMMS@MARVELSTUDIOS.COM",
-                            NormalizedUserName = "MS-COMMS@MARVELSTUDIOS.COM",
-                            PasswordHash = "$3y$20$kP9O8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "8a57c8e1-08f3-42b5-9671-cbc84976fb01",
-                            TwoFactorEnabled = false,
-                            UserName = "ms-comms@marvelstudios.com"
-                        },
-                        new
-                        {
-                            Id = "e2e7e873-a404-4c13-bd5e-8c10a046c168",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1889, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "e2e7e873-a404-4c13-bd5e-8c10a046c168",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "contact@nintendo.de",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "Nintendo",
-                            NormalizedEmail = "CONTACT@NINTENDO.DE",
-                            NormalizedUserName = "CONTACT@NINTENDO.DE",
-                            PasswordHash = "$3y$20$qU4T8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "e2e7e873-a404-4c13-bd5e-8c10a046c168",
-                            TwoFactorEnabled = false,
-                            UserName = "contact@nintendo.de"
-                        },
-                        new
-                        {
-                            Id = "e29ae0f4-c7d1-4a08-bfbb-b1fcbf2f391d",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1993, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "e29ae0f4-c7d1-4a08-bfbb-b1fcbf2f391d",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "info@sony.fake",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "Sony Interactive Entertainment",
-                            NormalizedEmail = "INFO@SONY.FAKE",
-                            NormalizedUserName = "INFO@SONY.FAKE",
-                            PasswordHash = "$3y$20$rV5U8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "e29ae0f4-c7d1-4a08-bfbb-b1fcbf2f391d",
-                            TwoFactorEnabled = false,
-                            UserName = "info@sony.fake"
-                        },
-                        new
-                        {
-                            Id = "354f78e9-61bc-4f6e-8761-3cfab3749d42",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2002, 3, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "354f78e9-61bc-4f6e-8761-3cfab3749d42",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "biz@cdprojektred.com",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "CD Projekt RED",
-                            NormalizedEmail = "BIZ@CDPROJEKTRED.COM",
-                            NormalizedUserName = "BIZ@CDPROJEKTRED.COM",
-                            PasswordHash = "$3y$20$sW6V8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "354f78e9-61bc-4f6e-8761-3cfab3749d42",
-                            TwoFactorEnabled = false,
-                            UserName = "biz@cdprojektred.com"
-                        },
-                        new
-                        {
-                            Id = "a73f5524-6667-4a81-a1a0-1b3e3bbc432f",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2015, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "a73f5524-6667-4a81-a1a0-1b3e3bbc432f",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "us@innersloth.com",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "InnerSloth",
-                            NormalizedEmail = "US@INNERSLOTH.COM",
-                            NormalizedUserName = "US@INNERSLOTH.COM",
-                            PasswordHash = "$3y$20$tX7W8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "a73f5524-6667-4a81-a1a0-1b3e3bbc432f",
-                            TwoFactorEnabled = false,
-                            UserName = "us@innersloth.com"
-                        },
-                        new
-                        {
-                            Id = "7260b1d5-3c97-4bd1-8bbd-1b0183bb2393",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2009, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "7260b1d5-3c97-4bd1-8bbd-1b0183bb2393",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "info@supergiantgames.com",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "Supergiant Games",
-                            NormalizedEmail = "INFO@SUPERGIANTGAMES.COM",
-                            NormalizedUserName = "INFO@SUPERGIANTGAMES.COM",
-                            PasswordHash = "$3y$20$uY8X8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7260b1d5-3c97-4bd1-8bbd-1b0183bb2393",
-                            TwoFactorEnabled = false,
-                            UserName = "info@supergiantgames.com"
-                        },
-                        new
-                        {
-                            Id = "448d440b-c1c4-453c-8cda-608fedad3762",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2003, 4, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "448d440b-c1c4-453c-8cda-608fedad3762",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "support@square-enix.fake",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "Square Enix",
-                            NormalizedEmail = "SUPPORT@SQUARE-ENIX.FAKE",
-                            NormalizedUserName = "SUPPORT@SQUARE-ENIX.FAKE",
-                            PasswordHash = "$3y$20$vZ9Y8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "448d440b-c1c4-453c-8cda-608fedad3762",
-                            TwoFactorEnabled = false,
-                            UserName = "support@square-enix.fake"
-                        },
-                        new
-                        {
-                            Id = "d6c9880a-9926-400f-86da-79dc08234f33",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1979, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "d6c9880a-9926-400f-86da-79dc08234f33",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "info-asia@capcom.com",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "Capcom",
-                            NormalizedEmail = "INFO-ASIA@CAPCOM.COM",
-                            NormalizedUserName = "INFO-ASIA@CAPCOM.COM",
-                            PasswordHash = "$3y$20$wA0Z8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "d6c9880a-9926-400f-86da-79dc08234f33",
-                            TwoFactorEnabled = false,
-                            UserName = "info-asia@capcom.com"
-                        },
-                        new
-                        {
-                            Id = "8b1922c7-8118-474b-aa7b-032bec00234c",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(1998, 12, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "8b1922c7-8118-474b-aa7b-032bec00234c",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "support@rockstargames.com",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "Rockstar Games",
-                            NormalizedEmail = "SUPPORT@ROCKSTARGAMES.COM",
-                            NormalizedUserName = "SUPPORT@ROCKSTARGAMES.COM",
-                            PasswordHash = "$3y$20$xB1A8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "8b1922c7-8118-474b-aa7b-032bec00234c",
-                            TwoFactorEnabled = false,
-                            UserName = "support@rockstargames.com"
-                        },
-                        new
-                        {
-                            Id = "7c4df877-bffb-4cbd-8417-097cff415a03",
-                            AccessFailedCount = 0,
-                            BirthDate = new DateTime(2009, 6, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "7c4df877-bffb-4cbd-8417-097cff415a03",
-                            DateCreated = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "scoops@minecraft.net",
-                            EmailConfirmed = true,
-                            IsSoftDeleted = false,
-                            LockoutEnabled = false,
-                            NickName = "Mojang Studios",
-                            NormalizedEmail = "SCOOPS@MINECRAFT.NET",
-                            NormalizedUserName = "SCOOPS@MINECRAFT.NET",
-                            PasswordHash = "$3y$20$yC2B8JH6k9mXQ8e2c4c0EuXHkOa7wY",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7c4df877-bffb-4cbd-8417-097cff415a03",
-                            TwoFactorEnabled = false,
-                            UserName = "scoops@minecraft.net"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Models.Image", b =>
@@ -874,113 +388,99 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 17,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/d/db/The_Matrix.png",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/3/3b/Pulp_Fiction_%281994%29_poster.jpg",
                             ProductId = 17,
                             Type = 0
                         },
                         new
                         {
                             Id = 18,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/b/ba/Poster_-_The_Matrix_Reloaded.jpg",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/5/50/The_Matrix_Resurrections.jpg",
                             ProductId = 18,
                             Type = 0
                         },
                         new
                         {
                             Id = 19,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/7/7b/The-matrix-revolutions_oxlati6t.png",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/0/00/Spider-Man_No_Way_Home_poster.jpg",
                             ProductId = 19,
                             Type = 0
                         },
                         new
                         {
                             Id = 20,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/5/50/The_Matrix_Resurrections.jpg",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/a/a3/Get_Out_poster.png",
                             ProductId = 20,
                             Type = 0
                         },
                         new
                         {
                             Id = 21,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/0/00/Spider-Man_No_Way_Home_poster.jpg",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/c/c6/The_Legend_of_Zelda_Breath_of_the_Wild.jpg",
                             ProductId = 21,
                             Type = 0
                         },
                         new
                         {
                             Id = 22,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/c/c6/The_Legend_of_Zelda_Breath_of_the_Wild.jpg",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/b/b6/Ghost_of_Tsushima.jpg",
                             ProductId = 22,
                             Type = 0
                         },
                         new
                         {
                             Id = 23,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/b/b6/Ghost_of_Tsushima.jpg",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg",
                             ProductId = 23,
                             Type = 0
                         },
                         new
                         {
                             Id = 24,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/4/4f/TLOU_P2_Box_Art_2.png",
                             ProductId = 24,
                             Type = 0
                         },
                         new
                         {
                             Id = 25,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/4/46/Video_Game_Cover_-_The_Last_of_Us.jpg",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/9/9a/Among_Us_cover_art.jpg",
                             ProductId = 25,
                             Type = 0
                         },
                         new
                         {
                             Id = 26,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/4/4f/TLOU_P2_Box_Art_2.png",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/c/cc/Hades_cover_art.jpg",
                             ProductId = 26,
                             Type = 0
                         },
                         new
                         {
                             Id = 27,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/9/9a/Among_Us_cover_art.jpg",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/c/ce/FFVIIRemake.png",
                             ProductId = 27,
                             Type = 0
                         },
                         new
                         {
                             Id = 28,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/c/cc/Hades_cover_art.jpg",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/2/2c/Resident_Evil_Village.png",
                             ProductId = 28,
                             Type = 0
                         },
                         new
                         {
                             Id = 29,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/c/ce/FFVIIRemake.png",
+                            Data = "https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg",
                             ProductId = 29,
                             Type = 0
                         },
                         new
                         {
                             Id = 30,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/2/2c/Resident_Evil_Village.png",
-                            ProductId = 30,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 31,
-                            Data = "https://upload.wikimedia.org/wikipedia/en/4/44/Red_Dead_Redemption_II.jpg",
-                            ProductId = 31,
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 32,
                             Data = "https://upload.wikimedia.org/wikipedia/en/b/b6/Minecraft_2024_cover_art.png",
-                            ProductId = 32,
+                            ProductId = 30,
                             Type = 0
                         });
                 });
@@ -1056,9 +556,6 @@ namespace DataAccess.Migrations
                     b.Property<bool>("IsSoftDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("PublishedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1081,7 +578,6 @@ namespace DataAccess.Migrations
                             Description = "The Martian is a science fiction novel by Andy Weir, published in 2011. The story follows astronaut Mark Watney, who is stranded on Mars and must use his ingenuity and spirit to survive.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2011, 9, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "The Martian",
                             Visible = true
                         },
@@ -1093,7 +589,6 @@ namespace DataAccess.Migrations
                             Description = "The Silent Patient is a psychological thriller novel by Alex Michaelides, published in 2019. It tells the story of a woman who shoots her husband and then stops speaking, and the psychotherapist determined to uncover her motivations.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2019, 2, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "The Silent Patient",
                             Visible = true
                         },
@@ -1105,7 +600,6 @@ namespace DataAccess.Migrations
                             Description = "Where the Crawdads Sing is a novel by Delia Owens, published in 2018. It is a coming-of-age story that intertwines a murder mystery with the life of a young girl growing up in the marshes of North Carolina.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2018, 8, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Where the Crawdads Sing",
                             Visible = true
                         },
@@ -1117,7 +611,6 @@ namespace DataAccess.Migrations
                             Description = "Educated is a memoir by Tara Westover, published in 2018. It recounts her experiences growing up in a strict and abusive household in rural Idaho, and her quest for knowledge that ultimately leads her to earn a PhD.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2018, 2, 18, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Educated",
                             Visible = true
                         },
@@ -1129,7 +622,6 @@ namespace DataAccess.Migrations
                             Description = "The Night Circus is a fantasy novel by Erin Morgenstern, published in 2011. It follows a magical competition between two young illusionists, set against the backdrop of a mysterious circus that appears only at night.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2011, 9, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "The Night Circus",
                             Visible = true
                         },
@@ -1141,7 +633,6 @@ namespace DataAccess.Migrations
                             Description = "The Vanishing Half is a novel by Brit Bennett, published in 2020. It tells the story of twin sisters whose lives diverge when one decides to pass as white, exploring themes of race, identity, and family.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2020, 6, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "The Vanishing Half",
                             Visible = true
                         },
@@ -1153,7 +644,6 @@ namespace DataAccess.Migrations
                             Description = "Dune is a science fiction novel by Frank Herbert, published in 1965. It is set in a distant future amidst a huge interstellar empire, focusing on the conflict over the desert planet Arrakis and its valuable resource, spice.",
                             Featured = true,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(1965, 8, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Dune",
                             Visible = true
                         },
@@ -1165,7 +655,6 @@ namespace DataAccess.Migrations
                             Description = "The Book Thief is a historical novel by Markus Zusak, published in 2005. It follows a young girl in Nazi Germany who finds solace by stealing books and sharing them with others, narrated by Death.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2005, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "The Book Thief",
                             Visible = true
                         },
@@ -1177,7 +666,6 @@ namespace DataAccess.Migrations
                             Description = "Circe is a fantasy novel by Madeline Miller, published in 2018. It is a retelling of the life of Circe, the daughter of Helios, exploring her journey of self-discovery and empowerment.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2018, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Circe",
                             Visible = true
                         },
@@ -1189,7 +677,6 @@ namespace DataAccess.Migrations
                             Description = "The Giver of Stars is a historical novel by Jojo Moyes, published in 2019. It tells the story of a group of women who become traveling librarians in 1930s Kentucky, fighting for their right to work and make a difference.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2019, 10, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "The Giver of Stars",
                             Visible = true
                         },
@@ -1201,7 +688,6 @@ namespace DataAccess.Migrations
                             Description = "Inception is a 2010 science fiction film directed by Christopher Nolan. The story follows a skilled thief who steals secrets from within the subconscious during the dream state.",
                             Featured = true,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2010, 7, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Inception",
                             Visible = true
                         },
@@ -1213,7 +699,6 @@ namespace DataAccess.Migrations
                             Description = "Parasite is a 2019 South Korean black comedy thriller film directed by Bong Joon-ho. It tells the story of a poor family who schemes to become employed by a wealthy family.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2019, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Parasite",
                             Visible = true
                         },
@@ -1223,9 +708,8 @@ namespace DataAccess.Migrations
                             CategoryId = 2,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "The Shawshank Redemption is a 1994 drama film based on a Stephen King novella. It follows the story of a banker sentenced to life in Shawshank State Penitentiary for the murder of his wife.",
-                            Featured = false,
+                            Featured = true,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(1994, 9, 23, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "The Shawshank Redemption",
                             Visible = true
                         },
@@ -1237,7 +721,6 @@ namespace DataAccess.Migrations
                             Description = "The Godfather is a 1972 crime film directed by Francis Ford Coppola. It chronicles the powerful Italian-American crime family of Don Vito Corleone.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(1972, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "The Godfather",
                             Visible = true
                         },
@@ -1249,7 +732,6 @@ namespace DataAccess.Migrations
                             Description = "The Dark Knight is a 2008 superhero film directed by Christopher Nolan. It features Batman as he faces off against the Joker, who seeks to create chaos in Gotham City.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2008, 7, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "The Dark Knight",
                             Visible = true
                         },
@@ -1261,7 +743,6 @@ namespace DataAccess.Migrations
                             Description = "Forrest Gump is a 1994 drama film directed by Robert Zemeckis. The story follows a slow-witted but kind-hearted man as he witnesses and unwittingly influences several historical events.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(1994, 7, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Forrest Gump",
                             Visible = true
                         },
@@ -1270,11 +751,10 @@ namespace DataAccess.Migrations
                             Id = 17,
                             CategoryId = 2,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "The Matrix is a 1999 science fiction action film (and franchise) where humanity is unknowingly trapped in a simulated reality called the Matrix by intelligent machines.",
+                            Description = "Pulp Fiction is a 1994 crime film directed by Quentin Tarantino. The film intertwines multiple narratives of crime in Los Angeles, featuring an ensemble cast.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(1999, 3, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "The Matrix",
+                            Title = "Pulp Fiction",
                             Visible = true
                         },
                         new
@@ -1282,11 +762,10 @@ namespace DataAccess.Migrations
                             Id = 18,
                             CategoryId = 2,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "The Matrix Reloaded follows Neo, Morpheus, and Trinity as they battle the machines for Zion's survival and the fate of humanity.",
+                            Description = "The Matrix Resurrections is a 2021 science fiction film and the fourth installment in The Matrix franchise. It revisits the world of the Matrix with returning characters and new challenges.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2003, 5, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "The Matrix Reloaded",
+                            Title = "The Matrix Resurrections",
                             Visible = true
                         },
                         new
@@ -1294,11 +773,10 @@ namespace DataAccess.Migrations
                             Id = 19,
                             CategoryId = 2,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "The Matrix Revolutions is the third and final film in the original Matrix trilogy, depicting the epic war between humans and machines as Neo must confront the rogue program Agent Smith.",
-                            Featured = false,
+                            Description = "Spider-Man: No Way Home is a 2021 superhero film directed by Jon Watts. It follows Peter Parker as he seeks help from Doctor Strange to manage the fallout from revealing his identity.",
+                            Featured = true,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2003, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "The Matrix Revolutions",
+                            Title = "Spider-Man: No Way Home",
                             Visible = true
                         },
                         new
@@ -1306,23 +784,21 @@ namespace DataAccess.Migrations
                             Id = 20,
                             CategoryId = 2,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "The Matrix Resurrections is a 2021 science fiction film and the fourth installment in The Matrix franchise. It revisits the world of the Matrix with returning characters and new challenges.",
+                            Description = "Get Out is a 2017 horror film written and directed by Jordan Peele. It follows a young African-American man who uncovers disturbing secrets when he meets his white girlfriend's family.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2021, 12, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "The Matrix Resurrections",
+                            Title = "Get Out",
                             Visible = true
                         },
                         new
                         {
                             Id = 21,
-                            CategoryId = 2,
+                            CategoryId = 3,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Spider-Man: No Way Home is a 2021 superhero film directed by Jon Watts. It follows Peter Parker as he seeks help from Doctor Strange to manage the fallout from revealing his identity.",
-                            Featured = true,
+                            Description = "The Legend of Zelda: Breath of the Wild is an action-adventure game developed by Nintendo. Set in a vast open world, players control Link as he awakens from a long slumber to defeat Calamity Ganon.",
+                            Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2021, 12, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Spider-Man: No Way Home",
+                            Title = "The Legend of Zelda: Breath of the Wild",
                             Visible = true
                         },
                         new
@@ -1330,11 +806,10 @@ namespace DataAccess.Migrations
                             Id = 22,
                             CategoryId = 3,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "The Legend of Zelda: Breath of the Wild is an action-adventure game developed by Nintendo. Set in a vast open world, players control Link as he awakens from a long slumber to defeat Calamity Ganon.",
+                            Description = "Ghost of Tsushima is an action-adventure game developed by Sucker Punch Productions. Set in feudal Japan, players control samurai Jin Sakai as he battles against the Mongol invasion.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2017, 3, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "The Legend of Zelda: Breath of the Wild",
+                            Title = "Ghost of Tsushima",
                             Visible = true
                         },
                         new
@@ -1342,11 +817,10 @@ namespace DataAccess.Migrations
                             Id = 23,
                             CategoryId = 3,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Ghost of Tsushima is an action-adventure game developed by Sucker Punch Productions. Set in feudal Japan, players control samurai Jin Sakai as he battles against the Mongol invasion.",
-                            Featured = false,
+                            Description = "Cyberpunk 2077 is an open-world role-playing game developed by CD Projekt. Set in a dystopian future, players assume the role of V, a customizable mercenary navigating the streets of Night City.",
+                            Featured = true,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2020, 7, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Ghost of Tsushima",
+                            Title = "Cyberpunk 2077",
                             Visible = true
                         },
                         new
@@ -1354,11 +828,10 @@ namespace DataAccess.Migrations
                             Id = 24,
                             CategoryId = 3,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Cyberpunk 2077 is an open-world role-playing game developed by CD Projekt. Set in a dystopian future, players assume the role of V, a customizable mercenary navigating the streets of Night City.",
-                            Featured = true,
+                            Description = "The Last of Us Part II is an action-adventure game developed by Naughty Dog. It follows Ellie on her quest for revenge in a post-apocalyptic world filled with danger and moral dilemmas.",
+                            Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2020, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Cyberpunk 2077",
+                            Title = "The Last of Us Part II",
                             Visible = true
                         },
                         new
@@ -1366,11 +839,10 @@ namespace DataAccess.Migrations
                             Id = 25,
                             CategoryId = 3,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "The Last of Us is an action-adventure video game series and media franchise created by Naughty Dog and published by Sony Interactive Entertainment.",
+                            Description = "Among Us is a multiplayer social deduction game developed by InnerSloth. Players work together on a spaceship, but some are impostors trying to sabotage the crew.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2013, 6, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "The Last of Us",
+                            Title = "Among Us",
                             Visible = true
                         },
                         new
@@ -1378,11 +850,10 @@ namespace DataAccess.Migrations
                             Id = 26,
                             CategoryId = 3,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "The Last of Us Part II is an action-adventure game developed by Naughty Dog. It follows Ellie on her quest for revenge in a post-apocalyptic world filled with danger and moral dilemmas.",
+                            Description = "Hades is a roguelike dungeon crawler developed by Supergiant Games. Players control Zagreus, the son of Hades, as he attempts to escape the Underworld.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2020, 6, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "The Last of Us Part II",
+                            Title = "Hades",
                             Visible = true
                         },
                         new
@@ -1390,11 +861,10 @@ namespace DataAccess.Migrations
                             Id = 27,
                             CategoryId = 3,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Among Us is a multiplayer social deduction game developed by InnerSloth. Players work together on a spaceship, but some are impostors trying to sabotage the crew.",
+                            Description = "Final Fantasy VII Remake is an action role-playing game developed by Square Enix. It is a reimagining of the classic 1997 game, focusing on the early chapters of Cloud Strife's journey.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2018, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Among Us",
+                            Title = "Final Fantasy VII Remake",
                             Visible = true
                         },
                         new
@@ -1402,11 +872,10 @@ namespace DataAccess.Migrations
                             Id = 28,
                             CategoryId = 3,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Hades is a roguelike dungeon crawler developed by Supergiant Games. Players control Zagreus, the son of Hades, as he attempts to escape the Underworld.",
+                            Description = "Resident Evil Village is a survival horror game developed by Capcom. It follows Ethan Winters as he searches for his kidnapped daughter in a mysterious village filled with horrors.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2020, 9, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Hades",
+                            Title = "Resident Evil Village",
                             Visible = true
                         },
                         new
@@ -1414,11 +883,10 @@ namespace DataAccess.Migrations
                             Id = 29,
                             CategoryId = 3,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Final Fantasy VII Remake is an action role-playing game developed by Square Enix. It is a reimagining of the classic 1997 game, focusing on the early chapters of Cloud Strife's journey.",
-                            Featured = false,
+                            Description = "Red Dead Redemption 2 is a 2018 action-adventure game developed and published by Rockstar Games. The game is the third entry in the Red Dead series and a prequel to the 2010 game Red Dead Redemption. The story is set in a fictionalized representation of the United States in 1899 and follows the exploits of Arthur Morgan, an outlaw and member of the Van der Linde gang, who must deal with the decline of the Wild West while attempting to survive against government forces, rival gangs, and other adversaries.",
+                            Featured = true,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2020, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Final Fantasy VII Remake",
+                            Title = "Red Dead Redemption 2",
                             Visible = true
                         },
                         new
@@ -1426,34 +894,9 @@ namespace DataAccess.Migrations
                             Id = 30,
                             CategoryId = 3,
                             CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Resident Evil Village is a survival horror game developed by Capcom. It follows Ethan Winters as he searches for his kidnapped daughter in a mysterious village filled with horrors.",
-                            Featured = false,
-                            IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2021, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Resident Evil Village",
-                            Visible = true
-                        },
-                        new
-                        {
-                            Id = 31,
-                            CategoryId = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Red Dead Redemption 2 is a 2018 action-adventure game developed and published by Rockstar Games. The game is the third entry in the Red Dead series and a prequel to the 2010 game Red Dead Redemption. The story is set in a fictionalized representation of the United States in 1899 and follows the exploits of Arthur Morgan, an outlaw and member of the Van der Linde gang, who must deal with the decline of the Wild West while attempting to survive against government forces, rival gangs, and other adversaries.",
-                            Featured = true,
-                            IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2018, 10, 26, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Title = "Red Dead Redemption 2",
-                            Visible = true
-                        },
-                        new
-                        {
-                            Id = 32,
-                            CategoryId = 3,
-                            CreatedDate = new DateTime(2025, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Minecraft is a sandbox game developed by Mojang Studios. Players can build and explore their own worlds, crafting items and surviving against monsters.",
                             Featured = false,
                             IsSoftDeleted = false,
-                            PublishedDate = new DateTime(2009, 5, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Title = "Minecraft",
                             Visible = true
                         });
@@ -1782,15 +1225,6 @@ namespace DataAccess.Migrations
                         new
                         {
                             ProductId = 21,
-                            ProductTypeId = 6,
-                            IsSoftDeleted = false,
-                            OriginalPrice = 0m,
-                            Price = 14.99m,
-                            Visible = true
-                        },
-                        new
-                        {
-                            ProductId = 22,
                             ProductTypeId = 9,
                             IsSoftDeleted = false,
                             OriginalPrice = 69.99m,
@@ -1799,7 +1233,7 @@ namespace DataAccess.Migrations
                         },
                         new
                         {
-                            ProductId = 22,
+                            ProductId = 21,
                             ProductTypeId = 8,
                             IsSoftDeleted = false,
                             OriginalPrice = 59.99m,
@@ -1808,7 +1242,7 @@ namespace DataAccess.Migrations
                         },
                         new
                         {
-                            ProductId = 23,
+                            ProductId = 22,
                             ProductTypeId = 9,
                             IsSoftDeleted = false,
                             OriginalPrice = 69.99m,
@@ -1817,8 +1251,8 @@ namespace DataAccess.Migrations
                         },
                         new
                         {
-                            ProductId = 24,
-                            ProductTypeId = 8,
+                            ProductId = 23,
+                            ProductTypeId = 9,
                             IsSoftDeleted = false,
                             OriginalPrice = 79.99m,
                             Price = 59.99m,
@@ -1880,47 +1314,11 @@ namespace DataAccess.Migrations
                         },
                         new
                         {
-                            ProductId = 29,
-                            ProductTypeId = 9,
-                            IsSoftDeleted = false,
-                            OriginalPrice = 54.99m,
-                            Price = 49.99m,
-                            Visible = true
-                        },
-                        new
-                        {
                             ProductId = 30,
                             ProductTypeId = 8,
                             IsSoftDeleted = false,
                             OriginalPrice = 29.99m,
                             Price = 26.99m,
-                            Visible = true
-                        },
-                        new
-                        {
-                            ProductId = 31,
-                            ProductTypeId = 8,
-                            IsSoftDeleted = false,
-                            OriginalPrice = 0m,
-                            Price = 26.99m,
-                            Visible = true
-                        },
-                        new
-                        {
-                            ProductId = 32,
-                            ProductTypeId = 8,
-                            IsSoftDeleted = false,
-                            OriginalPrice = 29.99m,
-                            Price = 24.99m,
-                            Visible = true
-                        },
-                        new
-                        {
-                            ProductId = 32,
-                            ProductTypeId = 9,
-                            IsSoftDeleted = false,
-                            OriginalPrice = 19.99m,
-                            Price = 14.99m,
                             Visible = true
                         });
                 });
@@ -2058,181 +1456,19 @@ namespace DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ProductPublishers", b =>
+            modelBuilder.Entity("DbUserProduct", b =>
                 {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.HasOne("Domain.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("PublishedProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("PublisherId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ProductId", "PublisherId");
-
-                    b.HasIndex("PublisherId");
-
-                    b.ToTable("ProductPublishers");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1,
-                            PublisherId = "47fac782-04bb-45f0-8700-2b9a3b855984"
-                        },
-                        new
-                        {
-                            ProductId = 2,
-                            PublisherId = "9904a3cc-92aa-43e4-a743-5bdc46374c6c"
-                        },
-                        new
-                        {
-                            ProductId = 3,
-                            PublisherId = "d02c893b-5ed4-4e37-bac0-0b62bb50fcdb"
-                        },
-                        new
-                        {
-                            ProductId = 4,
-                            PublisherId = "dc7b8125-6391-4774-b1f2-ad92281ed289"
-                        },
-                        new
-                        {
-                            ProductId = 5,
-                            PublisherId = "27045ac4-b1d1-4dbb-a13b-529456b1dad2"
-                        },
-                        new
-                        {
-                            ProductId = 6,
-                            PublisherId = "bafc87aa-2221-4543-ac96-9f1e4aac691d"
-                        },
-                        new
-                        {
-                            ProductId = 7,
-                            PublisherId = "35be5291-5ce0-4483-9e7d-9d60dc912f98"
-                        },
-                        new
-                        {
-                            ProductId = 8,
-                            PublisherId = "a989fbed-3273-4342-bf5b-7724721e1504"
-                        },
-                        new
-                        {
-                            ProductId = 9,
-                            PublisherId = "8567a393-058f-4ecb-a209-307dc6c8c8fa"
-                        },
-                        new
-                        {
-                            ProductId = 10,
-                            PublisherId = "87ef6fb3-1a20-472e-b6d3-7599afb506e6"
-                        },
-                        new
-                        {
-                            ProductId = 11,
-                            PublisherId = "c5534807-f265-41c6-afa8-fcbefabb164b"
-                        },
-                        new
-                        {
-                            ProductId = 12,
-                            PublisherId = "3711943c-2d78-4a3f-b007-a6ee15ba0e7b"
-                        },
-                        new
-                        {
-                            ProductId = 13,
-                            PublisherId = "0f39bc69-752a-495f-9e13-07b8d447e98f"
-                        },
-                        new
-                        {
-                            ProductId = 14,
-                            PublisherId = "2bc82d0e-8b77-4a6a-84da-e79b618acbcf"
-                        },
-                        new
-                        {
-                            ProductId = 15,
-                            PublisherId = "c5534807-f265-41c6-afa8-fcbefabb164b"
-                        },
-                        new
-                        {
-                            ProductId = 16,
-                            PublisherId = "2bc82d0e-8b77-4a6a-84da-e79b618acbcf"
-                        },
-                        new
-                        {
-                            ProductId = 17,
-                            PublisherId = "c5534807-f265-41c6-afa8-fcbefabb164b"
-                        },
-                        new
-                        {
-                            ProductId = 18,
-                            PublisherId = "c5534807-f265-41c6-afa8-fcbefabb164b"
-                        },
-                        new
-                        {
-                            ProductId = 19,
-                            PublisherId = "c5534807-f265-41c6-afa8-fcbefabb164b"
-                        },
-                        new
-                        {
-                            ProductId = 20,
-                            PublisherId = "c5534807-f265-41c6-afa8-fcbefabb164b"
-                        },
-                        new
-                        {
-                            ProductId = 21,
-                            PublisherId = "8a57c8e1-08f3-42b5-9671-cbc84976fb01"
-                        },
-                        new
-                        {
-                            ProductId = 22,
-                            PublisherId = "e2e7e873-a404-4c13-bd5e-8c10a046c168"
-                        },
-                        new
-                        {
-                            ProductId = 23,
-                            PublisherId = "e29ae0f4-c7d1-4a08-bfbb-b1fcbf2f391d"
-                        },
-                        new
-                        {
-                            ProductId = 24,
-                            PublisherId = "354f78e9-61bc-4f6e-8761-3cfab3749d42"
-                        },
-                        new
-                        {
-                            ProductId = 25,
-                            PublisherId = "e29ae0f4-c7d1-4a08-bfbb-b1fcbf2f391d"
-                        },
-                        new
-                        {
-                            ProductId = 26,
-                            PublisherId = "e29ae0f4-c7d1-4a08-bfbb-b1fcbf2f391d"
-                        },
-                        new
-                        {
-                            ProductId = 27,
-                            PublisherId = "a73f5524-6667-4a81-a1a0-1b3e3bbc432f"
-                        },
-                        new
-                        {
-                            ProductId = 28,
-                            PublisherId = "7260b1d5-3c97-4bd1-8bbd-1b0183bb2393"
-                        },
-                        new
-                        {
-                            ProductId = 29,
-                            PublisherId = "448d440b-c1c4-453c-8cda-608fedad3762"
-                        },
-                        new
-                        {
-                            ProductId = 30,
-                            PublisherId = "d6c9880a-9926-400f-86da-79dc08234f33"
-                        },
-                        new
-                        {
-                            ProductId = 31,
-                            PublisherId = "8b1922c7-8118-474b-aa7b-032bec00234c"
-                        },
-                        new
-                        {
-                            ProductId = 32,
-                            PublisherId = "7c4df877-bffb-4cbd-8417-097cff415a03"
-                        });
+                    b.HasOne("Domain.Models.DbUser", null)
+                        .WithMany()
+                        .HasForeignKey("PublishersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Models.DbUser", b =>
@@ -2357,21 +1593,6 @@ namespace DataAccess.Migrations
                     b.HasOne("Domain.Models.DbUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ProductPublishers", b =>
-                {
-                    b.HasOne("Domain.Models.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Models.DbUser", null)
-                        .WithMany()
-                        .HasForeignKey("PublisherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

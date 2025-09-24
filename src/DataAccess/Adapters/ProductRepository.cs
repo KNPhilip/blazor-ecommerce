@@ -102,6 +102,7 @@ public sealed class ProductRepository(IServiceProvider serviceProvider) : IProdu
                 .ThenInclude(x => x.ProductType)
             .Include(x => x.Images)
             .Include(x => x.Category)
+            .Include(x => x.Publishers)
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == id)
                 ?? throw new NotFoundException("The product with the id"
@@ -119,6 +120,8 @@ public sealed class ProductRepository(IServiceProvider serviceProvider) : IProdu
             .Include(x => x.Variants.Where(x => !x.IsSoftDeleted))
                 .ThenInclude(x => x.ProductType)
             .Include(x => x.Images)
+            .Include(x => x.Category)
+            .Include(x => x.Publishers)
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == id)
                 ?? throw new NotFoundException("The product with the id"
