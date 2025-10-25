@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Models;
 
@@ -13,4 +14,8 @@ public sealed class DbUser : IdentityUser
     public string? NickName { get; set; }
     public Address? Address { get; set; }
     public List<Product> PublishedProducts { get; set; } = [];
+    [NotMapped]
+    public bool IsNew { get; set; }
+    [NotMapped]
+    public bool Editing { get; set; }
 }
