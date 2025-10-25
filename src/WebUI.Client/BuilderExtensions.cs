@@ -24,6 +24,7 @@ public static class BuilderExtensions
         services.AddScoped<IOrderUIService, OrderUIService>();
         services.AddScoped<IProductUIService, ProductUIService>();
         services.AddScoped<IProductTypeUIService, ProductTypeUIService>();
+        services.AddScoped<IPublisherUIService, PublisherUIService>();
 
         services.AddOptions();
         services.AddAuthorizationCore();

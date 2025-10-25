@@ -14,5 +14,6 @@ public static class BuilderExtensions
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProductTypeService, ProductTypeService>();
+        services.AddScoped<IPublisherService, PublisherService>();
     }
 }

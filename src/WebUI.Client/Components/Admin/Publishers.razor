@@ -1,0 +1,127 @@
+﻿@page "/admin/publisher"
+@page "/admin/publisher/{id}"
+@using Domain.Enums
+@using WebUI.Client.Ports
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+@attribute [Authorize(Roles = "Admin")]
+
+@inject NavigationManager NavigationManager
+@inject IPublisherUIService PublisherUIService
+@inject ISnackbar Snackbar
+@inject IJSRuntime JSRuntime
+
+<MudPopoverProvider />
+<MudSnackbarProvider />
+
+<div class="container mt-5">
+    @if (!isLoaded)
+    {
+        if (string.IsNullOrEmpty(message))
+        {
+            <MudProgressLinear Color="Color.Info"
+                               Indeterminate="true"
+                               Class="my-7" />
+        }
+        else
+        {
+            <MudText Typo="Typo.h5">@message</MudText>
+        }
+    }
+    else
+    {
+        if (publisher.Editing)
+        {
+            <MudText Typo="Typo.h3">
+                Edit publisher "@(publisher.HasNoName() 
+                ? publisher.NickName : publisher.FullName)"
+            </MudText>
+        }
+        else if (publisher.IsNew)
+        {
+            <MudText Typo="Typo.h3">Create a new publisher</MudText>
+        }
+
+        <EditForm Model="publisher" OnValidSubmit="CreateOrUpdatePublisherAsync">
+            <DataAnnotationsValidator />
+            <div class="mb-3 mt-3">
+                <MudTextField T="string"
+                              Label="Email"
+                              Variant="Variant.Outlined"
+                              Required="true"
+                              RequiredError="Email is required!"
+                              @bind-Value="publisher.Email" />
+            </div>
+            <div class="mb-3">
+                <MudTextField T="string"
+                              Label="Nickname"
+                              Variant="Variant.Outlined"
+                              @bind-Value="publisher.NickName" />
+            </div>
+            <div class="mb-3 d-flex">
+                <MudTextField T="string"
+                              Label="First Name"
+                              Class="pr-2"
+                              Variant="Variant.Outlined"
+                              @bind-Value="publisher.FirstName" />
+                <MudTextField T="string"
+                              Label="Last Name"
+                              Class="pl-2"
+                              Variant="Variant.Outlined"
+                              @bind-Value="publisher.LastName" />
+            </div>
+            <div class="mb-3">
+                <MudDatePicker Label="Birth Date"
+                               Variant="Variant.Outlined"
+                               Placeholder="Select Date"
+                               ShowWeekNumbers="true"
+                               Required="true"
+                               RequiredError="Birth Date is required!"
+                               @bind-Date="publisher.BirthDate" />
+            </div>
+            <hr />
+            <MudButton ButtonType="ButtonType.Submit"
+                       Class="float-end mb-3 ml-2"
+                       Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Save"
+                       Color="Color.Info">
+                @btnText
+            </MudButton>
+            <ValidationSummary class="mb-3"></ValidationSummary>
+        </EditForm>
+        @if (!publisher.IsNew)
+        {
+            <MudButton Class="float-end"
+                       Variant="Variant.Filled"
+                       StartIcon="@Icons.Material.Filled.Delete"
+                       Color="Color.Error"
+                       @onclick="DeletePublisherAsync">
+                Delete Publisher
+            </MudButton>
+        }
+    }
+</div>
+
+<style>
+    img {
+        max-height: 200px;
+        max-width: 200px;
+        margin: 6px;
+    }
+
+    .header {
+        display: flex;
+        font-weight: 600;
+        text-align: center;
+        border-bottom: 1px solid lightgray;
+        margin-bottom: 6px;
+        padding-bottom: 6px;
+    }
+
+    .col {
+        flex: 1;
+    }
+
+    .col-visible {
+        text-align: center;
+    }
+</style>
