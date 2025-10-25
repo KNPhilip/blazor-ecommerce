@@ -86,7 +86,7 @@ internal static class VideoGameSeeder
             {
                 Id = 31,
                 Title = "Red Dead Redemption 2",
-                Description = "Red Dead Redemption 2 is a 2018 action-adventure game developed and published by Rockstar Games. The game is the third entry in the Red Dead series and a prequel to the 2010 game Red Dead Redemption. The story is set in a fictionalized representation of the United States in 1899 and follows the exploits of Arthur Morgan, an outlaw and member of the Van der Linde gang, who must deal with the decline of the Wild West while attempting to survive against government forces, rival gangs, and other adversaries.",
+                Description = "America, 1899. The end of the Wild West era has begun. After a robbery goes badly wrong in the western town of Blackwater, Arthur Morgan and the Van der Linde gang are forced to flee. With federal agents and the best bounty hunters in the nation massing on their heels, the gang must rob, steal and fight their way across the rugged heartland of America in order to survive. As deepening internal divisions threaten to tear the gang apart, Arthur must make a choice between his own ideals and loyalty to the gang who raised him.",
                 CategoryId = 3,
                 Featured = true,
                 PublishedDate = new DateTime(2018, 10, 26)
@@ -98,6 +98,51 @@ internal static class VideoGameSeeder
                 Description = "Minecraft is a sandbox game developed by Mojang Studios. Players can build and explore their own worlds, crafting items and surviving against monsters.",
                 CategoryId = 3,
                 PublishedDate = new DateTime(2009, 5, 17)
+            },
+            new()
+            {
+                Id = 33,
+                Title = "Red Dead Revolver",
+                Description = "Vast, rugged, and lawless. As a young man, you were helpless to prevent the slaughter of your family at the hands of bandits. Many years later, you live as a bounty hunter bringing criminals to justice, while struggling to unravel the mystery of your past. You must find those who murdered your family. Then, you will take your revenge. A blazing arcade-style third-person game fueled by precision gunplay, Red Dead Revolver is a classic tale of vengeance on the untamed frontier.",
+                CategoryId = 3,
+                Featured = false,
+                PublishedDate = new DateTime(2004, 5, 4)
+            },
+            new()
+            {
+                Id = 34,
+                Title = "Red Dead Online",
+                Description = "Step into the vibrant, ever-evolving world of Red Dead Online and experience life across frontier America. Forge your own path as you battle lawmen, outlaw gangs and ferocious wild animals to build a life on the American frontier. Build a camp, ride solo or form a posse and explore everything from the snowy mountains in the North to the swamps of the South, from remote outposts to busy farms and bustling towns. Chase down bounties, hunt, fish and trade, search for exotic treasures, run your own underground Moonshine distillery, or become a Naturalist to learn the secrets of the animal kingdom and much more in a world of astounding depth and detail.",
+                CategoryId = 3,
+                Featured = false,
+                PublishedDate = new DateTime(2018, 11, 27)
+            },
+            new()
+            {
+                Id = 35,
+                Title = "Red Dead Redemption",
+                Description = "Journey across the sprawling expanses of the American West and Mexico in Red Dead Redemption. When federal agents threaten his family, former outlaw John Marston is forced to hunt down the gang of criminals he once called friends. Step into the events immediately following the 2018 blockbuster, Red Dead Redemption 2, in the critically acclaimed tale of Marston’s journey to bury his blood-stained past, one man at a time.",
+                CategoryId = 3,
+                Featured = false,
+                PublishedDate = new DateTime(2010, 5, 18)
+            },
+            new()
+            {
+                Id = 36,
+                Title = "Red Dead Redemption: Undead Nightmare",
+                Description = "When former outlaw John Marston wakes up at his farmhouse, he finds a world gone insane: overnight, deranged hordes have overrun the towns and outposts of the American frontier. In a desperate attempt to save his family, Marston must traverse a world torn apart by chaos and disorder, using every skill he has to survive long enough to find a cure.",
+                CategoryId = 3,
+                Featured = false,
+                PublishedDate = new DateTime(2010, 10, 26)
+            },
+            new()
+            {
+                Id = 37,
+                Title = "Red Dead Redemption 2: Ultimate Edition",
+                Description = "As Arthur Morgan, loyal right hand to charismatic gang leader, Dutch Van Der Linde, you’ll live, hunt, party, steal and fight alongside a diverse cast of outlaws you’ll come to know as family, including Bill Williamson, Javier Escuella, Sadie Adler, Micah Bell, John Marston, Charles Smith, Susan Grimshaw and many more. The Van Der Linde gang is a group of fully realized characters and living and fighting alongside this gang is an experience unlike any other.",
+                CategoryId = 3,
+                Featured = false,
+                PublishedDate = new DateTime(2018, 10, 26)
             }
         ];
 
@@ -189,6 +234,41 @@ internal static class VideoGameSeeder
                 Data = "https://upload.wikimedia.org/wikipedia/en/b/b6/Minecraft_2024_cover_art.png",
                 Type = ImageType.Url,
                 ProductId = 32
+            },
+            new()
+            {
+                Id = 33,
+                Data = "https://upload.wikimedia.org/wikipedia/en/c/c1/Red_Dead_Revolver_Coverart.jpg",
+                Type = ImageType.Url,
+                ProductId = 33
+            },
+            new()
+            {
+                Id = 34,
+                Data = "https://static.wikia.nocookie.net/reddeadredemption/images/9/9d/RedDeadOnline-EpicGamesStore-CoverArt.jpg/revision/latest?cb=20201201170402",
+                Type = ImageType.Url,
+                ProductId = 34
+            },
+            new()
+            {
+                Id = 35,
+                Data = "https://upload.wikimedia.org/wikipedia/en/a/a7/Red_Dead_Redemption.jpg",
+                Type = ImageType.Url,
+                ProductId = 35
+            },
+            new()
+            {
+                Id = 36,
+                Data = "https://upload.wikimedia.org/wikipedia/en/5/59/Red_Dead_Redemption_-_Undead_Nightmare_cover.JPG",
+                Type = ImageType.Url,
+                ProductId = 36
+            },
+            new()
+            {
+                Id = 37,
+                Data = "https://image.api.playstation.com/cdn/UP1004/CUSA03041_00/3zDubiWo2X5WU18FGiwlsf4lKWb8MwkE.png?w=620&thumb=false",
+                Type = ImageType.Url,
+                ProductId = 37
             }
         ];
     }
@@ -283,12 +363,6 @@ internal static class VideoGameSeeder
             },
             new()
             {
-                ProductId = 31,
-                ProductTypeId = 8,
-                Price = 26.99m
-            },
-            new()
-            {
                 ProductId = 32,
                 ProductTypeId = 8,
                 Price = 24.99m,
@@ -300,6 +374,122 @@ internal static class VideoGameSeeder
                 ProductTypeId = 9,
                 Price = 14.99m,
                 OriginalPrice = 19.99m
+            },
+            new()
+            {
+                ProductId = 33,
+                ProductTypeId = 9,
+                Price = 6.99m,
+                OriginalPrice = 11.49m
+            },
+            new()
+            {
+                ProductId = 33,
+                ProductTypeId = 10,
+                Price = 6.99m,
+                OriginalPrice = 11.49m
+            },
+            new()
+            {
+                ProductId = 35,
+                ProductTypeId = 8,
+                Price = 72.49m
+            },
+            new()
+            {
+                ProductId = 35,
+                ProductTypeId = 9,
+                Price = 66.49m
+            },
+            new()
+            {
+                ProductId = 35,
+                ProductTypeId = 10,
+                Price = 33.99m
+            },
+            new()
+            {
+                ProductId = 35,
+                ProductTypeId = 11,
+                Price = 49.99m
+            },
+            new()
+            {
+                ProductId = 36,
+                ProductTypeId = 8,
+                Price = 72.49m
+            },
+            new()
+            {
+                ProductId = 36,
+                ProductTypeId = 9,
+                Price = 66.49m
+            },
+            new()
+            {
+                ProductId = 36,
+                ProductTypeId = 10,
+                Price = 33.99m
+            },
+            new()
+            {
+                ProductId = 36,
+                ProductTypeId = 11,
+                Price = 49.99m
+            },
+            new()
+            {
+                ProductId = 31,
+                ProductTypeId = 8,
+                Price = 86.99m
+            },
+            new()
+            {
+                ProductId = 31,
+                ProductTypeId = 9,
+                Price = 69.99m
+            },
+            new()
+            {
+                ProductId = 31,
+                ProductTypeId = 10,
+                Price = 69.99m
+            },
+            new()
+            {
+                ProductId = 37,
+                ProductTypeId = 8,
+                Price = 144.99m
+            },
+            new()
+            {
+                ProductId = 37,
+                ProductTypeId = 9,
+                Price = 114.99m
+            },
+            new()
+            {
+                ProductId = 37,
+                ProductTypeId = 10,
+                Price = 114.99m
+            },
+            new()
+            {
+                ProductId = 34,
+                ProductTypeId = 8,
+                Price = 28.99m
+            },
+            new()
+            {
+                ProductId = 34,
+                ProductTypeId = 9,
+                Price = 23.49m
+            },
+            new()
+            {
+                ProductId = 34,
+                ProductTypeId = 10,
+                Price = 23.49m
             }
         ];
     }

@@ -4,6 +4,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(EcommerceContext))]
-    partial class EcommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20251025231611_Series")]
+    partial class Series
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2211,13 +2214,13 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "The Matrix is a groundbreaking sci-fi saga that explores a dystopian future in which humanity is unknowingly trapped inside a simulated reality — the Matrix — created by intelligent machines to subdue the human population, while their bodies’ bioelectric energy is harvested to power the machines.",
+                            Description = "",
                             Name = "The Matrix Series"
                         },
                         new
                         {
                             Id = 2,
-                            Description = "The Red Dead series is a sweeping, character-driven saga that explores the dying days of the American frontier — a world caught between rugged freedom and the encroaching forces of civilization. Developed by Rockstar Games, the series immerses players in a gritty, cinematic portrayal of the Old West, where loyalty, survival, and morality collide in a landscape as beautiful as it is brutal.",
+                            Description = "",
                             Name = "Red Dead Series"
                         });
                 });

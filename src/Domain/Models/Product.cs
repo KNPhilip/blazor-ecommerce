@@ -16,6 +16,7 @@ public sealed class Product : DbEntity
     public List<ProductVariant> Variants { get; set; } = [];
     public bool Visible { get; set; } = true;
     public List<DbUser> Publishers { get; set; } = [];
+    public List<Series> Series { get; set; } = [];
     [NotMapped]
     public bool IsNew { get; set; }
     [NotMapped]
