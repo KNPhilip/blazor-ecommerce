@@ -119,13 +119,13 @@ internal static class DataSeeder
             {
                 Id = 1,
                 Name = "The Matrix Series",
-                Description = ""
+                Description = "The Matrix is a groundbreaking sci-fi saga that explores a dystopian future in which humanity is unknowingly trapped inside a simulated reality — the Matrix — created by intelligent machines to subdue the human population, while their bodies’ bioelectric energy is harvested to power the machines."
             },
             new()
             {
                 Id = 2,
                 Name = "Red Dead Series",
-                Description = ""
+                Description = "The Red Dead series is a sweeping, character-driven saga that explores the dying days of the American frontier — a world caught between rugged freedom and the encroaching forces of civilization. Developed by Rockstar Games, the series immerses players in a gritty, cinematic portrayal of the Old West, where loyalty, survival, and morality collide in a landscape as beautiful as it is brutal."
             }
         ];
     }
