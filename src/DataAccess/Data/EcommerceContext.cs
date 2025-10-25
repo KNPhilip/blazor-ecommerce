@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Domain.Models;
 
@@ -23,8 +24,21 @@ public sealed class EcommerceContext : IdentityDbContext<DbUser>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<DbUser>()
-            .HasData(DataSeeder.SeedPublishers());
+        List<DbUser> publishers = DataSeeder.SeedPublishers();
+
+        modelBuilder.Entity<IdentityRole>().HasData(
+            new IdentityRole() { Id = "1", Name = "Admin", NormalizedName = "ADMIN" },
+            new IdentityRole() { Id = "2", Name = "Publisher", NormalizedName = "PUBLISHER" });
+
+        modelBuilder.Entity<DbUser>().HasData(publishers);
+
+        var userRoles = publishers.Select(publisher => new IdentityUserRole<string>
+        {
+            UserId = publisher.Id,
+            RoleId = "2"
+        }).ToArray();
+
+        modelBuilder.Entity<IdentityUserRole<string>>().HasData(userRoles);
 
         modelBuilder.Entity<Category>()
             .HasData(DataSeeder.SeedCategories());
