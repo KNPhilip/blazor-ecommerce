@@ -46,6 +46,9 @@ public sealed class EcommerceContext : IdentityDbContext<DbUser>
         modelBuilder.Entity<ProductType>()
             .HasData(DataSeeder.SeedProductTypes());
 
+        modelBuilder.Entity<Series>()
+            .HasData(DataSeeder.SeedSeries());
+
         modelBuilder.Entity<Product>()
             .HasData(DataSeeder.SeedProducts());
 
@@ -117,6 +120,38 @@ public sealed class EcommerceContext : IdentityDbContext<DbUser>
                         new { ProductId = 32, PublisherId = "7c4df877-bffb-4cbd-8417-097cff415a03" }
                     );
                 });
+
+        modelBuilder.Entity<Product>()
+            .HasMany(p => p.Series)
+            .WithMany(s => s.Products)
+            .UsingEntity<Dictionary<string, object>>(
+                "ProductSeries",
+                j => j
+                    .HasOne<Series>()
+                    .WithMany()
+                    .HasForeignKey("SeriesId")
+                    .HasPrincipalKey(s => s.Id),
+                j => j
+                    .HasOne<Product>()
+                    .WithMany()
+                    .HasForeignKey("ProductId")
+                    .HasPrincipalKey(p => p.Id),
+                j =>
+                {
+                    j.HasKey("ProductId", "SeriesId");
+                    j.HasData(
+                        new { ProductId = 17, SeriesId = 1 },
+                        new { ProductId = 18, SeriesId = 1 },
+                        new { ProductId = 19, SeriesId = 1 },
+                        new { ProductId = 20, SeriesId = 1 },
+                        new { ProductId = 33, SeriesId = 2 },
+                        new { ProductId = 35, SeriesId = 2 },
+                        new { ProductId = 36, SeriesId = 2 },
+                        new { ProductId = 31, SeriesId = 2 },
+                        new { ProductId = 37, SeriesId = 2 },
+                        new { ProductId = 34, SeriesId = 2 }
+                    );
+                });
     }
 
     public DbSet<Product> Products { get; set; }
@@ -128,4 +163,5 @@ public sealed class EcommerceContext : IdentityDbContext<DbUser>
     public DbSet<OrderItem> OrderItems { get; set; }
     public DbSet<Address> Addresses { get; set; }
     public DbSet<Image> Images { get; set; }
+    public DbSet<Series> Series { get; set; }
 }
