@@ -14,6 +14,7 @@ public static class BuilderExtensions
         services.AddScoped<IAddressRepository, AddressRepository>();
         services.AddScoped<ICartRepository, CartRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IFavoriteRepository, FavoriteRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<IProductTypeRepository, ProductTypeRepository>();

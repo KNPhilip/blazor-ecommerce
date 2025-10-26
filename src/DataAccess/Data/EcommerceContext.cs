@@ -127,6 +127,23 @@ public sealed class EcommerceContext : IdentityDbContext<DbUser>
                 });
 
         modelBuilder.Entity<Product>()
+            .HasMany(p => p.FavoritedBy)
+            .WithMany(u => u.Favorites)
+            .UsingEntity<Dictionary<string, object>>(
+                "ProductFavorites",
+                j => j
+                    .HasOne<DbUser>()
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .HasPrincipalKey(u => u.Id),
+                j => j
+                    .HasOne<Product>()
+                    .WithMany()
+                    .HasForeignKey("ProductId")
+                    .HasPrincipalKey(p => p.Id),
+                j => j.HasKey("ProductId", "UserId"));
+
+        modelBuilder.Entity<Product>()
             .HasMany(p => p.Series)
             .WithMany(s => s.Products)
             .UsingEntity<Dictionary<string, object>>(

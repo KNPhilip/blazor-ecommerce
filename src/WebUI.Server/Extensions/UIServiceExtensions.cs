@@ -11,6 +11,7 @@ public static class UIServiceExtensions
         services.AddScoped<IAuthUIService, AuthUIService>();
         services.AddScoped<ICartUIService, CartUIService>();
         services.AddScoped<ICategoryUIService, CategoryUIService>();
+        services.AddScoped<IFavoriteUIService, FavoriteUIService>();
         services.AddScoped<IOrderUIService, OrderUIService>();
         services.AddScoped<IProductUIService, ProductUIService>();
         services.AddScoped<IProductTypeUIService, ProductTypeUIService>();

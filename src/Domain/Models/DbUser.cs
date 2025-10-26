@@ -13,6 +13,7 @@ public sealed class DbUser : IdentityUser
     public string FullName { get => $"{FirstName} {LastName}"; }
     public string? NickName { get; set; }
     public Address? Address { get; set; }
+    public List<Product> Favorites { get; set; } = [];
     public List<Product> PublishedProducts { get; set; } = [];
     [NotMapped]
     public bool IsNew { get; set; }
