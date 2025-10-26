@@ -60,7 +60,6 @@ public sealed class SeriesRepository(IServiceProvider serviceProvider) : ISeries
 
         existingSeries.Name = series.Name;
         existingSeries.Description = series.Description;
-        existingSeries.Products = series.Products;
 
         await dbContext.SaveChangesAsync();
     }
