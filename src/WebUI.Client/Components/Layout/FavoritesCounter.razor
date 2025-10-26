@@ -1,0 +1,21 @@
+﻿@using WebUI.Client.Ports
+@rendermode @(new InteractiveServerRenderMode(prerender: false))
+@inject IFavoriteUIService FavoriteUIService
+@implements IDisposable
+
+<div class="mx-6 my-3">
+    @if (FavoriteUIService.Favorites.Count == 0)
+    {
+        <a href="favorites">
+            <MudIcon Href="favorites" Icon="@Icons.Material.Filled.Star" Size="Size.Large" />
+        </a>
+    }
+    else
+    {
+        <MudBadge Content="FavoriteUIService.Favorites.Count" Color="Color.Error" Overlap="true">
+            <a href="favorites">
+                <MudIcon Icon="@Icons.Material.Filled.Star" Size="Size.Large" />
+            </a>
+        </MudBadge>
+    }
+</div>
