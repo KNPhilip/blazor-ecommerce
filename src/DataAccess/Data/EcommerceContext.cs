@@ -117,7 +117,12 @@ public sealed class EcommerceContext : IdentityDbContext<DbUser>
                         new { ProductId = 29, PublisherId = "448d440b-c1c4-453c-8cda-608fedad3762" },
                         new { ProductId = 30, PublisherId = "d6c9880a-9926-400f-86da-79dc08234f33" },
                         new { ProductId = 31, PublisherId = "8b1922c7-8118-474b-aa7b-032bec00234c" },
-                        new { ProductId = 32, PublisherId = "7c4df877-bffb-4cbd-8417-097cff415a03" }
+                        new { ProductId = 32, PublisherId = "7c4df877-bffb-4cbd-8417-097cff415a03" },
+                        new { ProductId = 33, PublisherId = "8b1922c7-8118-474b-aa7b-032bec00234c" },
+                        new { ProductId = 34, PublisherId = "8b1922c7-8118-474b-aa7b-032bec00234c" },
+                        new { ProductId = 35, PublisherId = "8b1922c7-8118-474b-aa7b-032bec00234c" },
+                        new { ProductId = 36, PublisherId = "8b1922c7-8118-474b-aa7b-032bec00234c" },
+                        new { ProductId = 37, PublisherId = "8b1922c7-8118-474b-aa7b-032bec00234c" }
                     );
                 });
 

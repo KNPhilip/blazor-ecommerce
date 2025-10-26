@@ -15,5 +15,6 @@ public static class UIServiceExtensions
         services.AddScoped<IProductUIService, ProductUIService>();
         services.AddScoped<IProductTypeUIService, ProductTypeUIService>();
         services.AddScoped<IPublisherUIService, PublisherUIService>();
+        services.AddScoped<ISeriesUIService, SeriesUIService>();
     }
 }

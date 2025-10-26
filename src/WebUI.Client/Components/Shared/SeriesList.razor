@@ -1,26 +1,19 @@
 ﻿@using WebUI.Client.Ports
-@inject IProductUIService ProductUIService
+@inject ISeriesUIService SeriesUIService
 @implements IDisposable
 
-<center><h2>Featured Products:</h2></center>
-
-@if(ProductUIService.Products is null || ProductUIService.Products.Count == 0)
-{
-    if(string.IsNullOrEmpty(ProductUIService.Message))
+<div class="mt-5">
+    @if (SeriesUIService.Series is null || SeriesUIService.Series.Last().Products.Count == 0)
     {
+        <center><h2>New Series Available Now</h2></center>
         <MudProgressLinear Color="Color.Info" Indeterminate="true" Class="my-7" />
     }
     else
     {
-        <span>@ProductUIService.Message</span>
-    }
-}
-else
-{
-    <div class="customContainer">
-        @foreach (Product product in ProductUIService.Products)
-        {
-            @if (product.Featured)
+        <center><h2>@SeriesUIService.Series.Last().Name Available Now</h2></center>
+
+        <div class="customContainer">
+            @foreach (Product product in SeriesUIService.Series.Last().Products)
             {
                 <div class="featured-product">
                     <div class="flex flex-center">
@@ -33,7 +26,7 @@ else
                     <h4>
                         <a href="product/@product.Id">@product.Title</a>
                     </h4>
-                    @if(product.Variants is not null && product.Variants.Count > 0)
+                    @if (product.Variants is not null && product.Variants.Count > 0)
                     {
                         if (product.Variants.Count == 1)
                         {
@@ -52,9 +45,9 @@ else
                     }
                 </div>
             }
-        }
-    </div>
-}
+        </div>
+    }
+</div>
 
 <style>
     .customContainer {

@@ -6,6 +6,7 @@
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
 
 @inject IProductUIService ProductUIService
+@inject ISeriesUIService SeriesUIService
 
 <PageTitle>Home</PageTitle>
 
@@ -13,6 +14,7 @@
     @if (SearchTerm is null && CategoryUrl is null)
     {
         <FeaturedProducts />
+        <SeriesList />
     }
     else
     {
