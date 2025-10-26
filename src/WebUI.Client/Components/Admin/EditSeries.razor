@@ -1,4 +1,4 @@
-﻿@page "/admin/series-editor"
+@page "/admin/series-editor"
 @page "/admin/series-editor/{id:int}"
 @using WebUI.Client.Ports
 @rendermode @(new InteractiveServerRenderMode(prerender: false))
@@ -42,9 +42,6 @@
                               Class="pl-2"
                               Variant="Variant.Outlined"
                               @bind-Value="series.Description" />
-            </div>
-            <div class="mb-3">
-                @* Products *@
             </div>
             <hr />
             <MudButton ButtonType="ButtonType.Submit"
