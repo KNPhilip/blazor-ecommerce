@@ -12,6 +12,7 @@ public sealed class SeriesUIService(HttpClient http) : ISeriesUIService
     public async Task GetSeriesAsync()
     {
         Series = await http.GetFromJsonAsync<List<Series>>($"api/v1/series") ?? [];
+        OnSeriesChanged?.Invoke();
     }
 
     public async Task<Series> GetSeriesByIdAsync(int id)

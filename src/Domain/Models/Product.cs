@@ -15,6 +15,7 @@ public sealed class Product : DbEntity
     public int CategoryId { get; set; }
     public List<ProductVariant> Variants { get; set; } = [];
     public bool Visible { get; set; } = true;
+    public List<DbUser> FavoritedBy { get; set; } = [];
     public List<DbUser> Publishers { get; set; } = [];
     public List<Series> Series { get; set; } = [];
     [NotMapped]

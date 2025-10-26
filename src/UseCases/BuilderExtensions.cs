@@ -11,6 +11,7 @@ public static class BuilderExtensions
         services.AddScoped<IAddressService, AddressService>();
         services.AddScoped<ICartService, CartService>();
         services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<IFavoriteService, FavoriteService>();
         services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProductTypeService, ProductTypeService>();
