@@ -21,6 +21,9 @@ public sealed partial class Index
         }
         else
         {
+            if (CategoryUrl is null)
+                await SeriesUIService.GetSeriesAsync();
+
             await ProductUIService.GetProductsAsync(CategoryUrl);
         }
     }

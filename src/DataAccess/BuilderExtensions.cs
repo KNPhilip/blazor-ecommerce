@@ -19,6 +19,7 @@ public static class BuilderExtensions
         services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
         services.AddScoped<IProductVariantRepository, ProductVariantRepository>();
         services.AddScoped<IPublisherRepository, PublisherRepository>();
+        services.AddScoped<ISeriesRepository, SeriesRepository>();
 
         services.AddDbContext<EcommerceContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

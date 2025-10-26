@@ -23,7 +23,7 @@ public sealed class PublisherUIService(HttpClient http) : IPublisherUIService
     public async Task<DbUser> UpdatePublisherAsync(DbUser publisher)
     {
         HttpResponseMessage response = await http
-            .PostAsJsonAsync("api/v1/publisher", publisher);
+            .PutAsJsonAsync("api/v1/publisher", publisher);
 
         return response.Content.ReadFromJsonAsync<DbUser>().Result!;
     }

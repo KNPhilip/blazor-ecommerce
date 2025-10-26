@@ -15,6 +15,7 @@ internal static class BookSeeder
                 Title = "The Martian",
                 Description = "The Martian is a science fiction novel by Andy Weir, published in 2011. The story follows astronaut Mark Watney, who is stranded on Mars and must use his ingenuity and spirit to survive.",
                 CategoryId = 1,
+                Featured = true,
                 PublishedDate = new DateTime(2011, 9, 1)
             },
             new()
